@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profileConfig>
+  <profiles>
+    <profile id="My_JMRI_Railroad.3e4d7d8a" path="settings:My_JMRI_Railroad.jmri/" />
+    <profile id="CO_in_Virginia.3f3ef4aa" path="settings:CO_in_Virginia.jmri/" />
+  </profiles>
+  <searchPaths>
+    <path path="settings:" default="true" />
+  </searchPaths>
+</profileConfig>
