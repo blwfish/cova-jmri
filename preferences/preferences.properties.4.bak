@@ -1,6 +1,0 @@
-#JMRI Preferences version 5.15.3+R3035b2a0f7
-#Thu Feb 12 19:02:39 EST 2026
-jmri-util-zeroconf.useIPv4=true
-jmri-util-zeroconf.useIPv6=true
-jmri-util-zeroconf.useLinkLocal=true
-jmri-util-zeroconf.useLoopback=false

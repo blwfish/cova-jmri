@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/xml/XSLT/locomotive.xsl" type="text/xsl"?>
+<locomotive-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://jmri.org/xml/schema/locomotive-config.xsd">
+  <!--Written by JMRI version 5.11.7+Ra0046b3051 on Tue Jul 08 17:53:01 EDT 2025-->
+  <locomotive id="CJ H8 1604" fileName="CJ_H8_1604.xml" roadNumber="1604" roadName="Chesapeake &amp; Ohio" mfg="MTH" owner="Chris" model="" dccAddress="1604" comment="" developerID="-1" manufacturerID="27" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+    <dateUpdated>2025-07-08T21:53:01.530+00:00</dateUpdated>
+    <decoder model="MTH HO PS3" family="MTH HO PS3" comment="" maxFnNum="28" />
+    <locoaddress>
+      <dcclocoaddress number="1604" longaddress="yes" />
+      <number>1604</number>
+      <protocol>dcc_long</protocol>
+    </locoaddress>
+    <functionlabels />
+    <soundlabels />
+    <values>
+      <decoderDef>
+        <varValue item="Short Address Alt Access" value="3" />
+        <varValue item="Extended Address Alt Access" value="68" />
+        <varValue item="Short Address" value="68" />
+        <varValue item="Long Address" value="1604" />
+        <varValue item="Address Format" value="1" />
+        <varValue item="Accel" value="0" />
+        <varValue item="Decel" value="0" />
+        <varValue item="Speed Step Mode" value="1" />
+      </decoderDef>
+      <CVvalue name="49" value="3" />
+      <CVvalue name="50" value="192" />
+      <CVvalue name="18" value="68" />
+      <CVvalue name="1" value="68" />
+      <CVvalue name="17" value="198" />
+      <CVvalue name="29" value="34" />
+      <CVvalue name="3" value="0" />
+      <CVvalue name="4" value="0" />
+    </values>
+  </locomotive>
+</locomotive-config>

@@ -1,0 +1,1048 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/xml/XSLT/roster2array.xsl" type="text/xsl"?>
+<roster-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://jmri.org/xml/schema/roster.xsd">
+  <!--Written by JMRI version 5.15.3+R3035b2a0f7 on Wed Feb 18 17:56:21 EST 2026-->
+  <roster>
+    <locomotive id="Budd RDC" fileName="Budd_RDC.xml" roadNumber="9060" roadName="C&amp;O" mfg="Samhongsa" owner="blw" model="Budd ex-CNW RDC" dccAddress="9060" comment="Hallmark/Samhongsa" developerID="-1" manufacturerID="141" productID="852005" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2025-07-02T22:48:18.885+00:00</dateUpdated>
+      <decoder model="MC1H104P21" family="MC Motor Decoders" comment="with decoder buddy mini" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="9060" longaddress="yes" />
+        <number>9060</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>LastOperated</key>
+          <value>2026-02-17T12:09:29.149+00:00</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>OperatingDuration</key>
+          <value>409</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="C&amp;O B-3" fileName="C_O_B_3.xml" roadNumber="4001" roadName="C&amp;O" mfg="Samhongsa" owner="blw" model="B-3 2-10-2" dccAddress="4001" comment="Key / Samhongsa" developerID="-1" manufacturerID="141" productID="852005" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2025-07-12T00:07:26.219+00:00</dateUpdated>
+      <decoder model="MC1H104P21" family="MC Motor Decoders" comment="via Decoder Buddy Mini" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="4001" longaddress="yes" />
+        <number>4001</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+    </locomotive>
+    <locomotive id="C&amp;O C-16" fileName="C_O_C_16.xml" roadNumber="362" roadName="C&amp;O" mfg="Proto 2000" owner="blw" model="C-16 0-8-0" dccAddress="362" comment="" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-04-02T00:42:02.113+00:00</dateUpdated>
+      <decoder model="Titan Steam" family="QSI Ver. 8" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="362" longaddress="yes" />
+        <number>362</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Light</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Whistle</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Blower</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Dynamic</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Doppler</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Squeal</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Heavy Load</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Status</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Number Board</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Cab Light</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Fuel Loading</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Maintenance</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Loading</functionlabel>
+      </functionlabels>
+      <soundlabels />
+    </locomotive>
+    <locomotive id="C&amp;O C15a P" fileName="C_O_C15a_P.xml" roadNumber="116" roadName="C&amp;O" mfg="Soho" owner="blw" model="C15a 0-8-0" dccAddress="116" comment="" developerID="-1" manufacturerID="153" productID="1667" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2025-07-12T00:10:32.140+00:00</dateUpdated>
+      <decoder model="WOW Steam 121 SS4.6" family="WOW Steam Sound Set 4.6" comment="With Decoder Buddy Mini and Scale Sound Systems" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="116" longaddress="no" />
+        <number>116</number>
+        <protocol>dcc_short</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Whistle Playable</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Whistle Short</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Whistle Grade X Quill </functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Cylinder Cocks On/Off</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Release</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Train Brake</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Rotate Sound Function</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Johnson Bar Up</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Johnson Bar Down</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Injector</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Air Pump</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Blower</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Momentum Mode Selection</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">Idling Sounds On/Off</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Coal Shovelling</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">Blow Down</functionlabel>
+        <functionlabel num="19" lockable="true" visible="true" functionImage="" functionImageSelected="">Ash Dump</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Filling</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Departing Station Announcements</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Arriving Station Announcements</functionlabel>
+      </functionlabels>
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>LastOperated</key>
+          <value>2025-07-04T10:59:49.335+00:00</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>OperatingDuration</key>
+          <value>38</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="C&amp;O E-5" fileName="C_O_E_5.xml" roadNumber="1358" roadName="Boston &amp; Maine" mfg="Bachmann" owner="blw" model="E-5 2-6-0" dccAddress="1358" comment="Will become C&amp;O E5 1134" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2020-05-21T02:24:29.384+00:00</dateUpdated>
+      <decoder model="2-6-0 Mogul - Alco [HO]" family="Tsunami Steam Bachmann Sound Value" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="1358" longaddress="yes" />
+        <number>1358</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Whistle</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Short Whistle</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Steam-Release</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Dimming</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+      </functionlabels>
+      <soundlabels />
+    </locomotive>
+    <locomotive id="C&amp;O F-11" fileName="C_O_F_11.xml" roadNumber="238" roadName="CNW" mfg="Bachmann" owner="blw" model="CNW G-1 4-6-0" dccAddress="238" comment="Will be C&amp;O F-11 378" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2020-01-12T18:57:05.804+00:00</dateUpdated>
+      <decoder model="MC1Z102P6" family="MC Motor Decoders" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="238" longaddress="yes" />
+        <number>238</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+    </locomotive>
+    <locomotive id="C&amp;O H-4" fileName="C_O_H_4.xml" roadNumber="1431" roadName="C&amp;O" mfg="Bachmann" owner="blw" model="H-4 2-6-6-2" dccAddress="1431" comment="1/26/20 - dual air pumps, B&amp;O whistle, USRA 6-chime alternate&lt;?p?&gt;1/26/20 - set acceleration and braking to 30/20" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2020-01-27T02:39:19.404+00:00</dateUpdated>
+      <decoder model="HO 2-6-6-2" family="Tsunami Steam Bachmann OEM" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="1431" longaddress="yes" />
+        <number>1431</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Whistle</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Short Whistle</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Steam Release</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Smoke</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Dimmer</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+      </functionlabels>
+      <soundlabels />
+    </locomotive>
+    <locomotive id="C&amp;O H-5" fileName="C_O_H_5.xml" roadNumber="1524" roadName="C&amp;O" mfg="Bachmann" owner="blw" model="USRA 2-6-6-2" dccAddress="1524" comment="Decoder replaced in kind 4/8/23" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-04-11T16:09:28.286+00:00</dateUpdated>
+      <decoder model="LokSound 5" family="ESU LokSound 5" comment="" maxFnNum="31" />
+      <locoaddress>
+        <dcclocoaddress number="1524" longaddress="yes" />
+        <number>1524</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Light</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Horn</functionlabel>
+      </functionlabels>
+      <soundlabels>
+        <soundlabel num="33">Automatic brake sound</soundlabel>
+        <soundlabel num="34">Gear shift sound</soundlabel>
+      </soundlabels>
+    </locomotive>
+    <locomotive id="C&amp;O H-8" fileName="C_O_H_8.xml" roadNumber="1633" roadName="C&amp;O" mfg="Rivarossi" owner="blw" model="H-8 2-6-6-6" dccAddress="1633" comment="Reset to factory 5/17/20." developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2020-05-17T18:47:17.142+00:00</dateUpdated>
+      <decoder model="LokSound 5" family="ESU LokSound 5" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="1633" longaddress="yes" />
+        <number>1633</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+    </locomotive>
+    <locomotive id="C&amp;O J3a" fileName="C_O_J3a.xml" roadNumber="611" roadName="C&amp;O" mfg="Broadway Limited" owner="blw" model="J-3a 4-8-4" dccAddress="611" comment="" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2020-10-25T01:51:23.160+00:00</dateUpdated>
+      <decoder model="Steam w/depleting coal, whistle smoke" family="Paragon 3" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="611" longaddress="yes" />
+        <number>611</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Whistle</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Air Pump</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Blow Down/Chuff Up</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Fill/Chuff Dn</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Smoke Control</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute/Master Volume</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Shutdown and Startup</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Shovel Coal</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Injector</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Set/Release/Squeal</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn Grade Crossing</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Passenger Sounds</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Freight Sounds</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">Maintenance Sounds</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Radio Chatter</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">City Sounds</functionlabel>
+        <functionlabel num="19" lockable="true" visible="true" functionImage="" functionImageSelected="">Farm Sounds</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Industrial Sounds</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">Lumber Sounds</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn2</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">Track Sounds</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">Aux Light Control</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">Long Whistle</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Play Macro</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Record Macro</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Squeal</functionlabel>
+      </functionlabels>
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>RosterGroup:Steam</key>
+          <value>yes</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="C&amp;O L-1" fileName="C_O_L_1.xml" roadNumber="492" roadName="C&amp;O" mfg="Broadway Limited" owner="blw" model="L-1 4-6-4" dccAddress="492" comment="" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2022-06-10T10:26:12.775+00:00</dateUpdated>
+      <decoder model="Steam" family="Paragon 3" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="492" longaddress="yes" />
+        <number>492</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Whistle</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Air Pump</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Blow Down/Chuff Up</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Fill/Chuff Dn</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Smoke Control</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute/Master Volume</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Shutdown and Startup</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Shovel Coal</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Injector</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Set/Release/Squeal</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn Grade Crossing</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Passenger Sounds</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Freight Sounds</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">Maintenance Sounds</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Radio Chatter</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">City Sounds</functionlabel>
+        <functionlabel num="19" lockable="true" visible="true" functionImage="" functionImageSelected="">Farm Sounds</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Industrial Sounds</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">Lumber Sounds</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn2</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">Track Sounds</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">Aux Light Control</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">Long Whistle</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Play Macro</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Record Macro</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Squeal</functionlabel>
+      </functionlabels>
+      <soundlabels />
+    </locomotive>
+    <locomotive id="C&amp;O T1" fileName="C_O_T1.xml" roadNumber="3020" roadName="C&amp;O" mfg="Broadway Limited" owner="blw" model="T1 2-10-4" dccAddress="3020" comment="" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2020-10-25T01:51:30.662+00:00</dateUpdated>
+      <decoder model="Steam w/depleting coal, whistle smoke" family="Paragon 3" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="3020" longaddress="yes" />
+        <number>3020</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="true" visible="true" functionImage="" functionImageSelected="">Whistle</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Air Pump</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Blow Down/Chuff Up</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Fill/Chuff Dn</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Smoke Control</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute/Master Volume</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Johnson Bar</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Shovel Coal</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Injector</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Set/Release/Squeal</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn Grade Crossing</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Passenger Sounds</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Freight Sounds</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">Maintenance Sounds</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Radio Chatter</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">City Sounds</functionlabel>
+        <functionlabel num="19" lockable="true" visible="true" functionImage="" functionImageSelected="">Farm Sounds</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Industrial Sounds</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">Lumber Sounds</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn2</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">Track Sounds</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">Aux Light Control</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">Long Whistle</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Play Macro</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Record Macro</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Squeal</functionlabel>
+      </functionlabels>
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>RosterGroup:Steam</key>
+          <value>yes</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="C44-9" fileName="C44_9.xml" roadNumber="8773" roadName="Norfolk Southern" mfg="Scale Trains" owner="Fred" model="CW44-9" dccAddress="8773" comment="" developerID="-1" manufacturerID="151" productID="33554588" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-09-27T14:36:00.441+00:00</dateUpdated>
+      <decoder model="LokSound 5 DCC" family="ESU LokSound 5" comment="" maxFnNum="31" />
+      <locoaddress>
+        <dcclocoaddress number="8773" longaddress="yes" />
+        <number>8773</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>LastOperated</key>
+          <value>2023-07-05T18:32:44.324+00:00</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>OperatingDuration</key>
+          <value>58</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="C628" fileName="C628.xml" roadNumber="1103" roadName="N&amp;W" mfg="Stewart" owner="blw" model="Alco C628" dccAddress="1103" comment="1/26/20 128 steps, Regulated throttle, launch on DCC&lt;?p?&gt;-- accelleration and decelleraation to 40 and 30" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2022-10-15T15:50:15.571+00:00</dateUpdated>
+      <decoder model="Titan Diesel" family="QSI Ver. 8" comment="May have written some of 1431's pages to this one 1/26/20." maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="1103" longaddress="yes" />
+        <number>1103</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Light</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Whistle</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Blower</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Dynamic</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Doppler</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Squeal</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Heavy Load</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Status</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Number Board</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Cab Light</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Fuel Loading</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Maintenance</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Loading</functionlabel>
+      </functionlabels>
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>DispatcherTrainType</key>
+          <value>MOW</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>LastOperated</key>
+          <value>2026-02-17T13:00:58.177+00:00</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>OperatingDuration</key>
+          <value>1730</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="CJ Chessie T1" fileName="CJ_Chessie_T1.xml" roadNumber="2101" roadName="Chessie" mfg="Broadway Limited" owner="Chris" model="RDG T1" dccAddress="2101" comment="" developerID="-1" manufacturerID="38" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2024-07-28T15:56:25.450+00:00</dateUpdated>
+      <decoder model="Steam" family="Paragon 4" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="2101" longaddress="yes" />
+        <number>2101</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Whistle</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Air Pump</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Blow Down/Chuff Up</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Fill/Chuff Dn</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Smoke Control</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute/Master Volume</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Shutdown and Startup</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Shovel Coal</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Injector</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Set/Release</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn Grade Crossing</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Passenger Sounds</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Freight Sounds</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">Maintenance Sounds</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Radio Chatter</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">City Sounds</functionlabel>
+        <functionlabel num="19" lockable="true" visible="true" functionImage="" functionImageSelected="">Farm Sounds</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Industrial Sounds</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">Lumber Sounds</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn2</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">Track Sounds</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">Aux Light Control</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">Long Whistle</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Play Macro</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Record Macro</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Squeal</functionlabel>
+      </functionlabels>
+      <soundlabels />
+    </locomotive>
+    <locomotive id="CJ E8-1" fileName="CJ_E8_1.xml" roadNumber="4514" roadName="C&amp;O" mfg="Proto 2000" owner="Chris" model="E8A" dccAddress="4514" comment="" developerID="-1" manufacturerID="141" productID="2068" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2024-07-28T15:56:25.450+00:00</dateUpdated>
+      <decoder model="TSU-1100 EMD Diesels" family="Tsunami2 Diesel" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="4514" longaddress="yes" />
+        <number>4514</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Horn</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Short Horn</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Dynamic Brake</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">RPM+</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">RPM-</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Dimmer</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Xing Signal</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Straight to Eight</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Ind/Train Brake</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Select</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Half Speed</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Handbrake</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">HEP Mode</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Fuel Loading</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">General Service</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Steam Generator</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">Sander Valve</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Cab Chatter</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">All Aboard</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">FX3 Output</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">FX4 Output</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">FX5 Output</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">FX6 Output</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">FX7,8 Output</functionlabel>
+      </functionlabels>
+      <soundlabels />
+    </locomotive>
+    <locomotive id="CJ E8-2" fileName="CJ_E8_2.xml" roadNumber="4515" roadName="C&amp;O" mfg="Proto 2000" owner="Chris" model="E8" dccAddress="4515" comment="" developerID="-1" manufacturerID="141" productID="2068" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2024-07-28T15:56:25.451+00:00</dateUpdated>
+      <decoder model="TSU-1100 EMD Diesels" family="Tsunami2 Diesel" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="4515" longaddress="yes" />
+        <number>4515</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Horn</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Short Horn</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Dynamic Brake</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">RPM+</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">RPM-</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Dimmer</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Xing Signal</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Straight to Eight</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Ind/Train Brake</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Select</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Half Speed</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Handbrake</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">HEP Mode</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Fuel Loading</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">General Service</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Steam Generator</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">Sander Valve</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Cab Chatter</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">All Aboard</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">FX3 Output</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">FX4 Output</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">FX5 Output</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">FX6 Output</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">FX7,8 Output</functionlabel>
+      </functionlabels>
+      <soundlabels />
+    </locomotive>
+    <locomotive id="CJ H8" fileName="CJ_H8.xml" roadNumber="1601" roadName="C&amp;O" mfg="MTH" owner="Chris" model="H8 2-6-6-6" dccAddress="1601" comment="" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-04-09T19:13:15.143+00:00</dateUpdated>
+      <decoder model="MTH HO Full PS3 Definition" family="MTH HO Full PS3 Definition" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="1601" longaddress="yes" />
+        <number>1601</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Horn</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Start up - Shutdown</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">PFA</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Lights</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Master Volume</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Front Coupler</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Rear Coupler</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Forward Signal</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Reverse Signal</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Grade Crossing Signal</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Clickety Clack</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Idle Sequence 4</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Idle Sequence 3</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Idle Sequence 2</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">Idle Sequence 1</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Extended Start Up</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">Extended Shut Down</functionlabel>
+        <functionlabel num="19" lockable="true" visible="true" functionImage="" functionImageSelected="">Rev Up</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Rev Down</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">One Shot Doopler</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler Slack</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler Close</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">Short Horn</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">Engine Sounds</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Sounds</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Cab Chatter</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">Feature Reset</functionlabel>
+      </functionlabels>
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>LastOperated</key>
+          <value>2023-04-09T18:48:21.053+00:00</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>OperatingDuration</key>
+          <value>4638</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="CJ H8 1604" fileName="CJ_H8_1604.xml" roadNumber="1604" roadName="Chesapeake &amp; Ohio" mfg="MTH" owner="Chris" model="" dccAddress="1604" comment="" developerID="-1" manufacturerID="27" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2025-07-08T21:53:16.401+00:00</dateUpdated>
+      <decoder model="MTH HO PS3" family="MTH HO PS3" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="1604" longaddress="yes" />
+        <number>1604</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+    </locomotive>
+    <locomotive id="CJ K2" fileName="CJ_K_2.xml" roadNumber="1160" roadName="C&amp;O" mfg="Broadway Limited" owner="Chris" model="" dccAddress="1160" comment="" developerID="-1" manufacturerID="38" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2024-07-25T21:54:57.626+00:00</dateUpdated>
+      <decoder model="Steam" family="Paragon 4" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="1160" longaddress="yes" />
+        <number>1160</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Whistle</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Air Pump</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Blow Down/Chuff Up</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Fill/Chuff Dn</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Smoke Control</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute/Master Volume</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Shutdown and Startup</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Shovel Coal</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Injector</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Set/Release</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn Grade Crossing</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Passenger Sounds</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Freight Sounds</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">Maintenance Sounds</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Radio Chatter</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">City Sounds</functionlabel>
+        <functionlabel num="19" lockable="true" visible="true" functionImage="" functionImageSelected="">Farm Sounds</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Industrial Sounds</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">Lumber Sounds</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn2</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">Track Sounds</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">Aux Light Control</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">Long Whistle</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Play Macro</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Record Macro</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Squeal</functionlabel>
+      </functionlabels>
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>LastOperated</key>
+          <value>2024-07-25T23:32:10.361+00:00</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>OperatingDuration</key>
+          <value>2671</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="E6s" fileName="E6s.xml" roadNumber="363" roadName="PRR" mfg="Broadway" owner="Chris" model="E6s 4-4-2" dccAddress="393" comment="" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-04-09T19:13:03.753+00:00</dateUpdated>
+      <decoder model="Steam" family="Paragon 4" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="393" longaddress="yes" />
+        <number>393</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Whistle</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Air Pump</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Blow Down/Chuff Up</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Fill/Chuff Dn</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Smoke Control</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute/Master Volume</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Shutdown and Startup</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Shovel Coal</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Water Injector</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Set/Release</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn Grade Crossing</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Passenger Sounds</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Freight Sounds</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">Maintenance Sounds</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Radio Chatter</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">City Sounds</functionlabel>
+        <functionlabel num="19" lockable="true" visible="true" functionImage="" functionImageSelected="">Farm Sounds</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Industrial Sounds</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">Lumber Sounds</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn2</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">Track Sounds</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">Aux Light Control</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">Long Whistle</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Play Macro</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Record Macro</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Squeal</functionlabel>
+      </functionlabels>
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>LastOperated</key>
+          <value>2023-04-06T21:46:06.283+00:00</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>OperatingDuration</key>
+          <value>205</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="ES44AC John" fileName="ES44AC_John.xml" roadNumber="981" roadName="CSX" mfg="Walthers" owner="John" model="ES44AC" dccAddress="981" comment="" developerID="-1" manufacturerID="141" productID="326" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-09-27T14:36:38.979+00:00</dateUpdated>
+      <decoder model="TSU-21PNEM8 GE Diesels" family="Tsunami2 Diesel" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="981" longaddress="yes" />
+        <number>981</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Horn</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Short Horn</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Dynamic Brake</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">RPM+</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">RPM-</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Dimmer</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Xing Signal</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Straight to Eight</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Ind/Train Brake</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Select</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Half Speed</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Handbrake</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">HEP Mode</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Fuel Loading</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">General Service</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Steam Generator</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">Sander Valve</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Cab Chatter</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">All Aboard</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">FX3 Output</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">FX4 Output</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">FX5 Output</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">FX6 Output</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">FX7,8 Output</functionlabel>
+      </functionlabels>
+      <soundlabels />
+    </locomotive>
+    <locomotive id="ES44AC John 2" fileName="ES44AC_John_2.xml" roadNumber="977" roadName="CSX" mfg="Walthers" owner="John" model="ES44AC" dccAddress="977" comment="" developerID="-1" manufacturerID="141" productID="326" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-09-27T14:33:41.919+00:00</dateUpdated>
+      <decoder model="TSU-21PNEM8 GE Diesels" family="Tsunami2 Diesel" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="977" longaddress="yes" />
+        <number>977</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Horn</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Short Horn</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Dynamic Brake</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">RPM+</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">RPM-</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Dimmer</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Xing Signal</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Straight to Eight</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Ind/Train Brake</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Select</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Half Speed</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Handbrake</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">HEP Mode</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Fuel Loading</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">General Service</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Steam Generator</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">Sander Valve</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Cab Chatter</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">All Aboard</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">FX3 Output</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">FX4 Output</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">FX5 Output</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">FX6 Output</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">FX7,8 Output</functionlabel>
+      </functionlabels>
+      <soundlabels />
+    </locomotive>
+    <locomotive id="ES44DC" fileName="ES44DC.xml" roadNumber="8048" roadName="Norfolk Southern" mfg="Walthers" owner="Fred" model="ES44DC" dccAddress="8048" comment="" developerID="-1" manufacturerID="141" productID="MC1H104P21" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-09-27T14:37:26.455+00:00</dateUpdated>
+      <decoder model="Bachmann (soundTraxx MC1) 36-557" family="OEM Bachmann E-Z Command decoders" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="8048" longaddress="yes" />
+        <number>8048</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+    </locomotive>
+    <locomotive id="FP7A1" fileName="FP7A1.xml" roadNumber="7023" roadName="C&amp;O" mfg="Intermountain" owner="Chris" model="FP7" dccAddress="7023" comment="" developerID="-1" manufacturerID="153" productID="1" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-08-06T16:09:05.052+00:00</dateUpdated>
+      <decoder model="DP2X" family="Jan 2000" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="7023" longaddress="yes" />
+        <number>7023</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+    </locomotive>
+    <locomotive id="FP7A2" fileName="FP7A2.xml" roadNumber="7022" roadName="C&amp;O" mfg="Intermountain" owner="Chris" model="FP7" dccAddress="7022" comment="" developerID="-1" manufacturerID="153" productID="1" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-08-06T16:06:41.894+00:00</dateUpdated>
+      <decoder model="DP2X" family="Sep 2018" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="7022" longaddress="yes" />
+        <number>7022</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+    </locomotive>
+    <locomotive id="FP7B" fileName="FP7B.xml" roadNumber="7505" roadName="C&amp;O" mfg="Intermountain" owner="Chris" model="FP7B" dccAddress="7505" comment="" developerID="-1" manufacturerID="153" productID="1" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-08-06T15:39:21.162+00:00</dateUpdated>
+      <decoder model="DP2X" family="Jan 2000" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="7505" longaddress="yes" />
+        <number>7505</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+    </locomotive>
+    <locomotive id="NS C39-8" fileName="NS_C39_8.xml" roadNumber="8551" roadName="Norfolk Southern" mfg="Overland / Anjin" owner="blw" model="GE C39-8" dccAddress="8551" comment="" developerID="-1" manufacturerID="153" productID="171" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2025-07-15T17:05:45.582+00:00</dateUpdated>
+      <decoder model="WOW Diesel 121 SS4" family="WOW Diesel Sound Set 4" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="8551" longaddress="yes" />
+        <number>8551</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Horn Long</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn Short</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn Quill</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Dynamic Brake</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Release</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Train Brake</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Rotate Horn/Bell</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Manual Notch Up</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Manual Notch Down</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Prime Mover</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupling</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Uncoupling</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Mainline/Switching Momentum</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">Crew Alert</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Windshield Wipers</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">Air Spitter</functionlabel>
+      </functionlabels>
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>LastOperated</key>
+          <value>2025-07-15T17:10:10.319+00:00</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>OperatingDuration</key>
+          <value>43</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="S2" fileName="S2.xml" roadNumber="6200" roadName="PRR" mfg="Broadway" owner="Chris" model="S2 6-8-6 Turbine" dccAddress="6200" comment="" developerID="-1" manufacturerID="38" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-04-09T19:13:49.209+00:00</dateUpdated>
+      <decoder model="Diesel" family="Paragon 4" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="6200" longaddress="yes" />
+        <number>6200</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Horn</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Compressor</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">RPM Up</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">RPM Dn</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Smoke Control</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute/Master Volume</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Shutdown and Startup</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Cooling Fan</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Air Release</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Set/Release/Squeal</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn Grade Crossing</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Station Sounds</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Yard Sounds</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">Maintenance Sounds</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Radio Chatter</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">City Sounds</functionlabel>
+        <functionlabel num="19" lockable="true" visible="true" functionImage="" functionImageSelected="">Farm Sounds</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Industrial Sounds</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">Lumber Sounds</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn2</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">Track Sounds</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">Aux Light Control</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">Long Horn</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Play Macro</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Record Macro</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Squeal</functionlabel>
+      </functionlabels>
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>LastOperated</key>
+          <value>2023-04-03T15:51:32.069+00:00</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>OperatingDuration</key>
+          <value>182353</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="S3" fileName="S3.xml" roadNumber="765" roadName="Nickel Plate" mfg="MTH" owner="Chris" model="S3 2-8-4" dccAddress="765" comment="" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-04-09T19:13:33.789+00:00</dateUpdated>
+      <decoder model="MTH HO Full PS3 Definition" family="MTH HO Full PS3 Definition" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="765" longaddress="yes" />
+        <number>765</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Headlight</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="false" visible="true" functionImage="" functionImageSelected="">Horn</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Start up - Shutdown</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">PFA</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Lights</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Master Volume</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Front Coupler</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Rear Coupler</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Forward Signal</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Reverse Signal</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Grade Crossing Signal</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Clickety Clack</functionlabel>
+        <functionlabel num="13" lockable="true" visible="true" functionImage="" functionImageSelected="">Idle Sequence 4</functionlabel>
+        <functionlabel num="14" lockable="true" visible="true" functionImage="" functionImageSelected="">Idle Sequence 3</functionlabel>
+        <functionlabel num="15" lockable="true" visible="true" functionImage="" functionImageSelected="">Idle Sequence 2</functionlabel>
+        <functionlabel num="16" lockable="true" visible="true" functionImage="" functionImageSelected="">Idle Sequence 1</functionlabel>
+        <functionlabel num="17" lockable="true" visible="true" functionImage="" functionImageSelected="">Extended Start Up</functionlabel>
+        <functionlabel num="18" lockable="true" visible="true" functionImage="" functionImageSelected="">Extended Shut Down</functionlabel>
+        <functionlabel num="19" lockable="true" visible="true" functionImage="" functionImageSelected="">Rev Up</functionlabel>
+        <functionlabel num="20" lockable="true" visible="true" functionImage="" functionImageSelected="">Rev Down</functionlabel>
+        <functionlabel num="21" lockable="true" visible="true" functionImage="" functionImageSelected="">One Shot Doopler</functionlabel>
+        <functionlabel num="22" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler Slack</functionlabel>
+        <functionlabel num="23" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler Close</functionlabel>
+        <functionlabel num="24" lockable="true" visible="true" functionImage="" functionImageSelected="">Short Horn</functionlabel>
+        <functionlabel num="25" lockable="true" visible="true" functionImage="" functionImageSelected="">Engine Sounds</functionlabel>
+        <functionlabel num="26" lockable="true" visible="true" functionImage="" functionImageSelected="">Brake Sounds</functionlabel>
+        <functionlabel num="27" lockable="true" visible="true" functionImage="" functionImageSelected="">Cab Chatter</functionlabel>
+        <functionlabel num="28" lockable="true" visible="true" functionImage="" functionImageSelected="">Feature Reset</functionlabel>
+      </functionlabels>
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>LastOperated</key>
+          <value>2023-04-06T21:30:45.359+00:00</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>OperatingDuration</key>
+          <value>51</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="SAL B-1" fileName="SAL_B_1.xml" roadNumber="2485" roadName="Seaboard Air Line" mfg="Bachmann" owner="blw" model="USRA 2-10-2" dccAddress="2485" comment="Will become C&amp;O B-1 2952" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2020-01-12T17:06:45.520+00:00</dateUpdated>
+      <decoder model="4 function decoder (36-550)" family="E-Z Command decoders" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="2485" longaddress="yes" />
+        <number>2485</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+    </locomotive>
+    <locomotive id="SD70ACe" fileName="SD70ACe.xml" roadNumber="1125" roadName="Norfolk Southern" mfg="Walthers" owner="Fred" model="SD70ACe" dccAddress="1125" comment="" developerID="-1" manufacturerID="141" productID="MC1H104P21" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-09-27T14:37:11.807+00:00</dateUpdated>
+      <decoder model="Bachmann (soundTraxx MC1) 36-557" family="OEM Bachmann E-Z Command decoders" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="1125" longaddress="yes" />
+        <number>1125</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+    </locomotive>
+    <locomotive id="Sperry Rail Car" fileName="Sperry_Rail_Car.xml" roadNumber="136" roadName="Sperry" mfg="Mizuno" owner="blw" model="Rail Detector" dccAddress="136" comment="Hallmark / Mizuno" developerID="-1" manufacturerID="153" productID="12" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2025-07-01T17:49:21.932+00:00</dateUpdated>
+      <decoder model="MC2" family="Jan 2012" comment="TCS MC2 hardwired" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="136" longaddress="yes" />
+        <number>136</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+      <attributepairs>
+        <keyvaluepair>
+          <key>LastOperated</key>
+          <value>2025-07-01T17:57:59.204+00:00</value>
+        </keyvaluepair>
+        <keyvaluepair>
+          <key>OperatingDuration</key>
+          <value>75</value>
+        </keyvaluepair>
+      </attributepairs>
+    </locomotive>
+    <locomotive id="Steam Pot" fileName="Steam_Pot.xml" roadNumber="37" roadName="C&amp;O" mfg="Bachmann" owner="blw" model="C-8 Fireless 0-6-0" dccAddress="37" comment="" developerID="-1" manufacturerID="101" productID="" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2023-04-11T14:25:10.285+00:00</dateUpdated>
+      <decoder model="2 function decoder (36-552)" family="E-Z Command decoders" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="37" longaddress="no" />
+        <number>37</number>
+        <protocol>dcc_short</protocol>
+      </locoaddress>
+      <functionlabels />
+      <soundlabels />
+    </locomotive>
+    <locomotive id="TM1-EL" fileName="TM1_EL.xml" roadNumber="1852" roadName="Erie Lackawanna" mfg="Atlas" owner="blw" model="H-24-66" dccAddress="1852" comment="Consist address 4, leads (long hood first)" developerID="-1" manufacturerID="113" productID="106" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2024-07-06T21:30:04.690+00:00</dateUpdated>
+      <decoder model="Atlas TM wo/Mars" family="QSI Diesel Ver. 7" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="1852" longaddress="yes" />
+        <number>1852</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Light</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Fans</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Dynamic</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Doppler</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Squeal</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Heavy Load</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Status</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Number Board</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Cab Light</functionlabel>
+      </functionlabels>
+      <soundlabels />
+    </locomotive>
+    <locomotive id="TM2-PRR" fileName="TM2_PRR.xml" roadNumber="8703" roadName="PRR" mfg="Atlas" owner="blw" model="H-24-66" dccAddress="8703" comment="Leads or elephant style consist address 4" developerID="-1" manufacturerID="113" productID="106" decoderModes="" maxSpeed="100" imageFilePath="" iconFilePath="" URL="" IsShuntingOn="">
+      <dateUpdated>2024-07-06T21:32:05.771+00:00</dateUpdated>
+      <decoder model="Atlas TM wo/Mars" family="QSI Diesel Ver. 7" comment="" maxFnNum="28" />
+      <locoaddress>
+        <dcclocoaddress number="8703" longaddress="yes" />
+        <number>8703</number>
+        <protocol>dcc_long</protocol>
+      </locoaddress>
+      <functionlabels>
+        <functionlabel num="0" lockable="true" visible="true" functionImage="" functionImageSelected="">Light</functionlabel>
+        <functionlabel num="1" lockable="true" visible="true" functionImage="" functionImageSelected="">Bell</functionlabel>
+        <functionlabel num="2" lockable="true" visible="true" functionImage="" functionImageSelected="">Horn</functionlabel>
+        <functionlabel num="3" lockable="true" visible="true" functionImage="" functionImageSelected="">Coupler</functionlabel>
+        <functionlabel num="4" lockable="true" visible="true" functionImage="" functionImageSelected="">Fans</functionlabel>
+        <functionlabel num="5" lockable="true" visible="true" functionImage="" functionImageSelected="">Dynamic</functionlabel>
+        <functionlabel num="6" lockable="true" visible="true" functionImage="" functionImageSelected="">Doppler</functionlabel>
+        <functionlabel num="7" lockable="true" visible="true" functionImage="" functionImageSelected="">Squeal</functionlabel>
+        <functionlabel num="8" lockable="true" visible="true" functionImage="" functionImageSelected="">Mute</functionlabel>
+        <functionlabel num="9" lockable="true" visible="true" functionImage="" functionImageSelected="">Heavy Load</functionlabel>
+        <functionlabel num="10" lockable="true" visible="true" functionImage="" functionImageSelected="">Status</functionlabel>
+        <functionlabel num="11" lockable="true" visible="true" functionImage="" functionImageSelected="">Number Board</functionlabel>
+        <functionlabel num="12" lockable="true" visible="true" functionImage="" functionImageSelected="">Cab Light</functionlabel>
+      </functionlabels>
+      <soundlabels />
+    </locomotive>
+  </roster>
+  <rosterGroup>
+    <group>Steam</group>
+  </rosterGroup>
+</roster-config>

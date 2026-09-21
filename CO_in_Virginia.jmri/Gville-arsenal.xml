@@ -1,0 +1,1745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/xml/XSLT/panelfile-5-5-5.xsl" type="text/xsl"?>
+<layout-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://jmri.org/xml/schema/layout-5-5-5.xsd">
+  <jmriversion>
+    <major>5</major>
+    <minor>15</minor>
+    <test>3</test>
+    <modifier />
+  </jmriversion>
+  <sensors class="jmri.jmrix.openlcb.configurexml.OlcbSensorManagerXml">
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F2.00.66;02.01.57.00.03.F2.00.67</systemName>
+      <userName>Piedmont-center-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F2.00.72;02.01.57.00.03.F2.00.73</systemName>
+      <userName>VAL-entry-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F2.00.7E;02.01.57.00.03.F2.00.7F</systemName>
+      <userName>Lindsay-Main-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F2.00.8A;02.01.57.00.03.F2.00.8B</systemName>
+      <userName>Lindsay-Siding-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F3.00.36;02.01.57.00.03.F3.00.37</systemName>
+      <userName>VAL-staging-3south-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F3.00.4E;02.01.57.00.03.F3.00.4f</systemName>
+      <userName>VAL-staging-2north-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F3.00.5A;02.01.57.00.03.F3.00.5B</systemName>
+      <userName>VAL-staging-1north-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F3.00.66;02.01.57.00.03.F3.00.67</systemName>
+      <userName>VAL-helper-pocket-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F3.00.72;02.01.57.00.03.F3.00.73</systemName>
+      <userName>VAL-reverse-loop-2</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F3.00.7E;02.01.57.00.03.F3.00.7f</systemName>
+      <userName>VAL-reverse-loop-3</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F3.00.8A;02.01.57.00.03.F3.00.8b</systemName>
+      <userName>VAL-reverse-loop-4</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F3.00.96;02.01.57.00.03.F3.00.97</systemName>
+      <userName>VAL-reverse-loop-1</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F3.00.A2;02.01.57.00.03.F3.00.A3</systemName>
+      <userName>VAL-staging-2south-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F3.00.AE;02.01.57.00.03.F3.00.AF</systemName>
+      <userName>VAL-staging-1south-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.00.03.F3.00.BA;02.01.57.00.03.F3.00.Bb</systemName>
+      <userName>VAL-reverse-loop-5</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.002.C4.00.5A;02.01.57.10.02.C4.00.5B</systemName>
+      <userName>Arsenal-block-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.10.02.C4.00.12;02.01.57.10.02.C4.00.13</systemName>
+      <userName>Arsenal-Plant-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.10.02.C4.00.1E;02.01.57.10.02.C4.00.1F</systemName>
+      <userName>Washington-Sub-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.10.02.C4.00.37;02.01.57.10.02.C4.00.36</systemName>
+      <userName>Piedmont-block-occ</userName>
+      <comment>Why are the events for this sensor inverted? Usually it would be 36 is active and 37 is inactive!</comment>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.10.02.C4.00.42;02.01.57.10.02.C4.00.43</systemName>
+      <userName>Gordonsville-North-Wye-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.10.02.C4.00.4E;02.01.57.10.02.C4.00.4F</systemName>
+      <userName>Louisa-block-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.10.02.C5.00.06;02.01.57.10.02.C5.00.07</systemName>
+      <userName>Staging-Main-occ</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>MS02.01.57.10.02.C5.00.2A;02.01.57.10.02.C5.00.2B</systemName>
+      <userName>Staging-Siding-occ</userName>
+    </sensor>
+  </sensors>
+  <sensors class="jmri.jmrix.mqtt.configurexml.MqttSensorManagerXml">
+    <sensor inverted="false">
+      <systemName>M2SGordonsville-North-Button</systemName>
+      <userName>Gordonsville-North-Button</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>M2SStaging-Exit-Button</systemName>
+      <userName>Staging-Exit-Button</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>M2SStaging-Loop-Button</systemName>
+      <userName>Staging-Loop-Button</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>M2SStaging-Siding-Entry-Button</systemName>
+      <userName>Staging-Siding-Entry-Button</userName>
+    </sensor>
+    <sensor inverted="false">
+      <systemName>M2SStaging-Siding-Exit-Button</systemName>
+      <userName>Staging-Siding-Exit-Button</userName>
+    </sensor>
+  </sensors>
+  <sensors class="jmri.jmrix.internal.configurexml.InternalSensorManagerXml">
+    <defaultInitialState>unknown</defaultInitialState>
+    <sensor inverted="false">
+      <systemName>ISCLOCKRUNNING</systemName>
+    </sensor>
+  </sensors>
+  <turnouts class="jmri.jmrix.mqtt.configurexml.MqttTurnoutManagerXml">
+    <operations automate="false">
+      <operation name="NoFeedback" class="jmri.configurexml.turnoutoperations.NoFeedbackTurnoutOperationXml" interval="300" maxtries="2" />
+      <operation name="Raw" class="jmri.configurexml.turnoutoperations.RawTurnoutOperationXml" interval="300" maxtries="1" />
+      <operation name="Sensor" class="jmri.configurexml.turnoutoperations.SensorTurnoutOperationXml" interval="300" maxtries="3" />
+    </operations>
+    <defaultclosedspeed>Normal</defaultclosedspeed>
+    <defaultthrownspeed>Restricted</defaultthrownspeed>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>M2TEast-Lindsay</systemName>
+      <userName>East-Lindsay</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>M2TStaging-Reverse-Loop</systemName>
+      <userName>Main Staging Reverse Loop Turnout</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>M2TVAL-helper-pocket</systemName>
+      <userName>VAL-helper-pocket</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>M2TVAL-staging-north-1</systemName>
+      <userName>VAL-staging-north-1</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>M2TVAL-staging-north-2</systemName>
+      <userName>VAL-staging-north-2</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>M2TVAL-staging-north-3</systemName>
+      <userName>VAL-staging-north-3</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>M2TVAL-staging-return</systemName>
+      <userName>VAL-staging-return</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>M2TVAL-staging-south-1</systemName>
+      <userName>VAL-staging-south-1</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>M2TVAL-staging-south-2</systemName>
+      <userName>VAL-staging-south-2</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>M2TVAL-staging-south-3</systemName>
+      <userName>VAL-staging-south-3</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>M2TWest-Lindsay</systemName>
+      <userName>West-Lindsay</userName>
+    </turnout>
+  </turnouts>
+  <turnouts class="jmri.jmrix.sprog.configurexml.SprogTurnoutManagerXml">
+    <operations automate="false">
+      <operation name="NoFeedback" class="jmri.configurexml.turnoutoperations.NoFeedbackTurnoutOperationXml" interval="300" maxtries="2" />
+      <operation name="Raw" class="jmri.configurexml.turnoutoperations.RawTurnoutOperationXml" interval="300" maxtries="1" />
+      <operation name="Sensor" class="jmri.configurexml.turnoutoperations.SensorTurnoutOperationXml" interval="300" maxtries="3" />
+    </operations>
+    <defaultclosedspeed>Normal</defaultclosedspeed>
+    <defaultthrownspeed>Restricted</defaultthrownspeed>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>ST200</systemName>
+      <userName>Arsenal-gate</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>ST201</systemName>
+      <userName>Gordonsville-freight</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="true" automate="Off">
+      <systemName>ST202</systemName>
+      <userName>Gordonsville-south</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>ST203</systemName>
+      <userName>Arsenal-lead</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>ST210</systemName>
+      <userName>Gordonsville-north</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>ST211</systemName>
+      <userName>Staging-exit</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>ST212</systemName>
+      <userName>Staging-siding-entry</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="true" automate="Off">
+      <systemName>ST214</systemName>
+      <userName>Staging-siding-exit</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>ST220</systemName>
+      <userName>Arsenal-warehouse</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="true" automate="Off">
+      <systemName>ST301</systemName>
+      <userName>VAL-loop-turnout</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>ST302</systemName>
+      <userName>Gordonsville-west</userName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="true" automate="Off">
+      <systemName>ST303</systemName>
+      <userName>VAL-turnout</userName>
+    </turnout>
+  </turnouts>
+  <memories class="jmri.managers.configurexml.DefaultMemoryManagerXml">
+    <memory value="7:24 PM">
+      <systemName>IMCURRENTTIME</systemName>
+    </memory>
+    <memory value="1.0">
+      <systemName>IMRATEFACTOR</systemName>
+    </memory>
+  </memories>
+  <blocks class="jmri.configurexml.BlockManagerXml">
+    <defaultspeed>Normal</defaultspeed>
+    <block systemName="IB:AUTO:0001">
+      <systemName>IB:AUTO:0001</systemName>
+      <userName>Staging Exit Turnout</userName>
+    </block>
+    <block systemName="IB:AUTO:0002">
+      <systemName>IB:AUTO:0002</systemName>
+      <userName>Arsenal</userName>
+    </block>
+    <block systemName="IB:AUTO:0003">
+      <systemName>IB:AUTO:0003</systemName>
+      <userName>Arsenal-Plant</userName>
+    </block>
+    <block systemName="IB:AUTO:0004">
+      <systemName>IB:AUTO:0004</systemName>
+      <userName>Gordonsville-South-Turnout</userName>
+    </block>
+    <block systemName="IB:AUTO:0005">
+      <systemName>IB:AUTO:0005</systemName>
+      <userName>Gordonsville-North-Wye Turnout</userName>
+    </block>
+    <block systemName="IB:AUTO:0006">
+      <systemName>IB:AUTO:0006</systemName>
+      <userName>Gordonsville-Washington</userName>
+    </block>
+    <block systemName="IB:AUTO:0007">
+      <systemName>IB:AUTO:0007</systemName>
+      <userName>Staging Reverse Loop Turnout</userName>
+    </block>
+    <block systemName="IB:AUTO:0008">
+      <systemName>IB:AUTO:0008</systemName>
+      <userName>Staging Siding</userName>
+    </block>
+    <block systemName="IB:AUTO:0009">
+      <systemName>IB:AUTO:0009</systemName>
+      <userName>Lindsay</userName>
+    </block>
+    <block systemName="IB:AUTO:0010">
+      <systemName>IB:AUTO:0010</systemName>
+      <userName>VAL</userName>
+    </block>
+    <block systemName="IB:AUTO:0011">
+      <systemName>IB:AUTO:0011</systemName>
+      <userName>VAL Loop</userName>
+    </block>
+    <block systemName="IB:AUTO:0012">
+      <systemName>IB:AUTO:0012</systemName>
+      <userName>VAL staging6</userName>
+    </block>
+    <block systemName="IB:AUTO:0013">
+      <systemName>IB:AUTO:0013</systemName>
+      <userName>VAL staging1</userName>
+    </block>
+    <block systemName="IB:AUTO:0014">
+      <systemName>IB:AUTO:0014</systemName>
+      <userName>VAL staging2</userName>
+    </block>
+    <block systemName="IB:AUTO:0015">
+      <systemName>IB:AUTO:0015</systemName>
+      <userName>VAL staging3</userName>
+    </block>
+    <block systemName="IB:AUTO:0016">
+      <systemName>IB:AUTO:0016</systemName>
+      <userName>VAL staging4</userName>
+    </block>
+    <block systemName="IB:AUTO:0017">
+      <systemName>IB:AUTO:0017</systemName>
+      <userName>VAL staging5</userName>
+    </block>
+    <block systemName="IB:AUTO:0018">
+      <systemName>IB:AUTO:0018</systemName>
+      <userName>Lindsay Siding</userName>
+    </block>
+    <block systemName="IB:AUTO:0019">
+      <systemName>IB:AUTO:0019</systemName>
+      <userName>Woolen Mills</userName>
+    </block>
+    <block systemName="IB:AUTO:0021">
+      <systemName>IB:AUTO:0021</systemName>
+      <userName>Piedmont</userName>
+    </block>
+    <block systemName="IB:AUTO:0022">
+      <systemName>IB:AUTO:0022</systemName>
+      <userName>Staging Main</userName>
+    </block>
+    <block systemName="IB:AUTO:0024">
+      <systemName>IB:AUTO:0024</systemName>
+      <userName>Staging Main Exit Turnout</userName>
+    </block>
+    <block systemName="IB:AUTO:0025">
+      <systemName>IB:AUTO:0025</systemName>
+      <userName>Staging Main Entry Turnout</userName>
+    </block>
+    <block systemName="IB:AUTO:0026">
+      <systemName>IB:AUTO:0026</systemName>
+      <userName>Louisa</userName>
+    </block>
+    <block systemName="IB:AUTO:0027">
+      <systemName>IB:AUTO:0027</systemName>
+      <userName>Gordonsville-North-Wye</userName>
+    </block>
+    <block systemName="IB:AUTO:0028">
+      <systemName>IB:AUTO:0028</systemName>
+      <userName>Gordonsville-Piedmont</userName>
+    </block>
+    <block systemName="IB:AUTO:0001" length="0.0" curve="1">
+      <systemName>IB:AUTO:0001</systemName>
+      <userName>Staging Exit Turnout</userName>
+      <permissive>no</permissive>
+      <path todir="32" fromdir="16" block="IB:AUTO:0002">
+        <beansetting setting="2">
+          <turnout systemName="Staging-exit" />
+        </beansetting>
+      </path>
+      <path todir="32" fromdir="16" block="IB:AUTO:0005">
+        <beansetting setting="4">
+          <turnout systemName="Staging-exit" />
+        </beansetting>
+      </path>
+      <path todir="16" fromdir="32" block="IB:AUTO:0007" />
+    </block>
+    <block systemName="IB:AUTO:0002" length="0.0" curve="0">
+      <systemName>IB:AUTO:0002</systemName>
+      <userName>Arsenal</userName>
+      <permissive>no</permissive>
+      <occupancysensor>MS02.01.57.002.C4.00.5A;02.01.57.10.02.C4.00.5B</occupancysensor>
+      <path todir="16" fromdir="32" block="IB:AUTO:0001" />
+      <path todir="32" fromdir="16" block="IB:AUTO:0003">
+        <beansetting setting="4">
+          <turnout systemName="Arsenal-gate" />
+        </beansetting>
+      </path>
+      <path todir="16" fromdir="32" block="IB:AUTO:0004">
+        <beansetting setting="2">
+          <turnout systemName="Gordonsville-freight" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0003" length="0.0" curve="4">
+      <systemName>IB:AUTO:0003</systemName>
+      <userName>Arsenal-Plant</userName>
+      <permissive>no</permissive>
+      <occupancysensor>MS02.01.57.10.02.C4.00.12;02.01.57.10.02.C4.00.13</occupancysensor>
+      <path todir="16" fromdir="32" block="IB:AUTO:0002">
+        <beansetting setting="4">
+          <turnout systemName="Arsenal-gate" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0004" length="0.0" curve="2">
+      <systemName>IB:AUTO:0004</systemName>
+      <userName>Gordonsville-South-Turnout</userName>
+      <permissive>no</permissive>
+      <path todir="32" fromdir="16" block="IB:AUTO:0002" />
+      <path todir="64" fromdir="128" block="IB:AUTO:0006">
+        <beansetting setting="2">
+          <turnout systemName="Gordonsville-west" />
+        </beansetting>
+      </path>
+      <path todir="128" fromdir="64" block="IB:AUTO:0021" />
+      <path todir="16" fromdir="32" block="IB:AUTO:0027">
+        <beansetting setting="2">
+          <turnout systemName="Gordonsville-south" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0005" length="0.0" curve="0">
+      <systemName>IB:AUTO:0005</systemName>
+      <userName>Gordonsville-North-Wye Turnout</userName>
+      <permissive>no</permissive>
+      <path todir="16" fromdir="32" block="IB:AUTO:0001">
+        <beansetting setting="4">
+          <turnout systemName="Staging-exit" />
+        </beansetting>
+      </path>
+      <path todir="160" fromdir="80" block="IB:AUTO:0006">
+        <beansetting setting="4">
+          <turnout systemName="Gordonsville-north" />
+        </beansetting>
+      </path>
+      <path todir="32" fromdir="16" block="IB:AUTO:0027">
+        <beansetting setting="2">
+          <turnout systemName="Gordonsville-north" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0006" length="0.0" curve="2">
+      <systemName>IB:AUTO:0006</systemName>
+      <userName>Gordonsville-Washington</userName>
+      <permissive>no</permissive>
+      <occupancysensor>MS02.01.57.10.02.C4.00.1E;02.01.57.10.02.C4.00.1F</occupancysensor>
+      <path todir="128" fromdir="64" block="IB:AUTO:0004">
+        <beansetting setting="2">
+          <turnout systemName="Gordonsville-west" />
+        </beansetting>
+      </path>
+      <path todir="80" fromdir="160" block="IB:AUTO:0005">
+        <beansetting setting="4">
+          <turnout systemName="Gordonsville-north" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0007" length="0.0" curve="0">
+      <systemName>IB:AUTO:0007</systemName>
+      <userName>Staging Reverse Loop Turnout</userName>
+      <permissive>no</permissive>
+      <path todir="32" fromdir="16" block="IB:AUTO:0001" />
+      <path todir="16" fromdir="32" block="IB:AUTO:0008">
+        <beansetting setting="4">
+          <turnout systemName="Staging-siding-exit" />
+        </beansetting>
+        <beansetting setting="2">
+          <turnout systemName="Main Staging Reverse Loop Turnout" />
+        </beansetting>
+      </path>
+      <path todir="144" fromdir="96" block="IB:AUTO:0008">
+        <beansetting setting="4">
+          <turnout systemName="Staging-siding-entry" />
+        </beansetting>
+        <beansetting setting="4">
+          <turnout systemName="Main Staging Reverse Loop Turnout" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0008" length="0.0" curve="0">
+      <systemName>IB:AUTO:0008</systemName>
+      <userName>Staging Siding</userName>
+      <permissive>no</permissive>
+      <occupancysensor>Staging-Siding-occ</occupancysensor>
+      <path todir="32" fromdir="16" block="IB:AUTO:0007">
+        <beansetting setting="4">
+          <turnout systemName="Staging-siding-exit" />
+        </beansetting>
+      </path>
+      <path todir="96" fromdir="144" block="IB:AUTO:0007">
+        <beansetting setting="4">
+          <turnout systemName="Staging-siding-entry" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0009" length="0.0" curve="0">
+      <systemName>IB:AUTO:0009</systemName>
+      <userName>Lindsay</userName>
+      <permissive>no</permissive>
+      <path todir="144" fromdir="96" block="IB:AUTO:0018" />
+      <path todir="64" fromdir="128" block="IB:AUTO:0021">
+        <beansetting setting="2">
+          <turnout systemName="East-Lindsay" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0010" length="0.0" curve="0">
+      <systemName>IB:AUTO:0010</systemName>
+      <userName>VAL</userName>
+      <permissive>no</permissive>
+      <occupancysensor>MS02.01.57.00.03.F2.00.72;02.01.57.00.03.F2.00.73</occupancysensor>
+      <path todir="64" fromdir="128" block="IB:AUTO:0011">
+        <beansetting setting="4">
+          <turnout systemName="VAL-loop-turnout" />
+        </beansetting>
+      </path>
+      <path todir="144" fromdir="96" block="IB:AUTO:0011" />
+      <path todir="64" fromdir="128" block="IB:AUTO:0012" />
+      <path todir="80" fromdir="160" block="IB:AUTO:0016" />
+      <path todir="64" fromdir="128" block="IB:AUTO:0017" />
+    </block>
+    <block systemName="IB:AUTO:0011" length="0.0" curve="0">
+      <systemName>IB:AUTO:0011</systemName>
+      <userName>VAL Loop</userName>
+      <permissive>no</permissive>
+      <path todir="96" fromdir="144" block="IB:AUTO:0010">
+        <beansetting setting="2">
+          <turnout systemName="VAL-loop-turnout" />
+        </beansetting>
+      </path>
+      <path todir="128" fromdir="64" block="IB:AUTO:0010">
+        <beansetting setting="4">
+          <turnout systemName="VAL-loop-turnout" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0012" length="0.0" curve="0">
+      <systemName>IB:AUTO:0012</systemName>
+      <userName>VAL staging6</userName>
+      <permissive>no</permissive>
+      <occupancysensor>MS02.01.57.00.03.F3.00.36;02.01.57.00.03.F3.00.37</occupancysensor>
+      <path todir="128" fromdir="64" block="IB:AUTO:0010" />
+      <path todir="128" fromdir="64" block="IB:AUTO:0013" />
+    </block>
+    <block systemName="IB:AUTO:0013" length="0.0" curve="0">
+      <systemName>IB:AUTO:0013</systemName>
+      <userName>VAL staging1</userName>
+      <permissive>no</permissive>
+      <occupancysensor>MS02.01.57.00.03.F3.00.5A;02.01.57.00.03.F3.00.5B</occupancysensor>
+      <path todir="64" fromdir="128" block="IB:AUTO:0012" />
+    </block>
+    <block systemName="IB:AUTO:0014" length="0.0" curve="0">
+      <systemName>IB:AUTO:0014</systemName>
+      <userName>VAL staging2</userName>
+      <permissive>no</permissive>
+      <occupancysensor>MS02.01.57.00.03.F3.00.4E;02.01.57.00.03.F3.00.4f</occupancysensor>
+      <path todir="64" fromdir="128" block="IB:AUTO:0017" />
+    </block>
+    <block systemName="IB:AUTO:0015" length="0.0" curve="0">
+      <systemName>IB:AUTO:0015</systemName>
+      <userName>VAL staging3</userName>
+      <permissive>no</permissive>
+      <path todir="64" fromdir="128" block="IB:AUTO:0016" />
+    </block>
+    <block systemName="IB:AUTO:0016" length="0.0" curve="0">
+      <systemName>IB:AUTO:0016</systemName>
+      <userName>VAL staging4</userName>
+      <permissive>no</permissive>
+      <occupancysensor>MS02.01.57.00.03.F3.00.AE;02.01.57.00.03.F3.00.AF</occupancysensor>
+      <path todir="160" fromdir="80" block="IB:AUTO:0010" />
+      <path todir="128" fromdir="64" block="IB:AUTO:0015" />
+    </block>
+    <block systemName="IB:AUTO:0017" length="0.0" curve="0">
+      <systemName>IB:AUTO:0017</systemName>
+      <userName>VAL staging5</userName>
+      <permissive>no</permissive>
+      <occupancysensor>MS02.01.57.00.03.F3.00.A2;02.01.57.00.03.F3.00.A3</occupancysensor>
+      <path todir="128" fromdir="64" block="IB:AUTO:0010" />
+      <path todir="128" fromdir="64" block="IB:AUTO:0014" />
+    </block>
+    <block systemName="IB:AUTO:0018" length="0.0" curve="0">
+      <systemName>IB:AUTO:0018</systemName>
+      <userName>Lindsay Siding</userName>
+      <permissive>no</permissive>
+      <path todir="96" fromdir="144" block="IB:AUTO:0009" />
+      <path todir="64" fromdir="128" block="IB:AUTO:0021">
+        <beansetting setting="4">
+          <turnout systemName="East-Lindsay" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0019" length="0.0" curve="0">
+      <systemName>IB:AUTO:0019</systemName>
+      <userName>Woolen Mills</userName>
+      <permissive>no</permissive>
+    </block>
+    <block systemName="IB:AUTO:0021" length="0.0" curve="0">
+      <systemName>IB:AUTO:0021</systemName>
+      <userName>Piedmont</userName>
+      <permissive>no</permissive>
+      <occupancysensor>Piedmont-block-occ</occupancysensor>
+      <path todir="64" fromdir="128" block="IB:AUTO:0004" />
+      <path todir="128" fromdir="64" block="IB:AUTO:0009">
+        <beansetting setting="2">
+          <turnout systemName="East-Lindsay" />
+        </beansetting>
+        <beansetting setting="2">
+          <turnout systemName="VAL-turnout" />
+        </beansetting>
+      </path>
+      <path todir="128" fromdir="64" block="IB:AUTO:0018">
+        <beansetting setting="4">
+          <turnout systemName="East-Lindsay" />
+        </beansetting>
+        <beansetting setting="2">
+          <turnout systemName="VAL-turnout" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0022" length="0.0" curve="0">
+      <systemName>IB:AUTO:0022</systemName>
+      <userName>Staging Main</userName>
+      <permissive>no</permissive>
+      <occupancysensor>Staging-Main-occ</occupancysensor>
+    </block>
+    <block systemName="IB:AUTO:0024" length="0.0" curve="0">
+      <systemName>IB:AUTO:0024</systemName>
+      <userName>Staging Main Exit Turnout</userName>
+      <permissive>no</permissive>
+    </block>
+    <block systemName="IB:AUTO:0025" length="0.0" curve="0">
+      <systemName>IB:AUTO:0025</systemName>
+      <userName>Staging Main Entry Turnout</userName>
+      <permissive>no</permissive>
+    </block>
+    <block systemName="IB:AUTO:0026" length="0.0" curve="0">
+      <systemName>IB:AUTO:0026</systemName>
+      <userName>Louisa</userName>
+      <permissive>no</permissive>
+      <occupancysensor>Louisa-block-occ</occupancysensor>
+    </block>
+    <block systemName="IB:AUTO:0027" length="0.0" curve="0">
+      <systemName>IB:AUTO:0027</systemName>
+      <userName>Gordonsville-North-Wye</userName>
+      <permissive>no</permissive>
+      <occupancysensor>MS02.01.57.10.02.C4.00.42;02.01.57.10.02.C4.00.43</occupancysensor>
+      <path todir="32" fromdir="16" block="IB:AUTO:0004">
+        <beansetting setting="2">
+          <turnout systemName="Gordonsville-south" />
+        </beansetting>
+      </path>
+      <path todir="16" fromdir="32" block="IB:AUTO:0005">
+        <beansetting setting="2">
+          <turnout systemName="Gordonsville-north" />
+        </beansetting>
+      </path>
+    </block>
+    <block systemName="IB:AUTO:0028" length="0.0" curve="0">
+      <systemName>IB:AUTO:0028</systemName>
+      <userName>Gordonsville-Piedmont</userName>
+      <permissive>no</permissive>
+      <occupancysensor>Piedmont-block-occ</occupancysensor>
+    </block>
+  </blocks>
+  <layoutblocks class="jmri.jmrit.display.layoutEditor.configurexml.LayoutBlockManagerXml">
+    <layoutblock systemName="ILB1" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB1</systemName>
+      <userName>Staging Exit Turnout</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB2" occupancysensor="MS02.01.57.002.C4.00.5A;02.01.57.10.02.C4.00.5B" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB2</systemName>
+      <userName>Arsenal</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB3" occupancysensor="MS02.01.57.10.02.C4.00.12;02.01.57.10.02.C4.00.13" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB3</systemName>
+      <userName>Arsenal-Plant</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB4" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB4</systemName>
+      <userName>Gordonsville-South-Turnout</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB5" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB5</systemName>
+      <userName>Gordonsville-North-Wye Turnout</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB6" occupancysensor="MS02.01.57.10.02.C4.00.1E;02.01.57.10.02.C4.00.1F" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB6</systemName>
+      <userName>Gordonsville-Washington</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB7" occupancysensor="Staging-Siding-occ" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB7</systemName>
+      <userName>Staging Siding</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB8" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB8</systemName>
+      <userName>Staging Reverse Loop Turnout</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB9" occupancysensor="Piedmont-block-occ" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB9</systemName>
+      <userName>Piedmont</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB10" occupancysensor="MS02.01.57.00.03.F2.00.72;02.01.57.00.03.F2.00.73" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB10</systemName>
+      <userName>VAL</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB11" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB11</systemName>
+      <userName>Lindsay</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB12" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB12</systemName>
+      <userName>Lindsay Siding</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB13" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB13</systemName>
+      <userName>VAL Loop</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB14" occupancysensor="MS02.01.57.00.03.F3.00.5A;02.01.57.00.03.F3.00.5B" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB14</systemName>
+      <userName>VAL staging1</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB15" occupancysensor="MS02.01.57.00.03.F3.00.4E;02.01.57.00.03.F3.00.4f" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB15</systemName>
+      <userName>VAL staging2</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB16" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB16</systemName>
+      <userName>VAL staging3</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB17" occupancysensor="MS02.01.57.00.03.F3.00.AE;02.01.57.00.03.F3.00.AF" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB17</systemName>
+      <userName>VAL staging4</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB18" occupancysensor="MS02.01.57.00.03.F3.00.A2;02.01.57.00.03.F3.00.A3" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB18</systemName>
+      <userName>VAL staging5</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB19" occupancysensor="MS02.01.57.00.03.F3.00.36;02.01.57.00.03.F3.00.37" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB19</systemName>
+      <userName>VAL staging6</userName>
+    </layoutblock>
+    <layoutblock systemName="ILB20" occupancysensor="MS02.01.57.10.02.C4.00.42;02.01.57.10.02.C4.00.43" occupiedsense="2" trackcolor="darkGray" occupiedcolor="red" extracolor="white">
+      <systemName>ILB20</systemName>
+      <userName>Gordonsville-North-Wye</userName>
+    </layoutblock>
+  </layoutblocks>
+  <routes class="jmri.managers.configurexml.DefaultRouteManagerXml">
+    <route userName="Gordonsville-Piedmont">
+      <systemName>IO:AUTO:0001</systemName>
+      <userName>Gordonsville-Piedmont</userName>
+    </route>
+    <route userName="Gordonsville-Washington">
+      <systemName>IO:AUTO:0002</systemName>
+      <userName>Gordonsville-Washington</userName>
+    </route>
+    <route userName="Gordonsville-staging">
+      <systemName>IO:AUTO:0003</systemName>
+      <userName>Gordonsville-staging</userName>
+    </route>
+    <route userName="Staging Siding">
+      <systemName>IO:AUTO:0004</systemName>
+      <userName>Staging Siding</userName>
+    </route>
+    <route userName="Staging Main">
+      <systemName>IO:AUTO:0005</systemName>
+      <userName>Staging Main</userName>
+    </route>
+  </routes>
+  <signalmastlogics class="jmri.managers.configurexml.DefaultSignalMastLogicManagerXml">
+    <logicDelay>500</logicDelay>
+  </signalmastlogics>
+  <timebase class="jmri.jmrit.simpleclock.configurexml.SimpleTimebaseXml" time="Wed Feb 22 07:48:48 EST 2023" rate="1.0" startrate="1.0" run="yes" master="yes" sync="no" correct="no" display="no" startstopped="no" startrunning="yes" startsettime="no" startclockoption="0" showbutton="no" startsetrate="yes" />
+  <LogixNGs class="jmri.jmrit.logixng.implementation.configurexml.DefaultLogixNGManagerXml">
+    <Thread>
+      <id>0</id>
+      <name>LogixNG thread</name>
+    </Thread>
+    <LogixNG enabled="yes" inline="no">
+      <systemName>IQ:AUTO:0001</systemName>
+      <userName>Throw-Staging-Exit</userName>
+      <ConditionalNGs>
+        <systemName>IQC:AUTO:0001</systemName>
+      </ConditionalNGs>
+    </LogixNG>
+    <LogixNG enabled="yes" inline="no">
+      <systemName>IQ:AUTO:0002</systemName>
+      <userName>Throw-gville-north</userName>
+      <ConditionalNGs>
+        <systemName>IQC:AUTO:0002</systemName>
+      </ConditionalNGs>
+    </LogixNG>
+    <LogixNG enabled="yes" inline="no">
+      <systemName>IQ:AUTO:0003</systemName>
+      <userName>Throw-Staging-Siding-Entry</userName>
+      <ConditionalNGs>
+        <systemName>IQC:AUTO:0003</systemName>
+      </ConditionalNGs>
+    </LogixNG>
+    <LogixNG enabled="yes" inline="no">
+      <systemName>IQ:AUTO:0004</systemName>
+      <userName>Throw-Staging-Siding-Exit</userName>
+      <ConditionalNGs>
+        <systemName>IQC:AUTO:0004</systemName>
+      </ConditionalNGs>
+    </LogixNG>
+    <LogixNG enabled="yes" inline="no">
+      <systemName>IQ:AUTO:0005</systemName>
+      <userName>Throw-Staging-Loop</userName>
+      <ConditionalNGs>
+        <systemName>IQC:AUTO:0005</systemName>
+      </ConditionalNGs>
+    </LogixNG>
+    <InitializationTable />
+    <Clipboard>
+      <Many class="jmri.jmrit.logixng.implementation.configurexml.ClipboardManyXml">
+        <Socket>
+          <socketName>X1</socketName>
+        </Socket>
+      </Many>
+    </Clipboard>
+  </LogixNGs>
+  <LogixNGConditionalNGs class="jmri.jmrit.logixng.implementation.configurexml.DefaultConditionalNGManagerXml">
+    <ConditionalNG enabled="yes">
+      <systemName>IQC:AUTO:0001</systemName>
+      <userName>throw-staging-exit</userName>
+      <thread>0</thread>
+      <Socket>
+        <socketName>A</socketName>
+        <systemName>IQDA:AUTO:0002</systemName>
+      </Socket>
+    </ConditionalNG>
+    <ConditionalNG enabled="yes">
+      <systemName>IQC:AUTO:0002</systemName>
+      <userName>throw-gville-n</userName>
+      <thread>0</thread>
+      <Socket>
+        <socketName>A</socketName>
+        <systemName>IQDA:AUTO:0006</systemName>
+      </Socket>
+    </ConditionalNG>
+    <ConditionalNG enabled="yes">
+      <systemName>IQC:AUTO:0003</systemName>
+      <userName>Throw-Staging-Siding-Entry</userName>
+      <thread>0</thread>
+      <Socket>
+        <socketName>A</socketName>
+        <systemName>IQDA:AUTO:0008</systemName>
+      </Socket>
+    </ConditionalNG>
+    <ConditionalNG enabled="yes">
+      <systemName>IQC:AUTO:0004</systemName>
+      <userName>Throw-Staging-Siding-Exit</userName>
+      <thread>0</thread>
+      <Socket>
+        <socketName>A</socketName>
+        <systemName>IQDA:AUTO:0010</systemName>
+      </Socket>
+    </ConditionalNG>
+    <ConditionalNG enabled="yes">
+      <systemName>IQC:AUTO:0005</systemName>
+      <userName>Throw-Staging-Loop</userName>
+      <thread>0</thread>
+      <Socket>
+        <socketName>A</socketName>
+        <systemName>IQDA:AUTO:0013</systemName>
+      </Socket>
+    </ConditionalNG>
+  </LogixNGConditionalNGs>
+  <LogixNGDigitalExpressions class="jmri.jmrit.logixng.implementation.configurexml.DefaultDigitalExpressionManagerXml">
+    <ExpressionSensor class="jmri.jmrit.logixng.expressions.configurexml.ExpressionSensorXml">
+      <systemName>IQDE:AUTO:0001</systemName>
+      <namedBean>
+        <addressing>Direct</addressing>
+        <name>Staging-Exit-Button</name>
+        <listenToMemory>no</listenToMemory>
+      </namedBean>
+      <is_isNot>Is</is_isNot>
+      <state>
+        <addressing>Direct</addressing>
+        <enum>Active</enum>
+        <listenToMemory>no</listenToMemory>
+      </state>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalExpressionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalExpressionSocketXml" DefaultMaleDigitalExpressionSocketListen="yes">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </ExpressionSensor>
+    <ExpressionSensor class="jmri.jmrit.logixng.expressions.configurexml.ExpressionSensorXml">
+      <systemName>IQDE:AUTO:0003</systemName>
+      <namedBean>
+        <addressing>Direct</addressing>
+        <name>Gordonsville-North-Button</name>
+        <listenToMemory>no</listenToMemory>
+      </namedBean>
+      <is_isNot>Is</is_isNot>
+      <state>
+        <addressing>Direct</addressing>
+        <enum>Inactive</enum>
+        <listenToMemory>no</listenToMemory>
+      </state>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalExpressionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalExpressionSocketXml" DefaultMaleDigitalExpressionSocketListen="yes">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </ExpressionSensor>
+    <ExpressionSensor class="jmri.jmrit.logixng.expressions.configurexml.ExpressionSensorXml">
+      <systemName>IQDE:AUTO:0004</systemName>
+      <namedBean>
+        <addressing>Direct</addressing>
+        <name>Staging-Siding-Entry-Button</name>
+        <listenToMemory>no</listenToMemory>
+      </namedBean>
+      <is_isNot>Is</is_isNot>
+      <state>
+        <addressing>Direct</addressing>
+        <enum>Inactive</enum>
+        <listenToMemory>no</listenToMemory>
+      </state>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalExpressionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalExpressionSocketXml" DefaultMaleDigitalExpressionSocketListen="yes">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </ExpressionSensor>
+    <ExpressionSensor class="jmri.jmrit.logixng.expressions.configurexml.ExpressionSensorXml">
+      <systemName>IQDE:AUTO:0005</systemName>
+      <namedBean>
+        <addressing>Direct</addressing>
+        <name>Staging-Siding-Entry-Button</name>
+        <listenToMemory>no</listenToMemory>
+      </namedBean>
+      <is_isNot>Is</is_isNot>
+      <state>
+        <addressing>Direct</addressing>
+        <enum>Active</enum>
+        <listenToMemory>no</listenToMemory>
+      </state>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalExpressionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalExpressionSocketXml" DefaultMaleDigitalExpressionSocketListen="yes">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </ExpressionSensor>
+    <ExpressionSensor class="jmri.jmrit.logixng.expressions.configurexml.ExpressionSensorXml">
+      <systemName>IQDE:AUTO:0006</systemName>
+      <namedBean>
+        <addressing>Direct</addressing>
+        <name>Staging-Loop-Button</name>
+        <listenToMemory>no</listenToMemory>
+      </namedBean>
+      <is_isNot>Is</is_isNot>
+      <state>
+        <addressing>Direct</addressing>
+        <enum>Inactive</enum>
+        <listenToMemory>no</listenToMemory>
+      </state>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalExpressionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalExpressionSocketXml" DefaultMaleDigitalExpressionSocketListen="yes">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </ExpressionSensor>
+  </LogixNGDigitalExpressions>
+  <LogixNGDigitalActions class="jmri.jmrit.logixng.implementation.configurexml.DefaultDigitalActionManagerXml">
+    <IfThenElse class="jmri.jmrit.logixng.actions.configurexml.IfThenElseXml" executeType="ExecuteOnChange" evaluateType="EvaluateAll">
+      <systemName>IQDA:AUTO:0002</systemName>
+      <Expressions>
+        <Socket>
+          <socketName>If</socketName>
+          <systemName>IQDE:AUTO:0001</systemName>
+        </Socket>
+      </Expressions>
+      <Actions>
+        <Socket>
+          <socketName>Then</socketName>
+          <systemName>IQDA:AUTO:0005</systemName>
+        </Socket>
+        <Socket>
+          <socketName>Else</socketName>
+        </Socket>
+      </Actions>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalActionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalActionSocketXml">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </IfThenElse>
+    <ActionTurnout class="jmri.jmrit.logixng.actions.configurexml.ActionTurnoutXml">
+      <systemName>IQDA:AUTO:0005</systemName>
+      <namedBean>
+        <addressing>Direct</addressing>
+        <name>Staging-exit</name>
+        <listenToMemory>no</listenToMemory>
+      </namedBean>
+      <state>
+        <addressing>Direct</addressing>
+        <enum>Toggle</enum>
+        <listenToMemory>no</listenToMemory>
+      </state>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalActionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalActionSocketXml">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </ActionTurnout>
+    <IfThenElse class="jmri.jmrit.logixng.actions.configurexml.IfThenElseXml" executeType="ExecuteOnChange" evaluateType="EvaluateAll">
+      <systemName>IQDA:AUTO:0006</systemName>
+      <Expressions>
+        <Socket>
+          <socketName>If</socketName>
+          <systemName>IQDE:AUTO:0003</systemName>
+        </Socket>
+      </Expressions>
+      <Actions>
+        <Socket>
+          <socketName>Then</socketName>
+          <systemName>IQDA:AUTO:0007</systemName>
+        </Socket>
+        <Socket>
+          <socketName>Else</socketName>
+        </Socket>
+      </Actions>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalActionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalActionSocketXml">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </IfThenElse>
+    <ActionTurnout class="jmri.jmrit.logixng.actions.configurexml.ActionTurnoutXml">
+      <systemName>IQDA:AUTO:0007</systemName>
+      <namedBean>
+        <addressing>Direct</addressing>
+        <name>Gordonsville-north</name>
+        <listenToMemory>no</listenToMemory>
+      </namedBean>
+      <state>
+        <addressing>Direct</addressing>
+        <enum>Toggle</enum>
+        <listenToMemory>no</listenToMemory>
+      </state>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalActionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalActionSocketXml">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </ActionTurnout>
+    <IfThenElse class="jmri.jmrit.logixng.actions.configurexml.IfThenElseXml" executeType="ExecuteOnChange" evaluateType="EvaluateAll">
+      <systemName>IQDA:AUTO:0008</systemName>
+      <Expressions>
+        <Socket>
+          <socketName>If</socketName>
+          <systemName>IQDE:AUTO:0004</systemName>
+        </Socket>
+      </Expressions>
+      <Actions>
+        <Socket>
+          <socketName>Then</socketName>
+          <systemName>IQDA:AUTO:0009</systemName>
+        </Socket>
+        <Socket>
+          <socketName>Else</socketName>
+        </Socket>
+      </Actions>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalActionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalActionSocketXml">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </IfThenElse>
+    <ActionTurnout class="jmri.jmrit.logixng.actions.configurexml.ActionTurnoutXml">
+      <systemName>IQDA:AUTO:0009</systemName>
+      <namedBean>
+        <addressing>Direct</addressing>
+        <name>Staging-siding-entry</name>
+        <listenToMemory>no</listenToMemory>
+      </namedBean>
+      <state>
+        <addressing>Direct</addressing>
+        <enum>Toggle</enum>
+        <listenToMemory>no</listenToMemory>
+      </state>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalActionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalActionSocketXml">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </ActionTurnout>
+    <IfThenElse class="jmri.jmrit.logixng.actions.configurexml.IfThenElseXml" executeType="ExecuteOnChange" evaluateType="EvaluateAll">
+      <systemName>IQDA:AUTO:0010</systemName>
+      <Expressions>
+        <Socket>
+          <socketName>If</socketName>
+          <systemName>IQDE:AUTO:0005</systemName>
+        </Socket>
+      </Expressions>
+      <Actions>
+        <Socket>
+          <socketName>Then</socketName>
+          <systemName>IQDA:AUTO:0011</systemName>
+        </Socket>
+        <Socket>
+          <socketName>Else</socketName>
+        </Socket>
+      </Actions>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalActionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalActionSocketXml">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </IfThenElse>
+    <ActionTurnout class="jmri.jmrit.logixng.actions.configurexml.ActionTurnoutXml">
+      <systemName>IQDA:AUTO:0011</systemName>
+      <namedBean>
+        <addressing>Direct</addressing>
+        <name>Staging-siding-entry</name>
+        <listenToMemory>no</listenToMemory>
+      </namedBean>
+      <state>
+        <addressing>Direct</addressing>
+        <enum>Toggle</enum>
+        <listenToMemory>no</listenToMemory>
+      </state>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalActionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalActionSocketXml">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </ActionTurnout>
+    <IfThenElse class="jmri.jmrit.logixng.actions.configurexml.IfThenElseXml" executeType="ExecuteOnChange" evaluateType="EvaluateAll">
+      <systemName>IQDA:AUTO:0013</systemName>
+      <Expressions>
+        <Socket>
+          <socketName>If</socketName>
+          <systemName>IQDE:AUTO:0006</systemName>
+        </Socket>
+      </Expressions>
+      <Actions>
+        <Socket>
+          <socketName>Then</socketName>
+          <systemName>IQDA:AUTO:0014</systemName>
+        </Socket>
+        <Socket>
+          <socketName>Else</socketName>
+        </Socket>
+      </Actions>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalActionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalActionSocketXml">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </IfThenElse>
+    <ActionTurnout class="jmri.jmrit.logixng.actions.configurexml.ActionTurnoutXml">
+      <systemName>IQDA:AUTO:0014</systemName>
+      <namedBean>
+        <addressing>Direct</addressing>
+        <name>Main Staging Reverse Loop Turnout</name>
+        <listenToMemory>no</listenToMemory>
+      </namedBean>
+      <state>
+        <addressing>Direct</addressing>
+        <enum>Toggle</enum>
+        <listenToMemory>no</listenToMemory>
+      </state>
+      <MaleSocket>
+        <AbstractDebuggerMaleSocket class="jmri.jmrit.logixng.tools.debugger.configurexml.DebuggerMaleDigitalActionSocketXml" />
+        <AbstractMaleSocket enabled="yes" locked="no" system="no" catchAbortExecution="no" class="jmri.jmrit.logixng.implementation.configurexml.DefaultMaleDigitalActionSocketXml">
+          <errorHandling>Default</errorHandling>
+        </AbstractMaleSocket>
+      </MaleSocket>
+    </ActionTurnout>
+  </LogixNGDigitalActions>
+  <LayoutEditor class="jmri.jmrit.display.layoutEditor.configurexml.LayoutEditorXml" name="C&amp;O in Virginia" x="800" y="30" windowheight="1320" windowwidth="1760" panelheight="1707" panelwidth="2133" sliders="no" scrollable="none" editable="yes" positionable="yes" controlling="yes" animating="yes" showhelpbar="no" drawgrid="yes" snaponadd="no" snaponmove="no" antialiasing="no" turnoutcircles="no" tooltipsnotedit="no" tooltipsinedit="yes" mainlinetrackwidth="4" xscale="1.0" yscale="1.0" sidetrackwidth="2" defaulttrackcolor="darkGray" defaultoccupiedtrackcolor="red" defaultalternativetrackcolor="white" defaulttextcolor="black" turnoutcirclecolor="black" turnoutcirclesize="4" turnoutdrawunselectedleg="yes" turnoutbx="20.0" turnoutcx="20.0" turnoutwid="10.0" xoverlong="30.0" xoverhwid="10.0" xovershort="10.0" autoblkgenerate="no" redBackground="192" greenBackground="192" blueBackground="192" gridSize="10" gridSize2nd="10" openDispatcher="no" useDirectTurnoutControl="no">
+    <layoutTrackDrawingOptions name="C&amp;O in Virginia" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutTrackDrawingOptionsXml">
+      <mainBallastColor>#000000</mainBallastColor>
+      <mainBallastWidth>0</mainBallastWidth>
+      <mainBlockLineDashPercentageX10>0</mainBlockLineDashPercentageX10>
+      <mainBlockLineWidth>4</mainBlockLineWidth>
+      <mainRailColor>#404040</mainRailColor>
+      <mainRailCount>1</mainRailCount>
+      <mainRailGap>0</mainRailGap>
+      <mainRailWidth>2</mainRailWidth>
+      <mainTieColor>#000000</mainTieColor>
+      <mainTieGap>0</mainTieGap>
+      <mainTieLength>0</mainTieLength>
+      <mainTieWidth>0</mainTieWidth>
+      <sideBallastColor>#000000</sideBallastColor>
+      <sideBallastWidth>0</sideBallastWidth>
+      <sideBlockLineDashPercentageX10>0</sideBlockLineDashPercentageX10>
+      <sideBlockLineWidth>2</sideBlockLineWidth>
+      <sideRailColor>#404040</sideRailColor>
+      <sideRailCount>1</sideRailCount>
+      <sideRailGap>0</sideRailGap>
+      <sideRailWidth>1</sideRailWidth>
+      <sideTieColor>#000000</sideTieColor>
+      <sideTieGap>0</sideTieGap>
+      <sideTieLength>0</sideTieLength>
+      <sideTieWidth>0</sideTieWidth>
+    </layoutTrackDrawingOptions>
+    <layoutturnout ident="TO2" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="2012.0" ycen="1245.0" xa="2012.0" ya="1225.0" xb="2012.0" yb="1265.0" xc="2022.0" yc="1265.0" xd="2012.0" yd="1225.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="Arsenal-gate" blockname="Arsenal" connectaname="T29" connectbname="T35" connectcname="T20" />
+    <layoutturnout ident="TO4" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="2045.0" ycen="1360.0" xa="2042.0" ya="1338.0" xb="2048.0" yb="1382.0" xc="2035.0" yc="1380.0" xd="2042.0" yd="1338.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="Arsenal-lead" blockname="Arsenal-Plant" connectaname="T21" connectbname="T32" connectcname="T34" />
+    <layoutturnout ident="TO6" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="2018.0" ycen="1479.0" xa="2018.0" ya="1459.0" xb="2018.0" yb="1499.0" xc="2008.0" yc="1499.0" xd="2018.0" yd="1459.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="Arsenal-warehouse" blockname="Arsenal-Plant" connectaname="T33" connectbname="T14" connectcname="T15" />
+    <layoutturnout ident="TO7" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="2011.0" ycen="1163.0" xa="2011.0" ya="1183.0" xb="2011.0" yb="1143.0" xc="2021.0" yc="1143.0" xd="2011.0" yd="1183.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="Gordonsville-freight" blockname="Arsenal" connectaname="T30" connectbname="T9" connectcname="T24" />
+    <layoutturnout ident="TO1" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="2011.0" ycen="1081.5" xa="2011.0" ya="1101.5" xb="2011.0" yb="1061.5" xc="2001.0" yc="1061.5" xd="2011.0" yd="1101.5" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="Gordonsville-south" blockname="Gordonsville-South-Turnout" connectaname="T9" connectbname="T18" connectcname="T28" />
+    <layoutturnout ident="TO3" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="2011.0" ycen="874.0" xa="2011.0" ya="854.0" xb="2011.0" yb="894.0" xc="2001.0" yc="894.0" xd="2011.0" yd="854.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="Gordonsville-north" blockname="Gordonsville-North-Wye Turnout" connectaname="T45" connectbname="T18" connectcname="T36" />
+    <layoutturnout ident="TO5" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="1685.0" ycen="993.0" xa="1665.0" ya="993.0" xb="1705.0" yb="993.0" xc="1705.0" yc="1003.0" xd="1665.0" yd="993.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="Gordonsville-west" blockname="Gordonsville-South-Turnout" connectaname="T79" connectbname="T38" connectcname="T12" />
+    <layoutturnout ident="TO8" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="2035.0" ycen="756.0" xa="2035.0" ya="736.0" xb="2035.0" yb="776.0" xc="2025.0" yc="776.0" xd="2035.0" yd="736.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="Staging-exit" blockname="Staging Exit Turnout" connectaname="T78" connectbname="T43" connectcname="T44" />
+    <layoutturnout ident="TO9" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="2034.5" ycen="693.5" xa="2034.5" ya="713.5" xb="2034.5" yb="673.5" xc="2024.5" yc="673.5" xd="2034.5" yd="713.5" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="Main Staging Reverse Loop Turnout" blockname="Staging Reverse Loop Turnout" connectaname="T78" connectbname="T48" connectcname="T47" />
+    <layoutturnout ident="TO11" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="2043.0" ycen="555.0" xa="2041.0" ya="582.0" xb="2045.0" yb="528.0" xc="2026.0" yc="531.0" xd="2041.0" yd="582.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="Staging-siding-exit" blockname="Staging Reverse Loop Turnout" connectaname="T49" connectbname="T50" connectcname="T77" />
+    <layoutturnout ident="TO12" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="1960.0" ycen="599.0" xa="1969.0" ya="609.0" xb="1951.0" yb="589.0" xc="1948.0" yc="572.0" xd="1969.0" yd="609.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="Staging-siding-entry" blockname="Staging Reverse Loop Turnout" connectaname="T46" connectbname="T64" connectcname="T65" />
+    <layoutturnout ident="TO10" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="974.0" ycen="991.0" xa="994.0" ya="991.0" xb="954.0" yb="991.0" xc="954.0" yc="1001.0" xd="994.0" yd="991.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="East-Lindsay" blockname="Piedmont" connectaname="T81" connectbname="T83" connectcname="T90" />
+    <layoutturnout ident="TO13" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="1050.0" ycen="992.0" xa="1070.0" ya="992.0" xb="1030.0" yb="992.0" xc="1030.0" yc="982.0" xd="1070.0" yd="992.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="VAL-turnout" blockname="Piedmont" connectaname="T80" connectbname="T81" connectcname="T82" />
+    <layoutturnout ident="TO15" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="1023.0" ycen="1155.0" xa="1043.0" ya="1155.0" xb="1003.0" yb="1155.0" xc="1003.0" yc="1145.0" xd="1043.0" yd="1155.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" blockname="Lindsay" connectbname="T95" connectcname="T96" />
+    <tracksegment ident="T1" blockname="Staging Exit Turnout" connect1name="A1" type1="POS_POINT" connect2name="A2" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T2" blockname="Arsenal" connect1name="A2" type1="POS_POINT" connect2name="A76" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T3" blockname="Arsenal" connect1name="A10" type1="POS_POINT" connect2name="A4" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T4" blockname="Arsenal" connect1name="A4" type1="POS_POINT" connect2name="A77" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T5" blockname="Arsenal" connect1name="A5" type1="POS_POINT" connect2name="A80" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T6" blockname="Arsenal" connect1name="A6" type1="POS_POINT" connect2name="A78" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T7" blockname="Arsenal" connect1name="A7" type1="POS_POINT" connect2name="A79" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T8" blockname="Arsenal" connect1name="A14" type1="POS_POINT" connect2name="A81" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T10" blockname="Arsenal-Plant" connect1name="A19" type1="POS_POINT" connect2name="A20" type2="POS_POINT" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T14" blockname="Arsenal-Plant" connect1name="TO6" type1="TURNOUT_B" connect2name="EB3" type2="POS_POINT" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml">
+      <decorations>
+        <bumper end="stop" color="#000000" linewidth="8" length="8" />
+      </decorations>
+    </tracksegment>
+    <tracksegment ident="T15" blockname="Arsenal-Plant" connect1name="TO6" type1="TURNOUT_C" connect2name="EB4" type2="POS_POINT" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml">
+      <decorations>
+        <bumper end="stop" color="#000000" linewidth="8" length="8" />
+      </decorations>
+    </tracksegment>
+    <tracksegment ident="T16" blockname="Arsenal-Plant" connect1name="A20" type1="POS_POINT" connect2name="A24" type2="POS_POINT" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T17" blockname="Arsenal-Plant" connect1name="A24" type1="POS_POINT" connect2name="EB2" type2="POS_POINT" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml">
+      <decorations>
+        <bumper end="stop" color="#000000" linewidth="8" length="8" />
+      </decorations>
+    </tracksegment>
+    <tracksegment ident="T20" blockname="Arsenal-Plant" connect1name="TO2" type1="TURNOUT_C" connect2name="A17" type2="POS_POINT" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T21" blockname="Arsenal-Plant" connect1name="A17" type1="POS_POINT" connect2name="TO4" type2="TURNOUT_A" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T23" blockname="Staging Exit Turnout" connect1name="A12" type1="POS_POINT" connect2name="A1" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T27" blockname="Arsenal" connect1name="A16" type1="POS_POINT" connect2name="A14" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T29" blockname="Arsenal" connect1name="A28" type1="POS_POINT" connect2name="TO2" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T30" blockname="Arsenal" connect1name="TO7" type1="TURNOUT_A" connect2name="A28" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T31" blockname="Arsenal-Plant" connect1name="A19" type1="POS_POINT" connect2name="A18" type2="POS_POINT" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T32" blockname="Arsenal-Plant" connect1name="A18" type1="POS_POINT" connect2name="TO4" type2="TURNOUT_B" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T33" blockname="Arsenal-Plant" connect1name="TO6" type1="TURNOUT_A" connect2name="A30" type2="POS_POINT" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T34" blockname="Arsenal-Plant" connect1name="A30" type1="POS_POINT" connect2name="TO4" type2="TURNOUT_C" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T35" blockname="Arsenal" connect1name="TO2" type1="TURNOUT_B" connect2name="A16" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T9" blockname="Arsenal" connect1name="TO1" type1="TURNOUT_A" connect2name="TO7" type2="TURNOUT_B" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T11" blockname="Gordonsville-South-Turnout" connect1name="A11" type1="POS_POINT" connect2name="A9" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T24" blockname="Arsenal" connect1name="A21" type1="POS_POINT" connect2name="TO7" type2="TURNOUT_C" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T22" blockname="Staging Exit Turnout" connect1name="A12" type1="POS_POINT" connect2name="A13" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T25" blockname="Staging Exit Turnout" connect1name="A13" type1="POS_POINT" connect2name="A22" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T19" blockname="Arsenal" connect1name="EB1" type1="POS_POINT" connect2name="A21" type2="POS_POINT" dashed="no" mainline="no" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T12" blockname="Gordonsville-South-Turnout" connect1name="TO5" type1="TURNOUT_C" connect2name="A27" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T13" blockname="Gordonsville-South-Turnout" connect1name="A27" type1="POS_POINT" connect2name="A11" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T26" blockname="Gordonsville-South-Turnout" connect1name="A9" type1="POS_POINT" connect2name="A26" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T28" blockname="Gordonsville-South-Turnout" connect1name="A26" type1="POS_POINT" connect2name="TO1" type2="TURNOUT_C" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T18" blockname="Gordonsville-North-Wye" connect1name="TO1" type1="TURNOUT_B" connect2name="TO3" type2="TURNOUT_B" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T36" blockname="Gordonsville-Washington" connect1name="TO3" type1="TURNOUT_C" connect2name="A25" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T37" blockname="Gordonsville-Washington" connect1name="A25" type1="POS_POINT" connect2name="A23" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T38" blockname="Gordonsville-Washington" connect1name="TO5" type1="TURNOUT_B" connect2name="A29" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T39" blockname="Gordonsville-Washington" connect1name="A29" type1="POS_POINT" connect2name="A15" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T40" blockname="Gordonsville-Washington" connect1name="A15" type1="POS_POINT" connect2name="A23" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T41" blockname="Staging Exit Turnout" connect1name="A22" type1="POS_POINT" connect2name="A31" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T42" blockname="Staging Exit Turnout" connect1name="A31" type1="POS_POINT" connect2name="A32" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T43" blockname="Staging Exit Turnout" connect1name="TO8" type1="TURNOUT_B" connect2name="A32" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T44" blockname="Gordonsville-North-Wye Turnout" connect1name="TO8" type1="TURNOUT_C" connect2name="A33" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T45" blockname="Gordonsville-North-Wye Turnout" connect1name="A33" type1="POS_POINT" connect2name="TO3" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T46" blockname="Staging Reverse Loop Turnout" connect1name="TO12" type1="TURNOUT_A" connect2name="A60" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T47" blockname="Staging Reverse Loop Turnout" connect1name="A60" type1="POS_POINT" connect2name="TO9" type2="TURNOUT_C" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T48" blockname="Staging Reverse Loop Turnout" connect1name="TO9" type1="TURNOUT_B" connect2name="A3" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T49" blockname="Staging Reverse Loop Turnout" connect1name="A3" type1="POS_POINT" connect2name="TO11" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T50" blockname="Staging Reverse Loop Turnout" connect1name="TO11" type1="TURNOUT_B" connect2name="A34" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T51" blockname="Staging Reverse Loop Turnout" connect1name="A34" type1="POS_POINT" connect2name="A35" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T52" blockname="Staging Reverse Loop Turnout" connect1name="A35" type1="POS_POINT" connect2name="A82" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T53" blockname="Staging Reverse Loop Turnout" connect1name="A36" type1="POS_POINT" connect2name="A37" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T54" blockname="Staging Reverse Loop Turnout" connect1name="A37" type1="POS_POINT" connect2name="A38" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T55" blockname="Staging Reverse Loop Turnout" connect1name="A38" type1="POS_POINT" connect2name="A39" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T56" blockname="Staging Reverse Loop Turnout" connect1name="A39" type1="POS_POINT" connect2name="A49" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T57" blockname="Staging Reverse Loop Turnout" connect1name="A49" type1="POS_POINT" connect2name="A50" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T58" blockname="Staging Reverse Loop Turnout" connect1name="A50" type1="POS_POINT" connect2name="A51" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T59" blockname="Staging Reverse Loop Turnout" connect1name="A51" type1="POS_POINT" connect2name="A52" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T60" blockname="Staging Reverse Loop Turnout" connect1name="A52" type1="POS_POINT" connect2name="A53" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T61" blockname="Staging Reverse Loop Turnout" connect1name="A53" type1="POS_POINT" connect2name="A56" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T62" blockname="Staging Reverse Loop Turnout" connect1name="A56" type1="POS_POINT" connect2name="A57" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T63" blockname="Staging Reverse Loop Turnout" connect1name="A57" type1="POS_POINT" connect2name="A59" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T64" blockname="Staging Reverse Loop Turnout" connect1name="A59" type1="POS_POINT" connect2name="TO12" type2="TURNOUT_B" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T65" blockname="Staging Siding" connect1name="TO12" type1="TURNOUT_C" connect2name="A58" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T66" blockname="Staging Siding" connect1name="A58" type1="POS_POINT" connect2name="A55" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T67" blockname="Staging Siding" connect1name="A55" type1="POS_POINT" connect2name="A54" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T68" blockname="Staging Siding" connect1name="A54" type1="POS_POINT" connect2name="A48" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T69" blockname="Staging Siding" connect1name="A48" type1="POS_POINT" connect2name="A47" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T70" blockname="Staging Siding" connect1name="A47" type1="POS_POINT" connect2name="A46" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T71" blockname="Staging Siding" connect1name="A46" type1="POS_POINT" connect2name="A45" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T72" blockname="Staging Siding" connect1name="A45" type1="POS_POINT" connect2name="A44" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T73" blockname="Staging Siding" connect1name="A44" type1="POS_POINT" connect2name="A43" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T74" blockname="Staging Siding" connect1name="A43" type1="POS_POINT" connect2name="A42" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T75" blockname="Staging Siding" connect1name="A42" type1="POS_POINT" connect2name="A41" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T76" blockname="Staging Siding" connect1name="A41" type1="POS_POINT" connect2name="A40" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T77" blockname="Staging Siding" connect1name="A40" type1="POS_POINT" connect2name="TO11" type2="TURNOUT_C" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T78" blockname="Staging Reverse Loop Turnout" connect1name="TO9" type1="TURNOUT_A" connect2name="TO8" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T79" blockname="Piedmont" connect1name="TO5" type1="TURNOUT_A" connect2name="A62" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T80" blockname="Piedmont" connect1name="A62" type1="POS_POINT" connect2name="TO13" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T81" blockname="Piedmont" connect1name="TO13" type1="TURNOUT_B" connect2name="TO10" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T83" blockname="Lindsay" connect1name="TO10" type1="TURNOUT_B" connect2name="A67" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T84" blockname="Lindsay" connect1name="A67" type1="POS_POINT" connect2name="A68" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T85" blockname="Lindsay" connect1name="A68" type1="POS_POINT" connect2name="A69" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T86" blockname="Lindsay" connect1name="A69" type1="POS_POINT" connect2name="A70" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T87" blockname="Lindsay" connect1name="A70" type1="POS_POINT" connect2name="A71" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T88" blockname="Lindsay" connect1name="A71" type1="POS_POINT" connect2name="A72" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T89" blockname="Lindsay" connect1name="A72" type1="POS_POINT" connect2name="A73" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T90" blockname="Lindsay Siding" connect1name="TO10" type1="TURNOUT_C" connect2name="A74" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T91" blockname="Lindsay Siding" connect1name="A61" type1="POS_POINT" connect2name="A75" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T92" blockname="Lindsay Siding" connect1name="A63" type1="POS_POINT" connect2name="A64" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T93" blockname="Lindsay Siding" connect1name="A64" type1="POS_POINT" connect2name="A65" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T94" blockname="Lindsay Siding" connect1name="A65" type1="POS_POINT" connect2name="A66" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T95" blockname="Lindsay" connect1name="A73" type1="POS_POINT" connect2name="TO15" type2="TURNOUT_B" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T96" blockname="Lindsay Siding" connect1name="A66" type1="POS_POINT" connect2name="TO15" type2="TURNOUT_C" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T82" blockname="Piedmont" connect1name="TO13" type1="TURNOUT_C" connect2name="EC2" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T97" blockname="Lindsay Siding" connect1name="A74" type1="POS_POINT" connect2name="A61" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T98" blockname="Lindsay Siding" connect1name="A75" type1="POS_POINT" connect2name="A63" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T99" blockname="Arsenal" connect1name="A76" type1="POS_POINT" connect2name="A10" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T100" blockname="Arsenal" connect1name="A77" type1="POS_POINT" connect2name="A5" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T101" blockname="Arsenal" connect1name="A78" type1="POS_POINT" connect2name="A7" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T102" blockname="Arsenal" connect1name="A79" type1="POS_POINT" connect2name="A8" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T103" blockname="Arsenal" connect1name="A80" type1="POS_POINT" connect2name="A6" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T104" blockname="Arsenal" connect1name="A81" type1="POS_POINT" connect2name="A8" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T105" blockname="Staging Reverse Loop Turnout" connect1name="A82" type1="POS_POINT" connect2name="A36" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <positionablepoint ident="A1" type="ANCHOR" x="2082.0" y="1402.0" connect1name="T1" connect2name="T23" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A2" type="ANCHOR" x="2083.0" y="1604.0" connect1name="T1" connect2name="T2" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A4" type="ANCHOR" x="1963.0" y="1657.0" connect1name="T3" connect2name="T4" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A5" type="ANCHOR" x="1893.0" y="1604.0" connect1name="T100" connect2name="T5" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A6" type="ANCHOR" x="1892.0" y="1506.0" connect1name="T103" connect2name="T6" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A7" type="ANCHOR" x="1937.0" y="1434.0" connect1name="T101" connect2name="T7" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A8" type="ANCHOR" x="2004.0" y="1368.0" connect1name="T102" connect2name="T104" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A10" type="ANCHOR" x="2035.0" y="1657.0" connect1name="T99" connect2name="T3" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A12" type="ANCHOR" x="2083.0" y="1297.0" connect1name="T23" connect2name="T22" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A13" type="ANCHOR" x="2083.0" y="1197.0" connect1name="T22" connect2name="T25" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A14" type="ANCHOR" x="2012.0" y="1298.0" connect1name="T8" connect2name="T27" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A16" type="ANCHOR" x="2011.0" y="1277.0" connect1name="T27" connect2name="T35" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A17" type="ANCHOR" x="2028.0" y="1297.0" connect1name="T20" connect2name="T21" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A18" type="ANCHOR" x="2056.0" y="1472.0" connect1name="T31" connect2name="T32" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A19" type="ANCHOR" x="2059.0" y="1559.0" connect1name="T10" connect2name="T31" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A20" type="ANCHOR" x="2050.0" y="1595.0" connect1name="T10" connect2name="T16" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="EB3" type="END_BUMPER" x="2008.0" y="1565.0" connect1name="T14" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="EB4" type="END_BUMPER" x="1990.0" y="1564.0" connect1name="T15" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A24" type="ANCHOR" x="2025.0" y="1630.0" connect1name="T16" connect2name="T17" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="EB2" type="END_BUMPER" x="1978.0" y="1634.0" connect1name="T17" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A28" type="ANCHOR" x="2011.0" y="1199.0" connect1name="T29" connect2name="T30" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A30" type="ANCHOR" x="2025.0" y="1428.0" connect1name="T33" connect2name="T34" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A9" type="ANCHOR" x="1911.0" y="1012.0" connect1name="T11" connect2name="T26" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A11" type="ANCHOR" x="1861.0" y="1003.0" connect1name="T11" connect2name="T13" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A21" type="ANCHOR" x="2034.0" y="1117.5" connect1name="T24" connect2name="T19" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A22" type="ANCHOR" x="2083.0" y="1076.0" connect1name="T25" connect2name="T41" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="EB1" type="END_BUMPER" x="2034.0" y="980.0" connect1name="T19" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A23" type="ANCHOR" x="1937.0" y="962.0" connect1name="T37" connect2name="T40" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A25" type="ANCHOR" x="1971.0" y="936.0" connect1name="T36" connect2name="T37" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A26" type="ANCHOR" x="1972.0" y="1032.0" connect1name="T26" connect2name="T28" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A27" type="ANCHOR" x="1728.0" y="1002.0" connect1name="T12" connect2name="T13" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A15" type="ANCHOR" x="1900.0" y="979.0" connect1name="T39" connect2name="T40" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A29" type="ANCHOR" x="1862.0" y="988.0" connect1name="T38" connect2name="T39" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A31" type="ANCHOR" x="2064.0" y="979.0" connect1name="T41" connect2name="T42" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A32" type="ANCHOR" x="2038.0" y="837.0" connect1name="T42" connect2name="T43" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A33" type="ANCHOR" x="2017.0" y="807.0" connect1name="T44" connect2name="T45" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A3" type="ANCHOR" x="2041.0" y="631.0" connect1name="T48" connect2name="T49" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A34" type="ANCHOR" x="2048.0" y="488.0" connect1name="T50" connect2name="T51" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A35" type="ANCHOR" x="2047.0" y="424.0" connect1name="T51" connect2name="T52" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A36" type="ANCHOR" x="2004.0" y="386.0" connect1name="T105" connect2name="T53" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A37" type="ANCHOR" x="1942.0" y="378.0" connect1name="T53" connect2name="T54" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A38" type="ANCHOR" x="1886.0" y="380.0" connect1name="T54" connect2name="T55" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A39" type="ANCHOR" x="1842.0" y="402.0" connect1name="T55" connect2name="T56" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A40" type="ANCHOR" x="2019.0" y="485.0" connect1name="T76" connect2name="T77" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A41" type="ANCHOR" x="2017.0" y="443.0" connect1name="T75" connect2name="T76" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A42" type="ANCHOR" x="1987.0" y="414.0" connect1name="T74" connect2name="T75" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A43" type="ANCHOR" x="1955.0" y="400.0" connect1name="T73" connect2name="T74" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A44" type="ANCHOR" x="1909.0" y="403.0" connect1name="T72" connect2name="T73" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A45" type="ANCHOR" x="1880.0" y="416.0" connect1name="T71" connect2name="T72" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A46" type="ANCHOR" x="1854.0" y="441.0" connect1name="T70" connect2name="T71" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A47" type="ANCHOR" x="1861.0" y="477.0" connect1name="T69" connect2name="T70" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A48" type="ANCHOR" x="1859.0" y="491.0" connect1name="T68" connect2name="T69" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A49" type="ANCHOR" x="1830.0" y="430.0" connect1name="T56" connect2name="T57" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A50" type="ANCHOR" x="1823.0" y="459.0" connect1name="T57" connect2name="T58" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A51" type="ANCHOR" x="1827.0" y="488.0" connect1name="T58" connect2name="T59" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A52" type="ANCHOR" x="1836.0" y="505.0" connect1name="T59" connect2name="T60" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A53" type="ANCHOR" x="1850.0" y="529.0" connect1name="T60" connect2name="T61" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A54" type="ANCHOR" x="1888.0" y="518.0" connect1name="T67" connect2name="T68" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A55" type="ANCHOR" x="1902.0" y="522.0" connect1name="T66" connect2name="T67" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A56" type="ANCHOR" x="1872.0" y="549.0" connect1name="T61" connect2name="T62" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A57" type="ANCHOR" x="1888.0" y="558.0" connect1name="T62" connect2name="T63" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A58" type="ANCHOR" x="1930.0" y="545.0" connect1name="T65" connect2name="T66" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A59" type="ANCHOR" x="1908.0" y="569.0" connect1name="T63" connect2name="T64" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A60" type="ANCHOR" x="1981.0" y="630.0" connect1name="T46" connect2name="T47" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A62" type="ANCHOR" x="1115.0" y="993.0" connect1name="T79" connect2name="T80" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A61" type="ANCHOR" x="880.0" y="1034.0" connect1name="T97" connect2name="T91" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A63" type="ANCHOR" x="878.0" y="1093.0" connect1name="T98" connect2name="T92" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A64" type="ANCHOR" x="896.0" y="1117.0" connect1name="T92" connect2name="T93" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A65" type="ANCHOR" x="931.0" y="1129.0" connect1name="T93" connect2name="T94" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A66" type="ANCHOR" x="974.0" y="1130.0" connect1name="T94" connect2name="T96" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A67" type="ANCHOR" x="914.0" y="990.0" connect1name="T83" connect2name="T84" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A68" type="ANCHOR" x="876.0" y="1004.0" connect1name="T84" connect2name="T85" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A69" type="ANCHOR" x="847.0" y="1038.0" connect1name="T85" connect2name="T86" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A70" type="ANCHOR" x="851.0" y="1088.0" connect1name="T86" connect2name="T87" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A71" type="ANCHOR" x="858.0" y="1120.0" connect1name="T87" connect2name="T88" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A72" type="ANCHOR" x="893.0" y="1149.0" connect1name="T88" connect2name="T89" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A73" type="ANCHOR" x="934.0" y="1154.0" connect1name="T89" connect2name="T95" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="EC2" type="EDGE_CONNECTOR" x="993.0" y="970.0" connect1name="T82" linkedpanel="" linkpointid="" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A74" type="ANCHOR" x="909.5" y="1016.0" connect1name="T90" connect2name="T97" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A75" type="ANCHOR" x="872.5" y="1066.0" connect1name="T91" connect2name="T98" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A76" type="ANCHOR" x="2068.0" y="1639.5" connect1name="T2" connect2name="T99" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A77" type="ANCHOR" x="1921.0" y="1637.5" connect1name="T4" connect2name="T100" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A78" type="ANCHOR" x="1914.5" y="1470.0" connect1name="T6" connect2name="T101" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A79" type="ANCHOR" x="1973.0" y="1404.0" connect1name="T7" connect2name="T102" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A80" type="ANCHOR" x="1883.5" y="1545.0" connect1name="T5" connect2name="T103" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A81" type="ANCHOR" x="2011.5" y="1334.0" connect1name="T8" connect2name="T104" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A82" type="ANCHOR" x="2025.0" y="395.0" connect1name="T52" connect2name="T105" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+  </LayoutEditor>
+  <LayoutEditor class="jmri.jmrit.display.layoutEditor.configurexml.LayoutEditorXml" name="VAL" x="629" y="319" windowheight="984" windowwidth="1706" panelheight="552" panelwidth="1318" sliders="no" scrollable="none" editable="yes" positionable="yes" controlling="yes" animating="yes" showhelpbar="no" drawgrid="yes" snaponadd="no" snaponmove="no" antialiasing="no" turnoutcircles="no" tooltipsnotedit="no" tooltipsinedit="yes" mainlinetrackwidth="4" xscale="1.0" yscale="1.0" sidetrackwidth="2" defaulttrackcolor="darkGray" defaultoccupiedtrackcolor="red" defaultalternativetrackcolor="white" defaulttextcolor="black" turnoutcirclecolor="black" turnoutcirclesize="4" turnoutdrawunselectedleg="yes" turnoutbx="20.0" turnoutcx="20.0" turnoutwid="10.0" xoverlong="30.0" xoverhwid="10.0" xovershort="10.0" autoblkgenerate="no" redBackground="192" greenBackground="192" blueBackground="192" gridSize="10" gridSize2nd="10" openDispatcher="no" useDirectTurnoutControl="no">
+    <layoutTrackDrawingOptions name="VAL" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutTrackDrawingOptionsXml">
+      <mainBallastColor>#000000</mainBallastColor>
+      <mainBallastWidth>0</mainBallastWidth>
+      <mainBlockLineDashPercentageX10>0</mainBlockLineDashPercentageX10>
+      <mainBlockLineWidth>4</mainBlockLineWidth>
+      <mainRailColor>#404040</mainRailColor>
+      <mainRailCount>1</mainRailCount>
+      <mainRailGap>0</mainRailGap>
+      <mainRailWidth>2</mainRailWidth>
+      <mainTieColor>#000000</mainTieColor>
+      <mainTieGap>0</mainTieGap>
+      <mainTieLength>0</mainTieLength>
+      <mainTieWidth>0</mainTieWidth>
+      <sideBallastColor>#000000</sideBallastColor>
+      <sideBallastWidth>0</sideBallastWidth>
+      <sideBlockLineDashPercentageX10>0</sideBlockLineDashPercentageX10>
+      <sideBlockLineWidth>2</sideBlockLineWidth>
+      <sideRailColor>#404040</sideRailColor>
+      <sideRailCount>1</sideRailCount>
+      <sideRailGap>0</sideRailGap>
+      <sideRailWidth>1</sideRailWidth>
+      <sideTieColor>#000000</sideTieColor>
+      <sideTieGap>0</sideTieGap>
+      <sideTieLength>0</sideTieLength>
+      <sideTieWidth>0</sideTieWidth>
+    </layoutTrackDrawingOptions>
+    <layoutturnout ident="TO6" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="433.0" ycen="479.0" xa="401.0" ya="480.0" xb="465.0" yb="478.0" xc="453.0" yc="469.0" xd="401.0" yd="480.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" blockname="VAL" connectaname="T32" connectbname="T55" connectcname="T56" />
+    <layoutturnout ident="TO7" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="504.0" ycen="455.0" xa="484.0" ya="455.0" xb="524.0" yb="455.0" xc="524.0" yc="445.0" xd="484.0" yd="455.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" blockname="VAL" connectaname="T56" connectbname="T57" connectcname="T58" />
+    <layoutturnout ident="TO10" type="RH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="640.0" ycen="93.0" xa="660.0" ya="93.0" xb="620.0" yb="93.0" xc="620.0" yc="83.0" xd="660.0" yd="93.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHTurnoutXml" turnoutname="VAL-loop-turnout" blockname="VAL Loop" connectbname="T90" connectcname="T53" />
+    <layoutturnout ident="TO1" type="LH_TURNOUT" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="562.0" ycen="298.0" xa="542.0" ya="298.0" xb="582.0" yb="298.0" xc="582.0" yc="288.0" xd="542.0" yd="298.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutLHTurnoutXml" turnoutname="VAL-staging-north-1" blockname="VAL Loop" />
+    <tracksegment ident="T1" blockname="VAL" connect1name="A7" type1="POS_POINT" connect2name="A25" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T2" blockname="VAL" connect1name="A8" type1="POS_POINT" connect2name="A9" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T3" blockname="VAL" connect1name="A9" type1="POS_POINT" connect2name="A61" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T4" blockname="VAL" connect1name="A10" type1="POS_POINT" connect2name="A11" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T5" blockname="VAL" connect1name="A11" type1="POS_POINT" connect2name="A12" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T6" blockname="VAL" connect1name="A12" type1="POS_POINT" connect2name="A13" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T7" blockname="VAL" connect1name="A13" type1="POS_POINT" connect2name="A14" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T8" blockname="VAL" connect1name="A14" type1="POS_POINT" connect2name="A39" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T10" blockname="VAL Loop" connect1name="A1" type1="POS_POINT" connect2name="A2" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T11" blockname="VAL Loop" connect1name="A2" type1="POS_POINT" connect2name="A3" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T12" blockname="VAL Loop" connect1name="A3" type1="POS_POINT" connect2name="A59" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T13" blockname="VAL Loop" connect1name="A4" type1="POS_POINT" connect2name="A58" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T14" blockname="VAL Loop" connect1name="A5" type1="POS_POINT" connect2name="A29" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T15" blockname="VAL Loop" connect1name="A6" type1="POS_POINT" connect2name="A57" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T17" blockname="VAL Loop" connect1name="A55" type1="POS_POINT" connect2name="A1" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T18" blockname="VAL Loop" connect1name="A18" type1="POS_POINT" connect2name="A17" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T19" blockname="VAL staging1" connect1name="A47" type1="POS_POINT" connect2name="A16" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T20" blockname="VAL staging1" connect1name="A16" type1="POS_POINT" connect2name="A19" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T21" blockname="VAL staging2" connect1name="A73" type1="POS_POINT" connect2name="A20" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T22" blockname="VAL staging3" connect1name="A74" type1="POS_POINT" connect2name="A21" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T23" blockname="VAL staging4" connect1name="A22" type1="POS_POINT" connect2name="A26" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T24" blockname="VAL staging4" connect1name="A26" type1="POS_POINT" connect2name="A30" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T25" blockname="VAL staging4" connect1name="A30" type1="POS_POINT" connect2name="A31" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T26" blockname="VAL staging4" connect1name="A31" type1="POS_POINT" connect2name="A32" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T27" blockname="VAL staging4" connect1name="A32" type1="POS_POINT" connect2name="A33" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T28" blockname="VAL staging5" connect1name="A23" type1="POS_POINT" connect2name="A27" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T29" blockname="VAL staging5" connect1name="A27" type1="POS_POINT" connect2name="A34" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T30" blockname="VAL staging5" connect1name="A34" type1="POS_POINT" connect2name="A35" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T31" blockname="VAL staging5" connect1name="A35" type1="POS_POINT" connect2name="A36" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T37" blockname="VAL staging6" connect1name="A24" type1="POS_POINT" connect2name="A28" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T38" blockname="VAL staging6" connect1name="A28" type1="POS_POINT" connect2name="A62" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T39" blockname="VAL staging6" connect1name="A43" type1="POS_POINT" connect2name="A44" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T40" blockname="VAL staging6" connect1name="A44" type1="POS_POINT" connect2name="A45" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T41" blockname="VAL staging6" connect1name="A45" type1="POS_POINT" connect2name="A46" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T45" blockname="VAL staging6" connect1name="A49" type1="POS_POINT" connect2name="A50" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T46" blockname="VAL staging6" connect1name="A50" type1="POS_POINT" connect2name="A51" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T47" blockname="VAL staging4" connect1name="A33" type1="POS_POINT" connect2name="A52" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T48" blockname="VAL staging5" connect1name="A41" type1="POS_POINT" connect2name="A53" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T49" blockname="VAL staging6" connect1name="A51" type1="POS_POINT" connect2name="A54" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T16" blockname="VAL Loop" connect1name="A56" type1="POS_POINT" connect2name="A17" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T50" blockname="VAL Loop" connect1name="A57" type1="POS_POINT" connect2name="A56" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T51" blockname="VAL Loop" connect1name="A58" type1="POS_POINT" connect2name="A5" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T52" blockname="VAL Loop" connect1name="A59" type1="POS_POINT" connect2name="A4" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T54" blockname="VAL" connect1name="A7" type1="POS_POINT" connect2name="A90" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T55" blockname="VAL staging6" connect1name="A54" type1="POS_POINT" connect2name="TO6" type2="TURNOUT_B" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T56" blockname="VAL" connect1name="TO6" type1="TURNOUT_C" connect2name="TO7" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T57" blockname="VAL staging5" connect1name="TO7" type1="TURNOUT_B" connect2name="A53" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T58" blockname="VAL staging4" connect1name="TO7" type1="TURNOUT_C" connect2name="A40" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T59" blockname="VAL staging1" connect1name="A19" type1="POS_POINT" connect2name="A24" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T60" blockname="VAL staging2" connect1name="A20" type1="POS_POINT" connect2name="A23" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T61" blockname="VAL staging3" connect1name="A21" type1="POS_POINT" connect2name="A22" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T62" blockname="VAL" connect1name="A61" type1="POS_POINT" connect2name="A10" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T63" blockname="VAL staging6" connect1name="A62" type1="POS_POINT" connect2name="A43" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T64" blockname="VAL Loop" connect1name="A18" type1="POS_POINT" connect2name="A63" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T65" blockname="VAL Loop" connect1name="A63" type1="POS_POINT" connect2name="A64" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T66" blockname="VAL Loop" connect1name="A64" type1="POS_POINT" connect2name="A65" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T67" blockname="VAL Loop" connect1name="A65" type1="POS_POINT" connect2name="A66" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T68" blockname="VAL Loop" connect1name="A66" type1="POS_POINT" connect2name="A67" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T69" blockname="VAL Loop" connect1name="A67" type1="POS_POINT" connect2name="A42" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T70" blockname="VAL Loop" connect1name="A68" type1="POS_POINT" connect2name="A69" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T71" blockname="VAL Loop" connect1name="A69" type1="POS_POINT" connect2name="A70" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T72" blockname="VAL Loop" connect1name="A70" type1="POS_POINT" connect2name="A71" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T73" blockname="VAL Loop" connect1name="A71" type1="POS_POINT" connect2name="A72" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T74" blockname="VAL Loop" connect1name="A72" type1="POS_POINT" connect2name="A89" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T76" blockname="VAL Loop" connect1name="A75" type1="POS_POINT" connect2name="A88" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T77" blockname="VAL Loop" connect1name="A76" type1="POS_POINT" connect2name="A77" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T78" blockname="VAL Loop" connect1name="A77" type1="POS_POINT" connect2name="A78" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T79" blockname="VAL Loop" connect1name="A78" type1="POS_POINT" connect2name="A79" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T80" blockname="VAL Loop" connect1name="A79" type1="POS_POINT" connect2name="A80" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T81" blockname="VAL Loop" connect1name="A80" type1="POS_POINT" connect2name="A81" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T82" blockname="VAL Loop" connect1name="A81" type1="POS_POINT" connect2name="A82" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T83" blockname="VAL Loop" connect1name="A82" type1="POS_POINT" connect2name="A83" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T84" blockname="VAL Loop" connect1name="A83" type1="POS_POINT" connect2name="A84" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T85" blockname="VAL Loop" connect1name="A84" type1="POS_POINT" connect2name="A85" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T86" blockname="VAL Loop" connect1name="A85" type1="POS_POINT" connect2name="A86" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T87" blockname="VAL Loop" connect1name="A86" type1="POS_POINT" connect2name="A87" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T88" blockname="VAL Loop" connect1name="A88" type1="POS_POINT" connect2name="A76" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T89" blockname="VAL Loop" connect1name="A89" type1="POS_POINT" connect2name="A75" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T90" blockname="VAL Loop" connect1name="A55" type1="POS_POINT" connect2name="TO10" type2="TURNOUT_B" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T91" blockname="VAL" connect1name="A90" type1="POS_POINT" connect2name="A15" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T53" blockname="VAL" connect1name="A15" type1="POS_POINT" connect2name="TO10" type2="TURNOUT_C" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T32" blockname="VAL Loop" connect1name="A87" type1="POS_POINT" connect2name="TO6" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T36" blockname="VAL staging5" connect1name="A41" type1="POS_POINT" connect2name="A38" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T75" blockname="VAL staging5" connect1name="A37" type1="POS_POINT" connect2name="A36" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T92" blockname="VAL" connect1name="A25" type1="POS_POINT" connect2name="A8" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T93" blockname="VAL Loop" connect1name="A29" type1="POS_POINT" connect2name="A6" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T34" blockname="VAL staging6" connect1name="A49" type1="POS_POINT" connect2name="A46" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T35" blockname="VAL staging4" connect1name="A40" type1="POS_POINT" connect2name="A52" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T42" blockname="VAL Loop" connect1name="A42" type1="POS_POINT" connect2name="A68" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="T33" blockname="VAL staging5" connect1name="A38" type1="POS_POINT" connect2name="A37" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <positionablepoint ident="A1" type="ANCHOR" x="546.0" y="92.0" connect1name="T10" connect2name="T17" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A2" type="ANCHOR" x="513.0" y="94.0" connect1name="T10" connect2name="T11" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A3" type="ANCHOR" x="480.0" y="102.0" connect1name="T11" connect2name="T12" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A4" type="ANCHOR" x="422.0" y="163.0" connect1name="T52" connect2name="T13" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A5" type="ANCHOR" x="458.0" y="247.0" connect1name="T51" connect2name="T14" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A6" type="ANCHOR" x="565.0" y="263.0" connect1name="T93" connect2name="T15" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A7" type="ANCHOR" x="481.0" y="65.0" connect1name="T1" connect2name="T54" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A8" type="ANCHOR" x="407.0" y="120.0" connect1name="T92" connect2name="T2" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A9" type="ANCHOR" x="395.0" y="145.0" connect1name="T2" connect2name="T3" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A10" type="ANCHOR" x="400.0" y="231.0" connect1name="T62" connect2name="T4" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A11" type="ANCHOR" x="424.0" y="262.0" connect1name="T4" connect2name="T5" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A12" type="ANCHOR" x="447.0" y="280.0" connect1name="T5" connect2name="T6" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A13" type="ANCHOR" x="470.0" y="289.0" connect1name="T6" connect2name="T7" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A14" type="ANCHOR" x="507.0" y="298.0" connect1name="T7" connect2name="T8" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A16" type="ANCHOR" x="929.0" y="272.0" connect1name="T19" connect2name="T20" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A17" type="ANCHOR" x="1072.0" y="246.0" connect1name="T16" connect2name="T18" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A18" type="ANCHOR" x="1155.0" y="247.0" connect1name="T18" connect2name="T64" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A19" type="ANCHOR" x="1041.0" y="273.0" connect1name="T20" connect2name="T59" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A20" type="ANCHOR" x="932.0" y="291.0" connect1name="T21" connect2name="T60" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A21" type="ANCHOR" x="866.0" y="309.0" connect1name="T22" connect2name="T61" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A22" type="ANCHOR" x="1097.0" y="313.0" connect1name="T23" connect2name="T61" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A23" type="ANCHOR" x="1117.0" y="292.0" connect1name="T28" connect2name="T60" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A24" type="ANCHOR" x="1132.0" y="274.0" connect1name="T37" connect2name="T59" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A26" type="ANCHOR" x="1146.0" y="321.0" connect1name="T23" connect2name="T24" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A27" type="ANCHOR" x="1150.0" y="293.0" connect1name="T28" connect2name="T29" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A28" type="ANCHOR" x="1181.0" y="279.0" connect1name="T37" connect2name="T38" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A30" type="ANCHOR" x="1168.0" y="340.0" connect1name="T24" connect2name="T25" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A31" type="ANCHOR" x="1178.0" y="373.0" connect1name="T25" connect2name="T26" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A32" type="ANCHOR" x="1177.0" y="397.0" connect1name="T26" connect2name="T27" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A33" type="ANCHOR" x="1158.0" y="421.0" connect1name="T27" connect2name="T47" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A34" type="ANCHOR" x="1186.0" y="316.0" connect1name="T29" connect2name="T30" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A35" type="ANCHOR" x="1207.0" y="357.0" connect1name="T30" connect2name="T31" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A36" type="ANCHOR" x="1208.0" y="390.0" connect1name="T31" connect2name="T75" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A37" type="ANCHOR" x="1202.0" y="422.0" connect1name="T75" connect2name="T33" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A38" type="ANCHOR" x="1186.0" y="438.0" connect1name="T36" connect2name="T33" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A41" type="ANCHOR" x="1163.0" y="450.0" connect1name="T48" connect2name="T36" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A43" type="ANCHOR" x="1235.0" y="344.0" connect1name="T63" connect2name="T39" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A44" type="ANCHOR" x="1239.0" y="378.0" connect1name="T39" connect2name="T40" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A45" type="ANCHOR" x="1235.0" y="414.0" connect1name="T40" connect2name="T41" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A46" type="ANCHOR" x="1219.0" y="447.0" connect1name="T41" connect2name="T34" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A49" type="ANCHOR" x="1190.0" y="470.0" connect1name="T45" connect2name="T34" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A50" type="ANCHOR" x="1140.0" y="478.0" connect1name="T45" connect2name="T46" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A51" type="ANCHOR" x="1092.0" y="477.0" connect1name="T46" connect2name="T49" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A52" type="ANCHOR" x="1123.0" y="430.0" connect1name="T47" connect2name="T35" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A53" type="ANCHOR" x="1126.0" y="453.0" connect1name="T48" connect2name="T57" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A54" type="ANCHOR" x="907.0" y="477.0" connect1name="T49" connect2name="T55" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A55" type="ANCHOR" x="592.0" y="93.0" connect1name="T17" connect2name="T90" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A56" type="ANCHOR" x="890.5" y="244.0" connect1name="T50" connect2name="T16" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A57" type="ANCHOR" x="634.25" y="245.5" connect1name="T15" connect2name="T50" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A58" type="ANCHOR" x="431.0" y="220.0" connect1name="T13" connect2name="T51" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A59" type="ANCHOR" x="445.0" y="122.5" connect1name="T12" connect2name="T52" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A61" type="ANCHOR" x="388.0" y="188.0" connect1name="T3" connect2name="T62" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A62" type="ANCHOR" x="1223.5" y="314.0" connect1name="T38" connect2name="T63" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A63" type="ANCHOR" x="1212.0" y="265.0" connect1name="T64" connect2name="T65" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A64" type="ANCHOR" x="1247.0" y="298.0" connect1name="T65" connect2name="T66" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A65" type="ANCHOR" x="1266.0" y="345.0" connect1name="T66" connect2name="T67" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A66" type="ANCHOR" x="1268.0" y="397.0" connect1name="T67" connect2name="T68" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A67" type="ANCHOR" x="1253.0" y="448.0" connect1name="T68" connect2name="T69" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A68" type="ANCHOR" x="1183.0" y="498.0" connect1name="T42" connect2name="T70" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A69" type="ANCHOR" x="1128.0" y="500.0" connect1name="T70" connect2name="T71" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A70" type="ANCHOR" x="467.0" y="497.0" connect1name="T71" connect2name="T72" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A71" type="ANCHOR" x="379.0" y="497.0" connect1name="T72" connect2name="T73" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A72" type="ANCHOR" x="317.0" y="501.0" connect1name="T73" connect2name="T74" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A75" type="ANCHOR" x="250.0" y="500.0" connect1name="T89" connect2name="T76" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A76" type="ANCHOR" x="182.0" y="495.0" connect1name="T88" connect2name="T77" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A77" type="ANCHOR" x="163.0" y="473.0" connect1name="T77" connect2name="T78" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A78" type="ANCHOR" x="144.0" y="435.0" connect1name="T78" connect2name="T79" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A79" type="ANCHOR" x="144.0" y="395.0" connect1name="T79" connect2name="T80" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A80" type="ANCHOR" x="163.0" y="354.0" connect1name="T80" connect2name="T81" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A81" type="ANCHOR" x="200.0" y="330.0" connect1name="T81" connect2name="T82" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A82" type="ANCHOR" x="244.0" y="326.0" connect1name="T82" connect2name="T83" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A83" type="ANCHOR" x="267.0" y="331.0" connect1name="T83" connect2name="T84" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A84" type="ANCHOR" x="301.0" y="362.0" connect1name="T84" connect2name="T85" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A85" type="ANCHOR" x="318.0" y="419.0" connect1name="T85" connect2name="T86" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A86" type="ANCHOR" x="340.0" y="449.0" connect1name="T86" connect2name="T87" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A87" type="ANCHOR" x="358.0" y="462.0" connect1name="T87" connect2name="T32" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A88" type="ANCHOR" x="226.0" y="502.0" connect1name="T76" connect2name="T88" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A89" type="ANCHOR" x="274.5" y="501.5" connect1name="T74" connect2name="T89" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A90" type="ANCHOR" x="531.0" y="58.0" connect1name="T54" connect2name="T91" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A15" type="ANCHOR" x="594.5" y="72.5" connect1name="T91" connect2name="T53" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A25" type="ANCHOR" x="429.5" y="90.0" connect1name="T1" connect2name="T92" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A29" type="ANCHOR" x="509.5" y="266.0" connect1name="T14" connect2name="T93" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A40" type="ANCHOR" x="559.5" y="430.0" connect1name="T58" connect2name="T35" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A42" type="ANCHOR" x="1231.5" y="477.5" connect1name="T69" connect2name="T42" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A39" type="ANCHOR" x="540.0" y="298.0" connect1name="T8" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A47" type="ANCHOR" x="641.0" y="274.0" connect1name="T19" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A48" type="ANCHOR" x="617.0" y="298.0" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A60" type="ANCHOR" x="631.0" y="291.0" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A73" type="ANCHOR" x="681.0" y="291.0" connect1name="T21" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+    <positionablepoint ident="A74" type="ANCHOR" x="681.0" y="309.0" connect1name="T22" class="jmri.jmrit.display.layoutEditor.configurexml.PositionablePointXml" />
+  </LayoutEditor>
+  <filehistory>
+    <operation>
+      <type>app</type>
+      <date>Thu Feb 12 19:19:16 EST 2026</date>
+      <filename>PanelPro (v5.15.3)</filename>
+    </operation>
+    <operation>
+      <type>Load OK</type>
+      <date>Thu Feb 12 19:19:18 EST 2026</date>
+      <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+      <filehistory>
+        <operation>
+          <type>app</type>
+          <date>Thu Feb 20 19:22:29 EST 2025</date>
+          <filename>PanelPro (v5.11.3)</filename>
+        </operation>
+        <operation>
+          <type>Load OK</type>
+          <date>Thu Feb 20 19:22:33 EST 2025</date>
+          <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+          <filehistory>
+            <operation>
+              <type>app</type>
+              <date>Sun Jul 28 13:56:37 EDT 2024</date>
+              <filename>PanelPro (v5.8.0)</filename>
+            </operation>
+            <operation>
+              <type>Load OK</type>
+              <date>Sun Jul 28 13:56:41 EDT 2024</date>
+              <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+              <filehistory>
+                <operation>
+                  <type>app</type>
+                  <date>Sun Jul 28 11:57:40 EDT 2024</date>
+                  <filename>PanelPro (v5.8.0)</filename>
+                </operation>
+                <operation>
+                  <type>Load OK</type>
+                  <date>Sun Jul 28 11:57:45 EDT 2024</date>
+                  <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+                  <filehistory>
+                    <operation>
+                      <type>app</type>
+                      <date>Thu Jul 25 17:55:04 EDT 2024</date>
+                      <filename>PanelPro (v5.8.0)</filename>
+                    </operation>
+                    <operation>
+                      <type>Load OK</type>
+                      <date>Thu Jul 25 17:55:08 EDT 2024</date>
+                      <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+                      <filehistory>
+                        <operation>
+                          <type>app</type>
+                          <date>Fri Jul 19 12:35:54 EDT 2024</date>
+                          <filename>PanelPro (v5.8.0)</filename>
+                        </operation>
+                        <operation>
+                          <type>Load OK</type>
+                          <date>Fri Jul 19 12:35:59 EDT 2024</date>
+                          <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+                        </operation>
+                        <operation>
+                          <type>Store</type>
+                          <date>Fri Jul 19 12:37:17 EDT 2024</date>
+                          <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+                        </operation>
+                      </filehistory>
+                    </operation>
+                    <operation>
+                      <type>Store</type>
+                      <date>Sun Jul 28 11:32:25 EDT 2024</date>
+                      <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+                    </operation>
+                  </filehistory>
+                </operation>
+                <operation>
+                  <type>Store</type>
+                  <date>Sun Jul 28 13:54:46 EDT 2024</date>
+                  <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+                </operation>
+              </filehistory>
+            </operation>
+            <operation>
+              <type>Store</type>
+              <date>Sun Jul 28 21:30:41 EDT 2024</date>
+              <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+            </operation>
+          </filehistory>
+        </operation>
+        <operation>
+          <type>Store</type>
+          <date>Mon Mar 31 19:37:39 EDT 2025</date>
+          <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+        </operation>
+      </filehistory>
+    </operation>
+    <operation>
+      <type>Store</type>
+      <date>Thu Feb 12 19:24:32 EST 2026</date>
+      <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/Gville-arsenal.xml</filename>
+    </operation>
+  </filehistory>
+  <!--Written by JMRI version 5.15.3+R3035b2a0f7 on Thu Feb 12 19:24:32 EST 2026-->
+</layout-config>
