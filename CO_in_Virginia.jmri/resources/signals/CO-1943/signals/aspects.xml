@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="../../XSLT/aspecttable.xsl" type="text/xsl"?>
+<aspecttable
+    xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation = "http://jmri.org/xml/schema/aspecttable.xsd"
+>
+  <name>C&amp;O 1943 Piedmont/Mountain Sub Color-Light</name>
+  <date>1943</date>
+  <reference>Adapted from the AAR 1946 recommended aspect/indication set, which C&amp;O's own
+    rulebook of this era closely tracked (as did most eastern roads by WWII). Physical hardware
+    (three-lamp AC color-light, not searchlight) is documented for Gordonsville-Charlottesville-
+    Staunton-Clifton Forge (ICC Order 1/2 ATC territory, installed 1919-1926) via period Railway
+    Signaling / Railway Age articles. Richmond-Gordonsville (including Louisa) is separately
+    documented only as "Automatic Block Territory" from the early 1900s; the source consulted did
+    not confirm whether that stretch carries the same color-light hardware as of 1943, or older
+    semaphore hardware not yet converted. THIS FILE ASSUMES COLOR-LIGHT THROUGHOUT and should be
+    checked against a period C&amp;O employee timetable, rulebook, or C&amp;OHS reference for the
+    Richmond-Gordonsville segment specifically, and for exact rule numbers/wording, before treating
+    it as prototypically final.</reference>
+  <reference>This is a hand-built starting point, not an official JMRI-distributed system. It has
+    not been loaded/validated in JMRI yet - use Debug -&gt; "Validate XML File" the first time you
+    load it, and expect to need small fixes.</reference>
+  <copyright xmlns="http://docbook.org/ns/docbook">
+    <year>2026</year>
+    <holder>Brian L Wong - personal use / not for JMRI distribution without further prototype verification.</holder>
+  </copyright>
+  <authorgroup xmlns="http://docbook.org/ns/docbook">
+    <author>
+      <personname>
+        <firstname>Brian</firstname>
+        <surname>Wong</surname>
+      </personname>
+      <email>blw@blw.net</email>
+    </author>
+  </authorgroup>
+  <revhistory xmlns="http://docbook.org/ns/docbook">
+    <revision>
+      <revnumber>1</revnumber>
+      <date>2026-09-21</date>
+      <authorinitials>BLW</authorinitials>
+      <revremark>Initial draft, hand-built from period trade-journal research. Not yet validated in a running JMRI instance.</revremark>
+    </revision>
+  </revhistory>
+
+  <aspects>
+
+    <aspect>
+      <name>Clear</name>
+      <indication>Proceed</indication>
+      <description>Block(s) ahead clear, route set for normal speed through any diverging turnouts ahead.</description>
+      <speed>Normal</speed>
+      <speed2>Normal</speed2>
+    </aspect>
+
+    <aspect>
+      <name>Approach Medium</name>
+      <indication>Proceed, be prepared to pass next signal at medium speed</indication>
+      <description>Next signal will be Medium Clear or more restrictive; be prepared to take a diverging route at the next interlocking at medium speed.</description>
+      <speed>Normal</speed>
+      <speed2>Medium</speed2>
+    </aspect>
+
+    <aspect>
+      <name>Medium Clear</name>
+      <indication>Proceed at medium speed, route diverging</indication>
+      <description>Train is taking a diverging (turnout) route at this signal; block(s) ahead clear beyond the diverging move.</description>
+      <speed>Medium</speed>
+      <speed2>Normal</speed2>
+      <route>Diverging</route>
+    </aspect>
+
+    <aspect>
+      <name>Approach</name>
+      <indication>Proceed prepared to stop at next signal</indication>
+      <description>Next signal displays Stop or Stop and Proceed; reduce to be able to stop at it.</description>
+      <speed>Normal</speed>
+      <speed2>Restricted</speed2>
+    </aspect>
+
+    <aspect>
+      <name>Medium Approach</name>
+      <indication>Proceed at medium speed, prepared to stop at next signal</indication>
+      <description>Diverging route at this signal, next signal displays Stop or Stop and Proceed.</description>
+      <speed>Medium</speed>
+      <speed2>Restricted</speed2>
+      <route>Diverging</route>
+    </aspect>
+
+    <aspect>
+      <name>Restricting</name>
+      <indication>Proceed at restricted speed</indication>
+      <description>Proceed prepared to stop short of train, obstruction, or improperly lined switch; used at some interlocking dwarfs and for permissive moves.</description>
+      <speed>Restricted</speed>
+      <speed2>Restricted</speed2>
+    </aspect>
+
+    <aspect>
+      <name>Stop and Proceed</name>
+      <indication>Stop, then proceed at restricted speed</indication>
+      <description>Used at automatic (non-interlocking) block signals only - stop, then proceed at restricted speed prepared to stop short of train or obstruction.</description>
+      <speed>Restricted</speed>
+      <speed2>Restricted</speed2>
+    </aspect>
+
+    <aspect>
+      <name>Stop</name>
+      <indication>Stop</indication>
+      <description>Used at interlocking home/absolute signals. Stop and stay stopped unless/until authorized to proceed.</description>
+      <speed>Stop</speed>
+      <speed2>Stop</speed2>
+    </aspect>
+
+  </aspects>
+
+  <appearancefiles>
+    <appearancefile href="appearance-color-light-1head.xml"/>
+    <appearancefile href="appearance-color-light-2head.xml"/>
+  </appearancefiles>
+
+</aspecttable>

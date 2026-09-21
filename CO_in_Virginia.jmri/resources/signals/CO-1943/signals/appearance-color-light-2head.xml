@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="../../XSLT/appearancetable.xsl" type="text/xsl"?>
+<appearancetable
+    xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation = "http://jmri.org/xml/schema/appearancetable.xsd"
+>
+  <copyright xmlns="http://docbook.org/ns/docbook">
+    <year>2026</year>
+    <holder>Brian L Wong - personal use / not for JMRI distribution without further prototype verification.</holder>
+  </copyright>
+  <authorgroup xmlns="http://docbook.org/ns/docbook">
+    <author>
+      <personname>
+        <firstname>Brian</firstname>
+        <surname>Wong</surname>
+      </personname>
+      <email>blw@blw.net</email>
+    </author>
+  </authorgroup>
+  <revhistory xmlns="http://docbook.org/ns/docbook">
+    <revision>
+      <revnumber>1</revnumber>
+      <date>2026-09-21</date>
+      <authorinitials>BLW</authorinitials>
+      <revremark>Initial draft, hand-built from period trade-journal research. Not yet validated in a running JMRI instance.</revremark>
+    </revision>
+  </revhistory>
+
+  <aspecttable>C&amp;O 1943 Piedmont/Mountain Sub Color-Light</aspecttable>
+
+  <name>C&amp;O 1943 Color Light (2 head, interlocking/diverging)</name>
+  <reference>Two-lamp-head mast: top head carries the same Clear/Approach/Stop indication as the
+    1-head mast, bottom head is the diverging-route modifier, dark when the route is normal (lined
+    through). Use at interlockings, passing-siding turnouts, and other locations with a diverging
+    move - e.g. Afton, and any of the passing sidings along Louisa-Gordonsville-Charlottesville-
+    Staunton (Trevilian, Mineral, Frederick Hall, etc., if you're signaling those turnouts). Absolute
+    (interlocking) use only - pairs with "Stop", not "Stop and Proceed", since two-head masts on the
+    prototype were typically home/interlocking signals rather than plain automatic blocks.</reference>
+
+  <appearances>
+
+    <appearance>
+      <aspectname>Clear</aspectname>
+      <show>green</show>
+      <show>dark</show>
+    </appearance>
+
+    <appearance>
+      <aspectname>Approach Medium</aspectname>
+      <show>green</show>
+      <show>yellow</show>
+    </appearance>
+
+    <appearance>
+      <aspectname>Medium Clear</aspectname>
+      <show>yellow</show>
+      <show>green</show>
+    </appearance>
+
+    <appearance>
+      <aspectname>Approach</aspectname>
+      <show>yellow</show>
+      <show>dark</show>
+    </appearance>
+
+    <appearance>
+      <aspectname>Medium Approach</aspectname>
+      <show>yellow</show>
+      <show>yellow</show>
+    </appearance>
+
+    <appearance>
+      <aspectname>Restricting</aspectname>
+      <show>red</show>
+      <show>yellow</show>
+      <reference>C&amp;O practice for Restricting at this date (lunar-white lamp vs. a red-over-yellow combination) is not confirmed here - check against the actual rulebook before relying on this row.</reference>
+    </appearance>
+
+    <appearance>
+      <aspectname>Stop</aspectname>
+      <show>red</show>
+      <show>dark</show>
+    </appearance>
+
+  </appearances>
+
+  <specificappearances>
+    <danger>
+      <aspect>Stop</aspect>
+    </danger>
+  </specificappearances>
+
+</appearancetable>

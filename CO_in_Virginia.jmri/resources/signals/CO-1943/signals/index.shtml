@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>C&amp;O 1943 Piedmont/Mountain Sub Color-Light Signal System</title></head>
+<body>
+<h1>C&amp;O 1943 Piedmont/Mountain Sub Color-Light</h1>
+<p>Draft signal system definition for a C&amp;O Virginia Division layout set in 1943,
+covering the Louisa-Gordonsville-Charlottesville-Staunton-Afton stretch of the Piedmont
+and Mountain Subdivisions. Hand-built starting point - not an official JMRI-distributed
+system, and not yet loaded/validated in a running copy of JMRI. See the reference notes
+inside aspects.xml for what is and isn't confirmed against period sources.</p>
+<ul>
+<li><a href="aspects.xml">Aspect table</a></li>
+<li><a href="appearance-color-light-1head.xml">Appearance: 1-head color light (automatic/intermediate)</a></li>
+<li><a href="appearance-color-light-2head.xml">Appearance: 2-head color light (interlocking/diverging)</a></li>
+</ul>
+</body>
+</html>

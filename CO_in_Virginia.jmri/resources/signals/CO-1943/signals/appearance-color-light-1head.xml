@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="../../XSLT/appearancetable.xsl" type="text/xsl"?>
+<appearancetable
+    xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation = "http://jmri.org/xml/schema/appearancetable.xsd"
+>
+  <copyright xmlns="http://docbook.org/ns/docbook">
+    <year>2026</year>
+    <holder>Brian L Wong - personal use / not for JMRI distribution without further prototype verification.</holder>
+  </copyright>
+  <authorgroup xmlns="http://docbook.org/ns/docbook">
+    <author>
+      <personname>
+        <firstname>Brian</firstname>
+        <surname>Wong</surname>
+      </personname>
+      <email>blw@blw.net</email>
+    </author>
+  </authorgroup>
+  <revhistory xmlns="http://docbook.org/ns/docbook">
+    <revision>
+      <revnumber>1</revnumber>
+      <date>2026-09-21</date>
+      <authorinitials>BLW</authorinitials>
+      <revremark>Initial draft, hand-built from period trade-journal research. Not yet validated in a running JMRI instance.</revremark>
+    </revision>
+  </revhistory>
+
+  <aspecttable>C&amp;O 1943 Piedmont/Mountain Sub Color-Light</aspecttable>
+
+  <name>C&amp;O 1943 Color Light (1 head, automatic/intermediate)</name>
+  <reference>Single-lamp-head, three-color (R/Y/G) mast. Intended for plain intermediate/automatic
+    block signals in open ABS territory with no diverging route at that location - this covers most
+    of the Louisa-Gordonsville-Charlottesville-Staunton-Afton main line. "Stop" and "Stop and Proceed"
+    both display red; on the prototype these were distinguished by a number plate on the mast (Stop
+    and Proceed = permissive automatic signal), not by a different aspect. Give the mast the
+    appropriate specific-appearance mapping below depending on whether it represents an automatic or
+    an absolute (interlocking) signal.</reference>
+
+  <appearances>
+
+    <appearance>
+      <aspectname>Clear</aspectname>
+      <show>green</show>
+    </appearance>
+
+    <appearance>
+      <aspectname>Approach</aspectname>
+      <show>yellow</show>
+    </appearance>
+
+    <appearance>
+      <aspectname>Stop and Proceed</aspectname>
+      <show>red</show>
+      <reference>Automatic (intermediate) block signal only - number-plated on the prototype. Use this aspect, not "Stop", for masts that are NOT at an interlocking.</reference>
+    </appearance>
+
+    <appearance>
+      <aspectname>Stop</aspectname>
+      <show>red</show>
+      <reference>Absolute/interlocking signal - no number plate on the prototype. Use this aspect, not "Stop and Proceed", for masts that ARE at an interlocking or station home signal.</reference>
+    </appearance>
+
+  </appearances>
+
+  <specificappearances>
+    <danger>
+      <aspect>Stop</aspect>
+    </danger>
+  </specificappearances>
+
+</appearancetable>
