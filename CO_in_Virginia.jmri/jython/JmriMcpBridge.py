@@ -860,6 +860,157 @@ def _authoring_create_transit(payload):
     }
 
 
+def _authoring_create_test_oval(payload):
+    """Builds a synthetic rectangular test loop -- four corner anchors and
+    one RH crossover per side, wired into the through route -- entirely
+    in-memory on a freshly-created LayoutEditor panel, so jmri-mcp
+    development/testing has an "obvious" fixture with real crossover
+    objects on it without touching this profile's real layout panels.
+    Nothing here is ever persisted (no store/save call anywhere in this
+    function) -- discard by disposing the panel or restarting JMRI without
+    saving; there is deliberately no delete/teardown operation to go with
+    this one.
+
+    Two things live-testing caught building this, neither obvious from the
+    API alone:
+      - LayoutEditor.addLayoutTurnout()/addTrackSegment()/etc. are the GUI
+        toolbar's own click-handlers -- they read private mouse-position
+        and live combo-box selections, not parameters, so they cannot be
+        called headlessly. This constructs LayoutTrack/LayoutTrackView
+        pairs directly (the same shape JMRI's own XML panel loader uses)
+        and registers each via the real underlying primitive,
+        LayoutEditor.addLayoutTrack(track, view).
+      - A TrackSegment's own constructor only wires the segment's view of
+        its endpoints (segment -> point/turnout-leg); the reverse link
+        (point/turnout-leg -> segment) needs a separate, explicit call --
+        PositionablePoint.setTrackConnection(segment) for a point end,
+        LayoutTurnout.setConnectA/B/C/D(segment, HitPointType.TRACK) for a
+        turnout leg. Skipping this produces a segment that LOOKS fully
+        built (no exception, its own connect1/connect2 fields populated)
+        but whose endpoints report no connection at all (getConnect1()
+        returns null) -- confirmed live 2026-09-22, the first build
+        attempt hit exactly this before the fix.
+
+    All Swing-panel mutation here runs wrapped in
+    ThreadingUtil.runOnGUIwithReturn() -- confirmed live 2026-09-22 that
+    this bridge's own HTTP worker thread is not the EDT
+    (SwingUtilities.isEventDispatchThread() is False there, True inside
+    the wrapped callback), matching every other LayoutEditor-mutating
+    operation's documented need for this (see jmri-mcp's usage_guidance.py
+    edt-thread-safety note). A single unwrapped call also completed
+    without error in testing, but that's not proof of safety under
+    contention -- the wrapper costs nothing measurable, so there's no
+    reason to skip it.
+
+    Each of the four crossovers gets its own real Turnout bean on JMRI's
+    Internal connection (system name prefix "IT", via
+    TurnoutManager.provideTurnout) -- a synthetic test fixture must never
+    be able to command real hardware, even by accident, so this
+    deliberately avoids whatever connection(s) this profile's real layout
+    uses (LCC/MQTT/SPROG DCC, none of them "I").
+
+    Only the A-B "through" route of each RH crossover is wired into the
+    loop (per LayoutXOver.java's own javadoc: A-B and C-D are the straight
+    continuing routes, A-C/B-D are the diverging routes) -- the C/D legs
+    are deliberately left unconnected for this first version. A crossover
+    with unconnected legs is a normal, valid JMRI object (get_panel_
+    structure already handles exactly this case on real panels), and
+    diverging-route stub track was judged out of scope for a v1 test
+    fixture -- extend here if a caller actually needs it.
+
+    params (all optional): editorName (default "Test Oval" -- JMRI allows
+    duplicate panel names across separate LayoutEditor instances, only
+    warns, so pass a distinct name to keep multiple test ovals apart
+    rather than relying on this to reject a collision), centerX/centerY
+    (default 300/300), width/height (default 400/300, pixels)."""
+    from java.awt.geom import Point2D
+    from jmri import InstanceManager
+    from jmri.jmrit.display.layoutEditor import (
+        LayoutEditor, LayoutRHXOver, LayoutRHXOverView,
+        TrackSegment, TrackSegmentView, HitPointType,
+    )
+    from jmri.util import ThreadingUtil
+    import uuid as _uuid
+
+    params = payload.get("params") or {}
+    editor_name = params.get("editorName") or "Test Oval"
+    center_x = float(params.get("centerX", 300.0))
+    center_y = float(params.get("centerY", 300.0))
+    width = float(params.get("width", 400.0))
+    height = float(params.get("height", 300.0))
+    if width <= 0 or height <= 0:
+        raise ValueError("testOval create requires width > 0 and height > 0")
+
+    half_w = width / 2.0
+    half_h = height / 2.0
+    suffix = _uuid.uuid4().hex[:6]
+
+    def build():
+        editor = LayoutEditor(editor_name)
+        editor.setVisible(True)
+
+        turnout_mgr = InstanceManager.turnoutManagerInstance()
+
+        corners = {
+            "NW": editor.addAnchor(Point2D.Double(center_x - half_w, center_y - half_h)),
+            "NE": editor.addAnchor(Point2D.Double(center_x + half_w, center_y - half_h)),
+            "SE": editor.addAnchor(Point2D.Double(center_x + half_w, center_y + half_h)),
+            "SW": editor.addAnchor(Point2D.Double(center_x - half_w, center_y + half_h)),
+        }
+
+        # side: (corner_a, corner_b, crossover center point, rotation degrees).
+        # 0 deg = crossover's A-B axis lies east-west (LayoutXOver's own
+        # javadoc); 90 deg rotates it to north-south -- matching the N/S
+        # sides' horizontal orientation and the E/W sides' vertical one.
+        sides = [
+            ("N", corners["NW"], corners["NE"], Point2D.Double(center_x, center_y - half_h), 0.0),
+            ("E", corners["NE"], corners["SE"], Point2D.Double(center_x + half_w, center_y), 90.0),
+            ("S", corners["SE"], corners["SW"], Point2D.Double(center_x, center_y + half_h), 0.0),
+            ("W", corners["SW"], corners["NW"], Point2D.Double(center_x - half_w, center_y), 90.0),
+        ]
+
+        seg_counter = [0]
+
+        def add_segment(id_prefix, c1, t1, c2, t2):
+            seg_counter[0] += 1
+            seg = TrackSegment("%s%d" % (id_prefix, seg_counter[0]), c1, t1, c2, t2, True, editor)
+            seg_view = TrackSegmentView(seg, editor)
+            editor.addLayoutTrack(seg, seg_view)
+            return seg
+
+        xovers = {}
+        for side_name, corner_a, corner_b, center_point, rotation in sides:
+            turnout_name = "ITTestOval%s%s" % (suffix, side_name)
+            turnout = turnout_mgr.provideTurnout(turnout_name)
+
+            xover_id = "X%s%s" % (suffix, side_name)
+            xover = LayoutRHXOver(xover_id, editor)
+            xover_view = LayoutRHXOverView(xover, center_point, rotation, 1.0, 1.0, editor)
+            editor.addLayoutTrack(xover, xover_view)
+            xover.setTurnout(turnout.getSystemName())
+
+            seg_a = add_segment("T%s" % side_name, corner_a, HitPointType.POS_POINT, xover, HitPointType.TURNOUT_A)
+            corner_a.setTrackConnection(seg_a)
+            xover.setConnectA(seg_a, HitPointType.TRACK)
+
+            seg_b = add_segment("T%s" % side_name, corner_b, HitPointType.POS_POINT, xover, HitPointType.TURNOUT_B)
+            corner_b.setTrackConnection(seg_b)
+            xover.setConnectB(seg_b, HitPointType.TRACK)
+
+            xovers[side_name] = {"id": xover.getId(), "turnout": turnout.getSystemName()}
+
+        editor.setDirty()
+
+        return {
+            "editorName": editor.getName(),
+            "corners": dict((name, pt.getId()) for name, pt in corners.items()),
+            "crossovers": xovers,
+            "trackCount": len(list(editor.getLayoutTracks())),
+        }
+
+    return ThreadingUtil.runOnGUIwithReturn(build)
+
+
 def _authoring_connection_discover(payload):
     """Runs JMRI's "SML Discover" (automaticallyDiscoverSignallingPairs()).
     Requires Advanced Layout Block Routing already enabled and its routing
@@ -958,6 +1109,7 @@ _STRUCTURED_OPS = {
     ("jmri_authoring", "create", "block"): _authoring_create_block,
     ("jmri_authoring", "create", "section"): _authoring_create_section,
     ("jmri_authoring", "create", "transit"): _authoring_create_transit,
+    ("jmri_authoring", "create", "testOval"): _authoring_create_test_oval,
     ("jmri_authoring", "discover", "connection"): _authoring_connection_discover,
     ("jmri_authoring", "generateSections", "connection"): _authoring_connection_generate_sections,
     ("jmri_logs", "tail", None): _jmri_logs_tail,
