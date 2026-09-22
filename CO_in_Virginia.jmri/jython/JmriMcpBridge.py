@@ -436,6 +436,95 @@ def _list_transits(payload):
     return _paginate(items, payload)
 
 
+def _get_panel_structure(payload):
+    """No `limit`/`offset` -- this isn't forwarded as a list_* pagination
+    hint by jmri_mcp_server.py (see its jmri_introspect docstring), so this
+    always returns every open Layout Editor panel's full summary.
+
+    JMRI's Layout Editor has no single API for "which blocks belong to
+    this panel" -- confirmed against source, not assumed, which is exactly
+    why this operation was deferred past the four list_* ones. Each
+    concrete LayoutTrack subclass owns its LayoutBlock reference(s) via
+    its own differently-named method(s):
+      - TrackSegment: getLayoutBlock() (one block)
+      - LayoutTurnout (LayoutRHTurnout/LayoutLHTurnout, and LayoutSlip --
+        both extend LayoutTurnout, confirmed against source): getLayoutBlock(),
+        plus getLayoutBlockB()/C()/D() for a double/three-way turnout's other
+        legs -- each of those three defaults back to getLayoutBlock() when
+        that specific block isn't set (confirmed against LayoutTurnout.java),
+        so calling all four unconditionally and de-duplicating is always
+        safe, never a crash on a plain single turnout.
+      - LevelXing: getLayoutBlockAC() / getLayoutBlockBD() (two blocks, for
+        its two crossing tracks) -- a different method-name pattern again.
+      - PositionablePoint: no block of its own -- it's a connector between
+        two other LayoutTrack elements (see below), not a track element.
+    Live-confirmed 2026-09-22 against this test rig's two real open panels
+    (105+90 TrackSegments, 14+4 turnouts between them) -- resolving through
+    to real Block system names via LayoutBlock.getBlock().getSystemName()
+    (LayoutBlock itself is a NamedBean with its OWN, different system name,
+    e.g. "IL..." -- confirmed against LayoutBlock.java; the underlying
+    Block it wraps, e.g. "IB:AUTO:...", is what this reports, matching what
+    jmri_introspect's list_sections/jmri_authoring's section create already
+    use elsewhere). Neither panel has a LevelXing or LayoutSlip configured,
+    so that branch is verified against source only, not live data -- TESTME
+    if one is ever added to this rig.
+
+    "Connection points" are PositionablePoints (LayoutEditor.
+    getPositionablePoints()) -- confirmed live against all three real
+    PointType values (ANCHOR, END_BUMPER, EDGE_CONNECTOR all occur on this
+    rig's panels) and against real edge cases live data actually contained:
+    an END_BUMPER has only one connection (getConnect2() is null, handled),
+    and this rig has a few ANCHOR points with only one connection or even
+    zero (apparent leftover/orphaned points in the layout's own data, not a
+    bug here) -- this returns whatever's actually there rather than
+    assuming every ANCHOR has exactly two."""
+    from jmri import InstanceManager
+    from jmri.jmrit.display import EditorManager
+    from jmri.jmrit.display.layoutEditor import LayoutEditor, TrackSegment, LayoutTurnout, LevelXing
+
+    panels = []
+    for editor in InstanceManager.getDefault(EditorManager).getAll():
+        if not isinstance(editor, LayoutEditor):
+            continue
+
+        block_names = set()
+        for track in editor.getLayoutTracks():
+            layout_blocks = []
+            if isinstance(track, TrackSegment):
+                layout_blocks = [track.getLayoutBlock()]
+            elif isinstance(track, LayoutTurnout):
+                layout_blocks = [track.getLayoutBlock(), track.getLayoutBlockB(),
+                                  track.getLayoutBlockC(), track.getLayoutBlockD()]
+            elif isinstance(track, LevelXing):
+                layout_blocks = [track.getLayoutBlockAC(), track.getLayoutBlockBD()]
+            for lb in layout_blocks:
+                if lb is None:
+                    continue
+                real_block = lb.getBlock()
+                if real_block is not None:
+                    block_names.add(real_block.getSystemName())
+
+        connection_points = []
+        for pp in editor.getPositionablePoints():
+            connects = []
+            for c in (pp.getConnect1(), pp.getConnect2()):
+                if c is not None:
+                    connects.append(c.getName())
+            connection_points.append({
+                "name": pp.getName(),
+                "type": pp.getType().toString(),
+                "connects": connects,
+            })
+
+        panels.append({
+            "name": editor.getTitle(),
+            "blocks": sorted(block_names),
+            "connectionPoints": connection_points,
+        })
+
+    return {"panels": panels}
+
+
 # --- jmri_logixng ---------------------------------------------------------
 # LogixNG has two separate, independent on/off signals, confirmed against
 # JMRI's own actions/EnableLogixNG.java (the built-in action our tool's
@@ -750,14 +839,15 @@ def _authoring_create_transit(payload):
 # Structured (tool, operation, target_type) tuples this bridge actually
 # implements -- target_type is None for every tool except jmri_authoring,
 # which is the only one with that extra dimension (see _handle's own
-# comment). Everything else -- jmri_introspect's get_panel_structure, and
-# jmri_authoring's connection/preference target_types (see that section's
-# own comment above for why) -- returns a clear "not yet implemented" error
-# rather than a fabricated JMRI API call I'm not confident about. See
-# jmri-mcp's TOOLS.md status legend; these get filled in incrementally,
-# each validated against this live instance before being trusted.
+# comment). Everything else -- jmri_authoring's connection/preference
+# target_types (see that section's own comment above for why) -- returns a
+# clear "not yet implemented" error rather than a fabricated JMRI API call
+# I'm not confident about. See jmri-mcp's TOOLS.md status legend; these get
+# filled in incrementally, each validated against this live instance before
+# being trusted.
 _STRUCTURED_OPS = {
     ("jmri_introspect", "describe_class", None): lambda payload: _describe_class(payload["class_name"]),
+    ("jmri_introspect", "get_panel_structure", None): _get_panel_structure,
     ("jmri_introspect", "list_signal_masts", None): _list_signal_masts,
     ("jmri_introspect", "list_signal_mast_logic", None): _list_signal_mast_logic,
     ("jmri_introspect", "list_sections", None): _list_sections,
