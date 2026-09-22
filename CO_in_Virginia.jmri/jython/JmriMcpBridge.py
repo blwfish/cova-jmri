@@ -523,26 +523,257 @@ def _logixng_disable(payload):
     return _logixng_set_enabled(payload, False)
 
 
-# Structured (tool, operation) pairs this bridge actually implements.
-# Everything else -- jmri_introspect's get_panel_structure, jmri_authoring
-# -- returns a clear "not yet implemented" error rather than a fabricated
-# JMRI API call I'm not confident about. See jmri-mcp's TOOLS.md status
-# legend; these get filled in incrementally, each validated against this
-# live instance before being trusted.
+# --- jmri_authoring --------------------------------------------------------
+# Four of the six target_types the client accepts (see jmri-mcp's TOOLS.md):
+# signalMast, block, section, transit. Each "create" recipe below was proven
+# live 2026-09-22 before being trusted, not written speculatively -- see
+# each function's own comment for what that proving caught.
+#
+# Deliberately NOT implemented here, and not planned as a quick follow-on:
+#
+# - target_type="connection" (JMRI's "SML Discover" --
+#   SignalMastLogicManager.automaticallyDiscoverSignallingPairs()) and the
+#   companion "Generate Sections" (DefaultSignalMastLogicManager.
+#   generateSection() / SectionManager.generateBlockSections()): JMRI's own
+#   GUI action (SignalMastLogicTableAction) runs discovery on a background
+#   thread specifically because "this process can take some time", then
+#   marshals the follow-up work (table update, optional section generation)
+#   back onto the EDT via SwingUtilities.invokeAndWait. That's exactly the
+#   open, documented EDT-marshaling risk in AGENT-DEBUGGING.md's "hangs or
+#   crashes JMRI's UI" section -- this bridge's handler runs on a plain HTTP
+#   worker thread, not the EDT, and that gap is not resolved. Also unlike
+#   signalMast/block/section/transit create, there was no way to responsibly
+#   validate this live: it needs real Layout Editor connectivity (blocks
+#   wired into TrackSegments with signal masts facing them) that this test
+#   rig's panels don't have configured, and fabricating a credible test
+#   fixture for that is a substantially bigger undertaking than anything
+#   else proven today.
+# - target_type="preference": TOOLS.md/the client's own docstring name this
+#   as a valid target_type value but never specify what operation it's for
+#   -- there is nothing concrete here to implement without inventing scope
+#   that was never actually asked for.
+def _lookup_named_bean(manager, name):
+    """`name` may be a system name or a user name -- most JMRI Manager
+    getBySystemName/getByUserName pairs don't combine the two lookups the
+    way SignalMastLogicManager.getLogixNG() does, so this bridge does it
+    itself wherever a caller-supplied name needs to resolve either way."""
+    bean = manager.getBySystemName(name)
+    if bean is None:
+        bean = manager.getByUserName(name)
+    return bean
+
+
+def _authoring_create_signal_mast(payload):
+    """A MatrixSignalMast's system name ENCODES its signal-system and
+    mast-type (parsed by configureFromName() from "IF$xsm:<system>:
+    <mastType>($NNNN)" -- confirmed against MatrixSignalMast.java's source,
+    not guessed), so this builds that string from structured params rather
+    than asking the caller to construct JMRI's own internal name format.
+    getLastRef()/the "($NNNN)" ordinal is MatrixSignalMast's own class-wide
+    auto-numbering counter (confirmed live 2026-09-22: creating one bumps
+    it, so a second create with the same signalSystem/mastType doesn't
+    collide). Passing a plain Python string ("0100") for the char[]
+    setBitsForAspect expects works without any manual conversion --
+    confirmed live, Jython does this automatically."""
+    params = payload.get("params") or {}
+    signal_system = params.get("signalSystem")
+    mast_type = params.get("mastType")
+    aspects = params.get("aspects")
+    user_name = params.get("userName")
+    if not signal_system or not mast_type:
+        raise ValueError("signalMast create requires params.signalSystem and params.mastType")
+    if not aspects:
+        raise ValueError("signalMast create requires params.aspects (a non-empty {aspect: bitPattern} mapping)")
+
+    from jmri.implementation import MatrixSignalMast
+    from jmri import InstanceManager, SignalMastManager
+
+    ordinal = MatrixSignalMast.getLastRef() + 1
+    system_name = "IF$xsm:%s:%s($%04d)" % (signal_system, mast_type, ordinal)
+    mast = MatrixSignalMast(system_name, user_name) if user_name else MatrixSignalMast(system_name)
+    for aspect, bits in aspects.items():
+        mast.setBitsForAspect(aspect, bits)
+    InstanceManager.getDefault(SignalMastManager).register(mast)
+    return {
+        "name": mast.getSystemName(),
+        "userName": mast.getUserName(),
+        "class": mast.getClass().getName(),
+        "aspects": sorted(aspects.keys()),
+    }
+
+
+def _authoring_create_block(payload):
+    """Two things live-testing caught here, neither obvious from the method
+    names alone:
+      - Block has NO getLength() -- only getLengthMm()/getLengthCm()/
+        getLengthIn() (confirmed against Block.java; calling the plausible-
+        looking getLength() raises AttributeError at the Jython/Java
+        boundary).
+      - Block.setSensor(name) is NOT a lookup -- it calls SensorManager.
+        provideSensor(name), which CREATES a new Sensor bean if none exists
+        by that name yet, and still returns True. Confirmed live: passing
+        a typo'd sensor name silently created a real, permanent phantom
+        Sensor (auto-prefixed onto this layout's default connection, e.g.
+        "M2Sno-such-sensor") rather than failing. This function checks
+        SensorManager.getSensor(name) itself FIRST (get-only, confirmed
+        against SensorManager.java's own doc comment: "Get an existing
+        Sensor or return null if it doesn't exist") and refuses before
+        ever calling setSensor, rather than trusting setSensor's return
+        value to mean what it sounds like it means."""
+    params = payload.get("params") or {}
+    user_name = params.get("userName")
+    if not user_name:
+        raise ValueError("block create requires params.userName")
+
+    from jmri import InstanceManager, BlockManager, SensorManager
+
+    sensor_name = params.get("sensor")
+    sensor = None
+    if sensor_name:
+        sensor = InstanceManager.getDefault(SensorManager).getSensor(sensor_name)
+        if sensor is None:
+            raise ValueError(
+                "no Sensor named %r -- refusing to auto-create one "
+                "(Block.setSensor() would silently do that)" % (sensor_name,)
+            )
+
+    mgr = InstanceManager.getDefault(BlockManager)
+    block = mgr.createNewBlock(user_name)
+    if block is None:
+        raise ValueError("could not create block %r (userName may already be in use)" % (user_name,))
+
+    if sensor is not None:
+        block.setSensor(sensor_name)
+
+    length = params.get("length")
+    if length is not None:
+        block.setLength(float(length))
+
+    return {
+        "name": block.getSystemName(),
+        "userName": block.getUserName(),
+        "sensor": sensor_name,
+        "lengthMm": block.getLengthMm(),
+    }
+
+
+def _authoring_create_section(payload):
+    """SectionManager.createNewSection(userName) throws (IllegalArgumentException,
+    per its own interface signature) on a name collision, rather than
+    returning null the way BlockManager.createNewBlock does -- confirmed
+    against SectionManager.java/Section.java; different managers, different
+    failure conventions for what looks like the same "create" shape (see
+    CLAUDE.md's Parallel Implementation Rule). Left to propagate as-is into
+    the bridge's normal traceback response rather than pre-checked, since
+    JMRI's own exception message is already clear."""
+    params = payload.get("params") or {}
+    user_name = params.get("userName")
+    block_names = params.get("blocks")
+    if not user_name:
+        raise ValueError("section create requires params.userName")
+    if not block_names:
+        raise ValueError("section create requires params.blocks (a non-empty list of Block names)")
+
+    from jmri import InstanceManager, SectionManager, BlockManager
+
+    block_mgr = InstanceManager.getDefault(BlockManager)
+    blocks = []
+    for name in block_names:
+        block = _lookup_named_bean(block_mgr, name)
+        if block is None:
+            raise ValueError("no Block named %r" % (name,))
+        blocks.append(block)
+
+    section = InstanceManager.getDefault(SectionManager).createNewSection(user_name)
+    for block in blocks:
+        section.addBlock(block)
+
+    return {
+        "name": section.getSystemName(),
+        "userName": section.getUserName(),
+        "blocks": [b.getSystemName() for b in section.getBlockList()],
+    }
+
+
+def _authoring_create_transit(payload):
+    """TransitManager.createNewTransit also throws (NamedBean.BadNameException)
+    on a collision rather than returning null -- same note as section
+    create above. TransitSection.getSectionName() in the response below
+    returns JMRI's own "system( username )" formatted string when the
+    Section has a user name, not a bare system name -- confirmed live,
+    passed through as-is (see jmri_introspect's list_transits, which hit
+    the same thing first)."""
+    params = payload.get("params") or {}
+    user_name = params.get("userName")
+    section_specs = params.get("sections")
+    if not user_name:
+        raise ValueError("transit create requires params.userName")
+    if not section_specs:
+        raise ValueError("transit create requires params.sections (a non-empty list of "
+                          "{name, sequenceNumber, direction} objects)")
+
+    from jmri import InstanceManager, SectionManager, TransitManager, Section, TransitSection
+
+    sec_mgr = InstanceManager.getDefault(SectionManager)
+    resolved = []
+    for spec in section_specs:
+        name = spec.get("name")
+        section = _lookup_named_bean(sec_mgr, name) if name else None
+        if section is None:
+            raise ValueError("no Section named %r" % (name,))
+        direction_str = spec.get("direction", "FORWARD")
+        if direction_str == "FORWARD":
+            direction = Section.FORWARD
+        elif direction_str == "REVERSE":
+            direction = Section.REVERSE
+        else:
+            raise ValueError("direction must be \"FORWARD\" or \"REVERSE\", got %r" % (direction_str,))
+        seq = spec.get("sequenceNumber")
+        if seq is None:
+            raise ValueError("each section spec requires sequenceNumber")
+        resolved.append((section, seq, direction))
+
+    transit = InstanceManager.getDefault(TransitManager).createNewTransit(user_name)
+    for section, seq, direction in resolved:
+        transit.addTransitSection(TransitSection(section, seq, direction))
+
+    return {
+        "name": transit.getSystemName(),
+        "userName": transit.getUserName(),
+        "sections": [
+            {"name": ts.getSectionName(), "sequenceNumber": ts.getSequenceNumber(), "direction": ts.getDirection()}
+            for ts in transit.getTransitSectionList()
+        ],
+    }
+
+
+# Structured (tool, operation, target_type) tuples this bridge actually
+# implements -- target_type is None for every tool except jmri_authoring,
+# which is the only one with that extra dimension (see _handle's own
+# comment). Everything else -- jmri_introspect's get_panel_structure, and
+# jmri_authoring's connection/preference target_types (see that section's
+# own comment above for why) -- returns a clear "not yet implemented" error
+# rather than a fabricated JMRI API call I'm not confident about. See
+# jmri-mcp's TOOLS.md status legend; these get filled in incrementally,
+# each validated against this live instance before being trusted.
 _STRUCTURED_OPS = {
-    ("jmri_introspect", "describe_class"): lambda payload: _describe_class(payload["class_name"]),
-    ("jmri_introspect", "list_signal_masts"): _list_signal_masts,
-    ("jmri_introspect", "list_signal_mast_logic"): _list_signal_mast_logic,
-    ("jmri_introspect", "list_sections"): _list_sections,
-    ("jmri_introspect", "list_transits"): _list_transits,
-    ("jmri_logixng", "list"): _logixng_list,
-    ("jmri_logixng", "get"): _logixng_get,
-    ("jmri_logixng", "create"): _logixng_create,
-    ("jmri_logixng", "enable"): _logixng_enable,
-    ("jmri_logixng", "disable"): _logixng_disable,
-    ("jmri_logs", "tail"): _jmri_logs_tail,
-    ("jmri_logs", "grep"): _jmri_logs_grep,
-    ("jmri_logs", "get_last_error"): _jmri_logs_get_last_error,
+    ("jmri_introspect", "describe_class", None): lambda payload: _describe_class(payload["class_name"]),
+    ("jmri_introspect", "list_signal_masts", None): _list_signal_masts,
+    ("jmri_introspect", "list_signal_mast_logic", None): _list_signal_mast_logic,
+    ("jmri_introspect", "list_sections", None): _list_sections,
+    ("jmri_introspect", "list_transits", None): _list_transits,
+    ("jmri_logixng", "list", None): _logixng_list,
+    ("jmri_logixng", "get", None): _logixng_get,
+    ("jmri_logixng", "create", None): _logixng_create,
+    ("jmri_logixng", "enable", None): _logixng_enable,
+    ("jmri_logixng", "disable", None): _logixng_disable,
+    ("jmri_authoring", "create", "signalMast"): _authoring_create_signal_mast,
+    ("jmri_authoring", "create", "block"): _authoring_create_block,
+    ("jmri_authoring", "create", "section"): _authoring_create_section,
+    ("jmri_authoring", "create", "transit"): _authoring_create_transit,
+    ("jmri_logs", "tail", None): _jmri_logs_tail,
+    ("jmri_logs", "grep", None): _jmri_logs_grep,
+    ("jmri_logs", "get_last_error", None): _jmri_logs_get_last_error,
 }
 
 
@@ -594,11 +825,19 @@ class BridgeHandler(HttpHandler):
 
         tool = payload.get("tool")
         operation = payload.get("operation")
-        handler_fn = _STRUCTURED_OPS.get((tool, operation))
+        # jmri_authoring is the one structured tool with a third dispatch
+        # dimension (target_type) -- every other tool's payload simply
+        # omits it, so payload.get() defaults to None, which is also what
+        # _STRUCTURED_OPS' keys use for those tools (see its own comment).
+        target_type = payload.get("target_type")
+        handler_fn = _STRUCTURED_OPS.get((tool, operation, target_type))
         if handler_fn is None:
+            label = "%s.%s" % (tool, operation)
+            if target_type is not None:
+                label += "(target_type=%s)" % target_type
             _send_json(exchange, 501, {
                 "request_id": request_id,
-                "error": "operation '%s.%s' not yet implemented on the bridge" % (tool, operation),
+                "error": "operation '%s' not yet implemented on the bridge" % label,
             })
             return
 
