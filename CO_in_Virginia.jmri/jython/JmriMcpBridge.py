@@ -327,14 +327,127 @@ def _jmri_logs_get_last_error(payload):
     return {"found": True, "lines": entry_lines}
 
 
+# --- jmri_introspect's list_* operations ---------------------------------
+# Bridge-side pagination: jmri_mcp_server.py forwards `limit`/`offset` as
+# hints (see its jmri_introspect docstring) and, once an operation is
+# implemented here, this is what actually owns honoring them -- strictly
+# better than fetching the whole object graph over HTTP just to slice it
+# client-side.
+def _paginate(items, payload):
+    limit = payload.get("limit")
+    offset = payload.get("offset") or 0
+    total = len(items)
+    page = items[offset:] if limit is None else items[offset:offset + limit]
+    next_offset = offset + len(page)
+    return {
+        "items": page,
+        "total": total,
+        "count": len(page),
+        "offset": offset,
+        "has_more": next_offset < total,
+        "next_offset": next_offset if next_offset < total else None,
+    }
+
+
+def _list_signal_masts(payload):
+    """Live-confirmed 2026-09-22 against a real registered VirtualSignalMast
+    (created and deregistered again for the test -- see jmri-mcp's commit
+    history) -- getSystemName/getUserName/getClass/getAspect all round-
+    tripped correctly, including the empty-list case (no signal masts
+    configured on this test rig otherwise)."""
+    from jmri import InstanceManager, SignalMastManager
+    masts = InstanceManager.getDefault(SignalMastManager).getNamedBeanSet()
+    items = [
+        {
+            "name": m.getSystemName(),
+            "userName": m.getUserName(),
+            "class": m.getClass().getName(),
+            "aspect": m.getAspect(),
+        }
+        for m in masts
+    ]
+    return _paginate(items, payload)
+
+
+def _list_signal_mast_logic(payload):
+    """Live-confirmed 2026-09-22 against a real, temporarily-created
+    SignalMastLogic pairing two VirtualSignalMasts (created and removed
+    again for the test). SignalMastLogic itself is not a NamedBean (no
+    system/user name of its own) -- identified here by its source mast."""
+    from jmri import InstanceManager, SignalMastLogicManager
+    smls = InstanceManager.getDefault(SignalMastLogicManager).getSignalMastLogicList()
+    items = []
+    for sml in smls:
+        source = sml.getSourceMast()
+        items.append({
+            "source": source.getSystemName() if source else None,
+            "destinations": [
+                {"name": d.getSystemName(), "enabled": sml.isEnabled(d)}
+                for d in sml.getDestinationList()
+            ],
+        })
+    return _paginate(items, payload)
+
+
+def _list_sections(payload):
+    """Live-confirmed 2026-09-22 against a real, temporarily-created
+    Section spanning two real Blocks from this layout (created and deleted
+    again for the test) -- getSectionType() (a Java enum) stringifies via
+    Jython's str() to its plain name (e.g. "USERDEFINED"), confirmed
+    empirically rather than assumed."""
+    from jmri import InstanceManager, SectionManager
+    sections = InstanceManager.getDefault(SectionManager).getNamedBeanSet()
+    items = [
+        {
+            "name": s.getSystemName(),
+            "userName": s.getUserName(),
+            "sectionType": str(s.getSectionType()),
+            "blocks": [b.getSystemName() for b in s.getBlockList()],
+        }
+        for s in sections
+    ]
+    return _paginate(items, payload)
+
+
+def _list_transits(payload):
+    """Live-confirmed 2026-09-22 against a real, temporarily-created
+    Transit containing one TransitSection (created and deleted again for
+    the test). Note TransitSection.getSectionName() returns JMRI's own
+    formatted "system(username)" string when the Section has a user name,
+    not a bare system name -- confirmed empirically, passed through as-is
+    rather than reformatted."""
+    from jmri import InstanceManager, TransitManager
+    transits = InstanceManager.getDefault(TransitManager).getNamedBeanSet()
+    items = [
+        {
+            "name": t.getSystemName(),
+            "userName": t.getUserName(),
+            "sections": [
+                {
+                    "name": ts.getSectionName(),
+                    "sequenceNumber": ts.getSequenceNumber(),
+                    "direction": ts.getDirection(),
+                }
+                for ts in t.getTransitSectionList()
+            ],
+        }
+        for t in transits
+    ]
+    return _paginate(items, payload)
+
+
 # Structured (tool, operation) pairs this bridge actually implements.
-# Everything else -- jmri_introspect's other operations, jmri_authoring,
+# Everything else -- jmri_introspect's get_panel_structure, jmri_authoring,
 # jmri_logixng -- returns a clear "not yet implemented" error rather than
 # a fabricated JMRI API call I'm not confident about. See jmri-mcp's
 # TOOLS.md status legend; these get filled in incrementally, each
 # validated against this live instance before being trusted.
 _STRUCTURED_OPS = {
     ("jmri_introspect", "describe_class"): lambda payload: _describe_class(payload["class_name"]),
+    ("jmri_introspect", "list_signal_masts"): _list_signal_masts,
+    ("jmri_introspect", "list_signal_mast_logic"): _list_signal_mast_logic,
+    ("jmri_introspect", "list_sections"): _list_sections,
+    ("jmri_introspect", "list_transits"): _list_transits,
     ("jmri_logs", "tail"): _jmri_logs_tail,
     ("jmri_logs", "grep"): _jmri_logs_grep,
     ("jmri_logs", "get_last_error"): _jmri_logs_get_last_error,
