@@ -1011,6 +1011,202 @@ def _authoring_create_test_oval(payload):
     return ThreadingUtil.runOnGUIwithReturn(build)
 
 
+def _authoring_create_test_double_oval(payload):
+    """Builds a synthetic double-oval test layout -- two concentric
+    rectangular loops (outer, inner) joined by two real LayoutRHXOver
+    crossovers, one on the north side and one on the south side --
+    entirely in-memory on a freshly-created LayoutEditor panel, so
+    jmri-mcp development/testing has a known, simple, fully-understood
+    fixture for exercising route/transit/signal-mast placement without
+    touching this profile's real layout panels. Nothing here is ever
+    persisted (no store/save call anywhere in this function).
+
+    This is testOval's actual double-track sibling -- testOval's four
+    crossovers only wire the A-B "through" route, leaving C/D as
+    unconnected stubs (a single loop has nothing for C/D to connect to).
+    Here, both crossovers wire all four legs, so each crossover's own
+    built-in diagonal (per LayoutXOver's javadoc: "A-B and C-D are the
+    straight continuing routes, A-C and B-D are the diverging routes; B-C
+    and A-D illegal") does real work -- it's what lets a train actually
+    move between the outer and inner loop. LayoutRHXOver's one physical
+    diagonal is A-C (confirmed against LayoutXOver.java's ASCII-art
+    javadoc: the right-hand crossing runs from A's corner down to C's
+    corner); no separate TrackSegment represents it -- it's inherent to
+    the crossover object itself, exactly like the through route needs no
+    extra track either.
+
+    Geometry: LayoutTurnoutView's coordinate math (rotation 0.0, the
+    default used here, matching LayoutXOver's own "0 degrees lies
+    east-west" convention for both crossovers, since north/south sides
+    run east-west) puts the crossover's A/B connection points at a
+    *smaller* y than its D/C points. So whichever loop's edge sits at the
+    smaller y for a given crossover is the one that has to map to A/B,
+    and the other maps to D/C:
+      - North crossover: the outer loop's north edge has the smaller y
+        (it's further from the shared center than the inner loop's north
+        edge) -- outer maps to A/B, inner maps to D/C.
+      - South crossover: this flips -- the inner loop's south edge has
+        the smaller y there (closer to center than the outer loop's
+        south edge) -- inner maps to A/B, outer maps to D/C.
+    Both crossovers still use rotation=0.0; only which loop's corners
+    feed which connection points changes. West/east (short) sides carry
+    no crossover at all -- just a plain point-to-point TrackSegment per
+    loop, per the "two long sides only" scoping decision (real
+    double-track practice keeps crossovers on tangent track, and it's
+    what keeps this fixture simple rather than symmetric-for-its-own-
+    sake). Each corner anchor ends up with exactly two track connections
+    (one long-side leg, one short-side leg) -- the same two-slot
+    connect1/connect2 pattern testOval's corners already use.
+
+    Each crossover gets its own real Turnout bean on JMRI's Internal
+    connection (system name prefix "IT", via TurnoutManager.
+    provideTurnout) -- same as testOval, a synthetic test fixture must
+    never be able to command real hardware.
+
+    params (all optional): editorName (default "Test Double Oval"),
+    centerX/centerY (default 300/300), outerWidth/outerHeight (default
+    500/400, pixels), gap (default 100, pixels -- the outer-to-inner
+    spacing on every side). innerWidth/innerHeight are derived as
+    outerWidth/outerHeight minus 2*gap and must come out positive --
+    e.g. the defaults above give a 300x200 inner loop."""
+    from java.awt.geom import Point2D
+    from jmri import InstanceManager
+    from jmri.jmrit.display.layoutEditor import (
+        LayoutEditor, LayoutRHXOver, LayoutRHXOverView,
+        TrackSegment, TrackSegmentView, HitPointType,
+    )
+    from jmri.util import ThreadingUtil
+    import uuid as _uuid
+
+    params = payload.get("params") or {}
+    editor_name = params.get("editorName") or "Test Double Oval"
+    center_x = float(params.get("centerX", 300.0))
+    center_y = float(params.get("centerY", 300.0))
+    outer_width = float(params.get("outerWidth", 500.0))
+    outer_height = float(params.get("outerHeight", 400.0))
+    gap = float(params.get("gap", 100.0))
+    if outer_width <= 0 or outer_height <= 0:
+        raise ValueError("testDoubleOval create requires outerWidth > 0 and outerHeight > 0")
+    if gap <= 0:
+        raise ValueError("testDoubleOval create requires gap > 0")
+    inner_width = outer_width - 2.0 * gap
+    inner_height = outer_height - 2.0 * gap
+    if inner_width <= 0 or inner_height <= 0:
+        raise ValueError(
+            "testDoubleOval create requires gap small enough that the inner "
+            "loop stays positive-sized (outerWidth - 2*gap and outerHeight - "
+            "2*gap must both be > 0)"
+        )
+
+    outer_half_w, outer_half_h = outer_width / 2.0, outer_height / 2.0
+    inner_half_w, inner_half_h = inner_width / 2.0, inner_height / 2.0
+    suffix = _uuid.uuid4().hex[:6]
+
+    def build():
+        editor = LayoutEditor(editor_name)
+        editor.setVisible(True)
+
+        turnout_mgr = InstanceManager.turnoutManagerInstance()
+
+        def anchor(x, y):
+            return editor.addAnchor(Point2D.Double(x, y))
+
+        outer = {
+            "NW": anchor(center_x - outer_half_w, center_y - outer_half_h),
+            "NE": anchor(center_x + outer_half_w, center_y - outer_half_h),
+            "SE": anchor(center_x + outer_half_w, center_y + outer_half_h),
+            "SW": anchor(center_x - outer_half_w, center_y + outer_half_h),
+        }
+        inner = {
+            "NW": anchor(center_x - inner_half_w, center_y - inner_half_h),
+            "NE": anchor(center_x + inner_half_w, center_y - inner_half_h),
+            "SE": anchor(center_x + inner_half_w, center_y + inner_half_h),
+            "SW": anchor(center_x - inner_half_w, center_y + inner_half_h),
+        }
+
+        seg_counter = [0]
+
+        def add_segment(id_prefix, c1, t1, c2, t2):
+            seg_counter[0] += 1
+            seg = TrackSegment("%s%d" % (id_prefix, seg_counter[0]), c1, t1, c2, t2, True, editor)
+            seg_view = TrackSegmentView(seg, editor)
+            editor.addLayoutTrack(seg, seg_view)
+            return seg
+
+        def make_crossover(name_suffix, center_point, ab_pair, dc_pair):
+            # ab_pair/dc_pair: (west_anchor, east_anchor) for whichever
+            # loop maps to this crossover's A/B row vs D/C row -- see the
+            # docstring above for which loop that is on which side.
+            turnout_name = "ITTestDblOval%s%s" % (suffix, name_suffix)
+            turnout = turnout_mgr.provideTurnout(turnout_name)
+
+            xover_id = "X%s%s" % (suffix, name_suffix)
+            xover = LayoutRHXOver(xover_id, editor)
+            xover_view = LayoutRHXOverView(xover, center_point, 0.0, 1.0, 1.0, editor)
+            editor.addLayoutTrack(xover, xover_view)
+            xover.setTurnout(turnout.getSystemName())
+
+            ab_w, ab_e = ab_pair
+            dc_w, dc_e = dc_pair
+
+            seg_a = add_segment("T%sA" % name_suffix, ab_w, HitPointType.POS_POINT, xover, HitPointType.TURNOUT_A)
+            ab_w.setTrackConnection(seg_a)
+            xover.setConnectA(seg_a, HitPointType.TRACK)
+
+            seg_b = add_segment("T%sB" % name_suffix, xover, HitPointType.TURNOUT_B, ab_e, HitPointType.POS_POINT)
+            ab_e.setTrackConnection(seg_b)
+            xover.setConnectB(seg_b, HitPointType.TRACK)
+
+            seg_d = add_segment("T%sD" % name_suffix, dc_w, HitPointType.POS_POINT, xover, HitPointType.TURNOUT_D)
+            dc_w.setTrackConnection(seg_d)
+            xover.setConnectD(seg_d, HitPointType.TRACK)
+
+            seg_c = add_segment("T%sC" % name_suffix, xover, HitPointType.TURNOUT_C, dc_e, HitPointType.POS_POINT)
+            dc_e.setTrackConnection(seg_c)
+            xover.setConnectC(seg_c, HitPointType.TRACK)
+
+            return {"id": xover.getId(), "turnout": turnout.getSystemName()}
+
+        # North side: outer's edge has the smaller y here -> outer is A/B.
+        north_center = Point2D.Double(
+            center_x, ((center_y - outer_half_h) + (center_y - inner_half_h)) / 2.0
+        )
+        north_xover = make_crossover(
+            "N", north_center, (outer["NW"], outer["NE"]), (inner["NW"], inner["NE"])
+        )
+
+        # South side: flips -- inner's edge has the smaller y here.
+        south_center = Point2D.Double(
+            center_x, ((center_y + inner_half_h) + (center_y + outer_half_h)) / 2.0
+        )
+        south_xover = make_crossover(
+            "S", south_center, (inner["SW"], inner["SE"]), (outer["SW"], outer["SE"])
+        )
+
+        def add_plain_side(id_prefix, corner_1, corner_2):
+            seg = add_segment(id_prefix, corner_1, HitPointType.POS_POINT, corner_2, HitPointType.POS_POINT)
+            corner_1.setTrackConnection(seg)
+            corner_2.setTrackConnection(seg)
+            return seg
+
+        add_plain_side("OuterW", outer["NW"], outer["SW"])
+        add_plain_side("OuterE", outer["NE"], outer["SE"])
+        add_plain_side("InnerW", inner["NW"], inner["SW"])
+        add_plain_side("InnerE", inner["NE"], inner["SE"])
+
+        editor.setDirty()
+
+        return {
+            "editorName": editor.getName(),
+            "outerCorners": dict((k, v.getId()) for k, v in outer.items()),
+            "innerCorners": dict((k, v.getId()) for k, v in inner.items()),
+            "crossovers": {"N": north_xover, "S": south_xover},
+            "trackCount": len(list(editor.getLayoutTracks())),
+        }
+
+    return ThreadingUtil.runOnGUIwithReturn(build)
+
+
 def _authoring_connection_discover(payload):
     """Runs JMRI's "SML Discover" (automaticallyDiscoverSignallingPairs()).
     Requires Advanced Layout Block Routing already enabled and its routing
@@ -1110,6 +1306,7 @@ _STRUCTURED_OPS = {
     ("jmri_authoring", "create", "section"): _authoring_create_section,
     ("jmri_authoring", "create", "transit"): _authoring_create_transit,
     ("jmri_authoring", "create", "testOval"): _authoring_create_test_oval,
+    ("jmri_authoring", "create", "testDoubleOval"): _authoring_create_test_double_oval,
     ("jmri_authoring", "discover", "connection"): _authoring_connection_discover,
     ("jmri_authoring", "generateSections", "connection"): _authoring_connection_generate_sections,
     ("jmri_logs", "tail", None): _jmri_logs_tail,
