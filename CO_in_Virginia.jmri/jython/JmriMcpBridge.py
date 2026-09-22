@@ -19,12 +19,13 @@
 
 import json
 import os
+import re
 import traceback as _traceback
 
 import jarray
 from java.io import ByteArrayOutputStream, PrintWriter, StringWriter
 from java.lang import String as JString
-from java.lang import Throwable
+from java.lang import System, Throwable
 from java.net import InetSocketAddress
 from java.security import SecureRandom
 from com.sun.net.httpserver import HttpHandler, HttpServer
@@ -242,14 +243,101 @@ def _describe_class(class_name):
     }
 
 
+# --- jmri_logs ----------------------------------------------------------
+# JMRI's own log4j2 config (default_lcf.xml) writes session.log/
+# messages.log to ${sys:jmri.log.path} -- the Java system property is the
+# only portable source of truth for this directory (confirmed live
+# 2026-09-22: matches the open file descriptors of the actual running
+# JMRI process on this machine, and is NOT the profile directory -- log
+# files are shared across all profiles run under this JMRI install, not
+# per-profile). jmri.util.FileUtil has no equivalent "logs:" alias.
+
+# Every log line JMRI itself writes starts with an ISO8601-ish timestamp
+# (log4j2's ISO8601 pattern actually renders as "2026-09-21T21:53:13,486",
+# confirmed against the real session.log -- NOT "yyyy-MM-dd HH:mm:ss,SSS"
+# with a space, which is what the pattern's own name would suggest),
+# followed by the padded/truncated logger-name field (%-37.37c{2}), then
+# the level field (%-5p), then " - ", then the message. A stack-trace
+# continuation line never starts this way, so this regex doubles as
+# "does this line start a new log entry" for get_last_error's multi-line
+# capture below. `\S+` for the logger-name field relies on class names
+# never containing whitespace -- true for every JMRI/Java class name.
+_LOG_ENTRY_RE = re.compile(r"^(\S+)\s+\S+\s+([A-Z]+)\s*-\s")
+
+
+def _log_file_path(file_name):
+    """Resolve a bare JMRI log filename to its absolute path. Defense in
+    depth against path traversal even though jmri_mcp_server.py already
+    validates `file` is a bare filename before this bridge ever sees a
+    request -- this script has no other caller today, but nothing
+    structurally prevents one, and this check is nearly free."""
+    if "/" in file_name or "\\" in file_name or ".." in file_name:
+        raise ValueError("file must be a bare filename, got %r" % (file_name,))
+    log_dir = System.getProperty("jmri.log.path")
+    if not log_dir:
+        raise ValueError("jmri.log.path system property is not set -- cannot locate JMRI's log directory")
+    return os.path.join(log_dir, file_name)
+
+
+def _read_log_lines(file_name):
+    path = _log_file_path(file_name)
+    if not os.path.exists(path):
+        raise ValueError("log file %r does not exist at %s" % (file_name, path))
+    f = open(path, "r")
+    try:
+        return f.readlines()
+    finally:
+        f.close()
+
+
+def _jmri_logs_tail(payload):
+    n = payload.get("lines") or 200
+    lines = _read_log_lines(payload["file"])
+    tail = lines[-n:] if n > 0 else []
+    return {"lines": [line.rstrip("\r\n") for line in tail]}
+
+
+def _jmri_logs_grep(payload):
+    pattern = payload.get("pattern")
+    if not pattern:
+        raise ValueError("grep requires a non-empty `pattern` (a regex, searched per-line)")
+    regex = re.compile(pattern)
+    lines = _read_log_lines(payload["file"])
+    matches = [line.rstrip("\r\n") for line in lines if regex.search(line)]
+    return {"lines": matches}
+
+
+def _jmri_logs_get_last_error(payload):
+    """Most recent ERROR (or FATAL) log entry, including any stack-trace
+    continuation lines that followed it -- not just its first line, since
+    a bare first line without the trace is rarely the useful part."""
+    lines = _read_log_lines(payload["file"])
+    start_index = None
+    for i in range(len(lines) - 1, -1, -1):
+        m = _LOG_ENTRY_RE.match(lines[i])
+        if m and m.group(2) in ("ERROR", "FATAL"):
+            start_index = i
+            break
+    if start_index is None:
+        return {"found": False}
+    end_index = start_index + 1
+    while end_index < len(lines) and not _LOG_ENTRY_RE.match(lines[end_index]):
+        end_index += 1
+    entry_lines = [line.rstrip("\r\n") for line in lines[start_index:end_index]]
+    return {"found": True, "lines": entry_lines}
+
+
 # Structured (tool, operation) pairs this bridge actually implements.
 # Everything else -- jmri_introspect's other operations, jmri_authoring,
-# jmri_logixng, jmri_logs -- returns a clear "not yet implemented" error
-# rather than a fabricated JMRI API call I'm not confident about. See
-# jmri-mcp's TOOLS.md status legend; these get filled in incrementally,
-# each validated against this live instance before being trusted.
+# jmri_logixng -- returns a clear "not yet implemented" error rather than
+# a fabricated JMRI API call I'm not confident about. See jmri-mcp's
+# TOOLS.md status legend; these get filled in incrementally, each
+# validated against this live instance before being trusted.
 _STRUCTURED_OPS = {
     ("jmri_introspect", "describe_class"): lambda payload: _describe_class(payload["class_name"]),
+    ("jmri_logs", "tail"): _jmri_logs_tail,
+    ("jmri_logs", "grep"): _jmri_logs_grep,
+    ("jmri_logs", "get_last_error"): _jmri_logs_get_last_error,
 }
 
 
