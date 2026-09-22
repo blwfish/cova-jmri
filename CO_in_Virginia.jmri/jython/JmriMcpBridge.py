@@ -613,30 +613,54 @@ def _logixng_disable(payload):
 
 
 # --- jmri_authoring --------------------------------------------------------
-# Four of the six target_types the client accepts (see jmri-mcp's TOOLS.md):
-# signalMast, block, section, transit. Each "create" recipe below was proven
-# live 2026-09-22 before being trusted, not written speculatively -- see
-# each function's own comment for what that proving caught.
+# Five of the six target_types the client accepts (see jmri-mcp's TOOLS.md):
+# signalMast, block, section, transit, connection. Each recipe below was
+# proven live before being trusted, not written speculatively -- see each
+# function's own comment for what that proving caught.
 #
-# Deliberately NOT implemented here, and not planned as a quick follow-on:
+# connection's two operations (discover/generateSections, added 2026-09-25)
+# needed a real correction to this project's own earlier assessment: reading
+# SignalMastLogicManager.automaticallyDiscoverSignallingPairs()'s actual
+# source shows no Swing/AWT calls anywhere in it -- it's pure model-layer
+# graph traversal. The EDT-marshaling risk flagged in AGENT-DEBUGGING.md's
+# "hangs or crashes JMRI's UI" section is real, but specific to JMRI's own
+# GUI wrapper (SignalMastLogicTableAction, which marshals its OWN table-view
+# refresh and dialog back onto the EDT via SwingUtilities.invokeAndWait) --
+# a headless bridge call has no table view or dialog to refresh, so that
+# part of the GUI's flow doesn't apply here. Confirmed live 2026-09-25:
+# calling automaticallyDiscoverSignallingPairs() directly from this bridge's
+# HTTP-worker-thread handler completed synchronously with no hang, both
+# with zero signal masts configured (a safe no-op) and with two real
+# VirtualSignalMasts temporarily attached to real PositionablePoints on this
+# rig's "C&O in Virginia" panel.
 #
-# - target_type="connection" (JMRI's "SML Discover" --
-#   SignalMastLogicManager.automaticallyDiscoverSignallingPairs()) and the
-#   companion "Generate Sections" (DefaultSignalMastLogicManager.
-#   generateSection() / SectionManager.generateBlockSections()): JMRI's own
-#   GUI action (SignalMastLogicTableAction) runs discovery on a background
-#   thread specifically because "this process can take some time", then
-#   marshals the follow-up work (table update, optional section generation)
-#   back onto the EDT via SwingUtilities.invokeAndWait. That's exactly the
-#   open, documented EDT-marshaling risk in AGENT-DEBUGGING.md's "hangs or
-#   crashes JMRI's UI" section -- this bridge's handler runs on a plain HTTP
-#   worker thread, not the EDT, and that gap is not resolved. Also unlike
-#   signalMast/block/section/transit create, there was no way to responsibly
-#   validate this live: it needs real Layout Editor connectivity (blocks
-#   wired into TrackSegments with signal masts facing them) that this test
-#   rig's panels don't have configured, and fabricating a credible test
-#   fixture for that is a substantially bigger undertaking than anything
-#   else proven today.
+# What DOES gate discover: it requires JMRI's "Advanced Layout Block
+# Routing" preference enabled first (LayoutBlockManager.
+# isAdvancedRoutingEnabled()) and its routing tables to have finished a
+# background stabilisation pass (routingStablised()) -- confirmed live,
+# ~3 seconds after enabling on this rig's ~200-element layout. This is a
+# real, layout-wide, non-trivial toggle (kicks off a background routing
+# computation over every block) -- deliberately NOT auto-enabled by
+# discover itself; it's the caller's explicit choice via jmri_run_jython,
+# with a clear error here if it hasn't been done. generateSections'
+# generateBlockSections() does NOT share this precondition, confirmed by
+# testing it both with and without Advanced Routing enabled and getting
+# identical, correct results both times (it depends on each LayoutBlock's
+# already-populated throughPaths list, not the advanced-routing-specific
+# multi-hop tables) -- an initial theory that it needed the same
+# precondition turned out to be wrong once actually tested, not assumed.
+#
+# Getting automaticallyDiscoverSignallingPairs() to find a genuine
+# mast-to-mast pair (rather than a mast with an empty destination list, its
+# own valid "found nothing reachable from here" result) needs signal masts
+# positioned at real block-boundary PositionablePoints with facing
+# directions this project didn't fully reverse-engineer -- not needed to
+# validate that the operation itself is safe to expose, since a caller
+# who's actually placed masts via jmri_run_jython/JMRI's own GUI has
+# already solved that part.
+#
+# Deliberately NOT implemented, and not planned as a quick follow-on:
+#
 # - target_type="preference": TOOLS.md/the client's own docstring name this
 #   as a valid target_type value but never specify what operation it's for
 #   -- there is nothing concrete here to implement without inventing scope
@@ -836,15 +860,88 @@ def _authoring_create_transit(payload):
     }
 
 
+def _authoring_connection_discover(payload):
+    """Runs JMRI's "SML Discover" (automaticallyDiscoverSignallingPairs()).
+    Requires Advanced Layout Block Routing already enabled and its routing
+    tables already stabilised -- checked explicitly here rather than
+    silently enabling it, since that's an invasive, layout-wide toggle with
+    its own background computation this operation shouldn't trigger as a
+    side effect. See this module's jmri_authoring section comment for what
+    live-testing this confirmed and corrected from an earlier assessment."""
+    from jmri import InstanceManager, SignalMastLogicManager
+    from jmri.jmrit.display.layoutEditor import LayoutBlockManager
+
+    lbm = InstanceManager.getDefault(LayoutBlockManager)
+    if not lbm.isAdvancedRoutingEnabled():
+        raise ValueError(
+            "Advanced Layout Block Routing is not enabled -- required for signal mast logic "
+            "discovery. Enable it first, e.g. via jmri_run_jython: InstanceManager.getDefault"
+            "(jmri.jmrit.display.layoutEditor.LayoutBlockManager).enableAdvancedRouting(True), "
+            "then wait for routingStablised() to become True before calling discover."
+        )
+    if not lbm.routingStablised():
+        raise ValueError(
+            "layout block routing has not stabilised yet after enabling Advanced Routing -- "
+            "wait a few seconds (confirmed ~3s on this test rig's layout) and retry."
+        )
+
+    mgr = InstanceManager.getDefault(SignalMastLogicManager)
+    mgr.automaticallyDiscoverSignallingPairs()
+    smls = mgr.getSignalMastLogicList()
+    return {
+        "signalMastLogicCount": len(smls),
+        "pairs": [
+            {
+                "source": sml.getSourceMast().getSystemName() if sml.getSourceMast() else None,
+                "destinations": [d.getSystemName() for d in sml.getDestinationList()],
+            }
+            for sml in smls
+        ],
+    }
+
+
+def _authoring_connection_generate_sections(payload):
+    """Runs JMRI's "Generate Sections" -- SignalMastLogicManager.
+    generateSection() (Sections from discovered SML pairs) AND
+    SectionManager.generateBlockSections() (Sections for stub/siding
+    blocks) together, matching how JMRI's own GUI action invokes them as
+    one combined step, not separately. Unlike discover, this does NOT
+    require Advanced Routing enabled -- confirmed live by running it both
+    with and without, getting identical, correct real Section data both
+    times (an initial assumption that it shared discover's precondition
+    turned out to be wrong once actually tested)."""
+    from jmri import InstanceManager, SignalMastLogicManager, SectionManager
+
+    sm = InstanceManager.getDefault(SectionManager)
+    before = set(s.getSystemName() for s in sm.getNamedBeanSet())
+
+    InstanceManager.getDefault(SignalMastLogicManager).generateSection()
+    sm.generateBlockSections()
+
+    after = sm.getNamedBeanSet()
+    created = [s for s in after if s.getSystemName() not in before]
+    return {
+        "created": [
+            {
+                "name": s.getSystemName(),
+                "userName": s.getUserName(),
+                "blocks": [b.getSystemName() for b in s.getBlockList()],
+            }
+            for s in created
+        ],
+        "totalSections": len(after),
+    }
+
+
 # Structured (tool, operation, target_type) tuples this bridge actually
 # implements -- target_type is None for every tool except jmri_authoring,
 # which is the only one with that extra dimension (see _handle's own
-# comment). Everything else -- jmri_authoring's connection/preference
-# target_types (see that section's own comment above for why) -- returns a
-# clear "not yet implemented" error rather than a fabricated JMRI API call
-# I'm not confident about. See jmri-mcp's TOOLS.md status legend; these get
-# filled in incrementally, each validated against this live instance before
-# being trusted.
+# comment). Everything else -- jmri_authoring's preference target_type
+# (see that section's own comment above for why) -- returns a clear "not
+# yet implemented" error rather than a fabricated JMRI API call I'm not
+# confident about. See jmri-mcp's TOOLS.md status legend; these get filled
+# in incrementally, each validated against this live instance before being
+# trusted.
 _STRUCTURED_OPS = {
     ("jmri_introspect", "describe_class", None): lambda payload: _describe_class(payload["class_name"]),
     ("jmri_introspect", "get_panel_structure", None): _get_panel_structure,
@@ -861,6 +958,8 @@ _STRUCTURED_OPS = {
     ("jmri_authoring", "create", "block"): _authoring_create_block,
     ("jmri_authoring", "create", "section"): _authoring_create_section,
     ("jmri_authoring", "create", "transit"): _authoring_create_transit,
+    ("jmri_authoring", "discover", "connection"): _authoring_connection_discover,
+    ("jmri_authoring", "generateSections", "connection"): _authoring_connection_generate_sections,
     ("jmri_logs", "tail", None): _jmri_logs_tail,
     ("jmri_logs", "grep", None): _jmri_logs_grep,
     ("jmri_logs", "get_last_error", None): _jmri_logs_get_last_error,
