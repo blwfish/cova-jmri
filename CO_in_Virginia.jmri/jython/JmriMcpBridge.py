@@ -5,14 +5,12 @@
 # jmri.script.JmriScriptEngineManager, returning stdout/result/traceback
 # as the synchronous HTTP response body.
 #
-# STATUS: unwired. Not yet added to profile.xml's <startup> block -- see
-# jmri-mcp's design spec, Next Steps 2-4. NOT YET LIVE-TESTED. Several
-# JMRI-API calls below are best-effort, not confirmed against a running
-# JVM -- each is flagged inline with "TESTME" where the spec's own
-# Unknowns section already calls this out as needing empirical proving
-# (particularly: does JmriScriptEngineManager expose getEngineByName, and
-# under what name; does an exception in a submitted script crash just
-# this request, this thread, or the JVM).
+# STATUS: wired into the CO_in_Virginia.jmri test-rig profile.xml's
+# <startup> block, third entry, enabled="yes" -- see jmri-mcp's design
+# spec, Next Steps 2-4. Live-testing in progress; some JMRI-API calls
+# below are still best-effort/TESTME pending confirmation against a real
+# submitted script (particularly: does JmriScriptEngineManager expose
+# getEngineByName, and under what name).
 #
 # Carries forward jmri_throttle_bridge.py's conventions (confirmed during
 # the spec review pass): request_id correlation, reject-and-continue
@@ -26,11 +24,13 @@ import traceback as _traceback
 import jarray
 from java.io import ByteArrayOutputStream, PrintWriter, StringWriter
 from java.lang import String as JString
+from java.lang import Throwable
 from java.net import InetSocketAddress
 from java.security import SecureRandom
 from com.sun.net.httpserver import HttpHandler, HttpServer
 
 from jmri.script import JmriScriptEngineManager
+from jmri.util import FileUtil
 
 # --- Configuration -----------------------------------------------------
 # Loopback-only default: this profile is the local test rig (see
@@ -46,8 +46,16 @@ BIND_PORT = 2059
 # cached at import time) so redeploying this file rotates the token --
 # matches freecad-mcp's Windows-fallback shape (TCP + shared-secret
 # token), except here the token is the primary mechanism, not a fallback.
-_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-TOKEN_PATH = os.path.join(_SCRIPT_DIR, "bridge_token.txt")
+#
+# __file__ is NOT available here -- confirmed empirically: JMRI's
+# PerformScriptModel runs this script's text through
+# JmriScriptEngineManager.eval() rather than a file-load path that would
+# bind __file__, so referencing it raised NameError and crashed the
+# whole startup action before the HTTP server ever came up. Use JMRI's
+# own path-alias resolver instead (the same "preference:" mechanism that
+# already resolved this script's own path in profile.xml) -- portable
+# across users/deployments, not hardcoded to one machine.
+TOKEN_PATH = FileUtil.getDefault().getExternalFilename("preference:jython/bridge_token.txt")
 
 
 def _get_or_create_token():
@@ -120,11 +128,22 @@ def _check_auth(exchange):
 
 
 def _run_jython(script):
-    """TESTME: getEngineByName's exact registered name for Jython under
-    JmriScriptEngineManager is unconfirmed -- "python" is JSR-223's
-    conventional registration name and the most likely candidate, but
-    this needs live confirmation (spec Next Steps #2). If this raises
-    AttributeError/None-engine, that's the first thing to check."""
+    """CONFIRMED live against the real JVM: getEngineByName("python") is
+    the correct registered name -- a plain successful script round-trips
+    stdout/result correctly.
+
+    except (Exception, Throwable), not except Exception alone: confirmed
+    empirically that a script exception propagating out of a NESTED
+    manager.eval() call surfaces as a genuine java.lang.Throwable
+    (javax.script.ScriptException specifically) that Jython's `except
+    Exception` -- and even `except BaseException` -- does NOT match here;
+    it silently falls through both, killing the request with no response
+    and no log output at all (empty-reply-from-server, reproduced and
+    confirmed against the real bridge before this fix). Only catching the
+    concrete Java type, java.lang.Throwable, or a bare `except:` catches
+    it. A native Python error (e.g. ZeroDivisionError raised directly,
+    not through a nested eval) is the opposite case -- Throwable alone
+    does NOT catch that. The combined tuple is required for both."""
     manager = JmriScriptEngineManager.getDefault()
     engine = manager.getEngineByName("python")
     sw = StringWriter()
@@ -135,14 +154,17 @@ def _run_jython(script):
         result = manager.eval(script, engine)
         writer.flush()
         return {"stdout": sw.toString(), "result": _jsonable(result)}
-    except Exception as exc:
+    except (Exception, Throwable) as exc:
         writer.flush()
-        return {
-            "stdout": sw.toString(),
-            "traceback": "%s: %s\n%s" % (
-                type(exc).__name__, exc, _traceback.format_exc(),
-            ),
-        }
+        try:
+            detail = "%s: %s" % (type(exc).__name__, exc)
+        except (Exception, Throwable):
+            detail = "<could not format exception>"
+        try:
+            detail += "\n" + _traceback.format_exc()
+        except (Exception, Throwable):
+            pass
+        return {"stdout": sw.toString(), "traceback": detail}
 
 
 def _jsonable(value):
@@ -166,18 +188,37 @@ def _describe_class(class_name):
     Pure java.lang.Class/reflect calls, no ScriptEngine involved, so this
     doesn't share _run_jython's engine-lookup uncertainty above. Highest
     confidence, lowest risk of the operations here (spec Next Steps #6:
-    "wire describe_class early")."""
+    "wire describe_class early"). Live-tested against
+    jmri.implementation.MatrixSignalMast on the real JVM; confirms
+    setBitsForAspect(String, char[]) -- the exact Unknown this project
+    exists to resolve."""
     from java.lang import Class
-    from java.lang.reflect import Modifier
 
     cls = Class.forName(class_name)
 
     def fmt(t):
-        return t.getName()
+        # Class.getName(t), NOT t.getName() -- confirmed empirically that
+        # Jython auto-boxes a Class instance representing a JDK-wrapped
+        # type (e.g. java.lang.String) into a Python `type` object rather
+        # than leaving it a plain Class instance, at which point
+        # t.getName() resolves to the UNBOUND Class.getName and raises
+        # "TypeError: getName(): expected 1 args; got 0". Calling it
+        # unbound-style with the instance passed explicitly sidesteps
+        # the ambiguity regardless of which way Jython boxed it.
+        return Class.getName(t)
 
+    # Reporting the raw JVM modifier bitmask (java.lang.reflect.Modifier's
+    # own constants: PUBLIC=1, PRIVATE=2, PROTECTED=4, STATIC=8, FINAL=16,
+    # ...) rather than Modifier.toString(int)'s human string --
+    # Modifier.toString(1) returned the literal string "1" here, not
+    # "public", for reasons not yet understood (same family of Jython
+    # overload-resolution surprise as the getName() issue above, but not
+    # chased further since it isn't load-bearing for what this tool is
+    # for). The bitmask is standard JVM spec, not JMRI-specific, and
+    # fully decodable by whoever/whatever reads this response.
     constructors = [
         {
-            "modifiers": Modifier.toString(c.getModifiers()),
+            "modifiers": c.getModifiers(),
             "params": [fmt(p) for p in c.getParameterTypes()],
         }
         for c in cls.getDeclaredConstructors()
@@ -185,7 +226,7 @@ def _describe_class(class_name):
     methods = [
         {
             "name": m.getName(),
-            "modifiers": Modifier.toString(m.getModifiers()),
+            "modifiers": m.getModifiers(),
             "params": [fmt(p) for p in m.getParameterTypes()],
             "returns": fmt(m.getReturnType()),
         }
@@ -194,8 +235,8 @@ def _describe_class(class_name):
     superclass = cls.getSuperclass()
     return {
         "class": class_name,
-        "superclass": superclass.getName() if superclass else None,
-        "interfaces": [i.getName() for i in cls.getInterfaces()],
+        "superclass": fmt(superclass) if superclass else None,
+        "interfaces": [fmt(i) for i in cls.getInterfaces()],
         "constructors": constructors,
         "methods": methods,
     }
@@ -217,17 +258,20 @@ class BridgeHandler(HttpHandler):
         # Defensive: the whole handler is wrapped so an unexpected
         # exception here (not just a submitted-script exception, which
         # _run_jython already catches) reports as a clean 500 instead of
-        # propagating into HttpServer's own thread pool. TESTME (spec
-        # Next Steps #2): confirm this actually holds for a JVM-level
-        # error (StackOverflowError, OutOfMemoryError), not just a
-        # regular Exception -- Jython's `except Exception` may not catch
-        # a java.lang.Error subtype.
+        # propagating into HttpServer's own thread pool. CONFIRMED live:
+        # `except Exception` alone is NOT sufficient here -- a Java
+        # exception surfacing from a nested script eval silently falls
+        # through it (see _run_jython's docstring); this outer net needs
+        # the same (Exception, Throwable) catch to actually be a net.
+        # Still TESTME: a genuine JVM Error (StackOverflowError,
+        # OutOfMemoryError) rather than a Throwable subclass reachable
+        # this way -- not yet deliberately triggered.
         try:
             self._handle(exchange)
-        except Exception as exc:
+        except (Exception, Throwable) as exc:
             try:
                 _send_json(exchange, 500, {"error": "internal bridge error: %s" % exc})
-            except Exception:
+            except (Exception, Throwable):
                 pass
         finally:
             exchange.close()
@@ -268,7 +312,7 @@ class BridgeHandler(HttpHandler):
         try:
             result = handler_fn(payload)
             _send_json(exchange, 200, {"request_id": request_id, "stdout": "", "result": result})
-        except Exception as exc:
+        except (Exception, Throwable) as exc:
             _send_json(exchange, 200, {
                 "request_id": request_id,
                 "stdout": "",
