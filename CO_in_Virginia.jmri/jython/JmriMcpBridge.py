@@ -436,18 +436,110 @@ def _list_transits(payload):
     return _paginate(items, payload)
 
 
+# --- jmri_logixng ---------------------------------------------------------
+# LogixNG has two separate, independent on/off signals, confirmed against
+# JMRI's own actions/EnableLogixNG.java (the built-in action our tool's
+# "enable"/"disable" op names are meant to match): setEnabled(bool) is the
+# persisted "is this in the table at all" flag; setActive(bool) is a
+# separate runtime activate/deactivate toggle. EnableLogixNG's own enum
+# maps its "Enable"/"Disable" choices to setEnabled ONLY -- never touching
+# setActive -- so that's what this bridge's enable/disable operations do
+# too, not some combination of both.
+#
+# isActive() (used for reporting only, never set directly here) is derived:
+# DefaultLogixNG.isActive() = _enabled && _isActive && _manager.isActive().
+# _isActive starts false on a freshly created LogixNG and is set true by
+# activate() (called once by the manager for every LogixNG that already
+# existed when JMRI started, via activateAllLogixNGs() -- confirmed in
+# DefaultLogixNGManager.java). A LogixNG created at runtime (this bridge's
+# "create" op) needs its own explicit activate() call for the same effect,
+# which is exactly the sequence jmri.jmrit.beantable.LogixNGTableAction's
+# own "Add LogixNG" GUI dialog uses -- createLogixNG(...) -> activate() ->
+# setEnabled(true) -> clearStartup() -- replicated here rather than
+# invented, and live-confirmed 2026-09-22 to produce a real, fully active
+# LogixNG (registerListeners()/execute() do run, since setEnabled(true)'s
+# own internal checkIfActiveAndEnabled() only takes effect once isActive()
+# is already true, which needs activate() to have run first).
+def _logixng_info(logixng):
+    return {
+        "name": logixng.getSystemName(),
+        "userName": logixng.getUserName(),
+        "enabled": logixng.isEnabled(),
+        "active": logixng.isActive(),
+        "comment": logixng.getComment(),
+    }
+
+
+def _logixng_manager():
+    from jmri import InstanceManager
+    from jmri.jmrit.logixng import LogixNG_Manager
+    return InstanceManager.getDefault(LogixNG_Manager)
+
+
+def _logixng_list(payload):
+    items = [_logixng_info(l) for l in _logixng_manager().getNamedBeanSet()]
+    return _paginate(items, payload)
+
+
+def _logixng_get(payload):
+    """`name` may be either a system name or a user name -- getLogixNG()
+    tries both (confirmed live), matching JMRI's own usual bean-lookup
+    convention."""
+    name = payload.get("name")
+    logixng = _logixng_manager().getLogixNG(name)
+    if logixng is None:
+        raise ValueError("no LogixNG named %r" % (name,))
+    return _logixng_info(logixng)
+
+
+def _logixng_create(payload):
+    params = payload.get("params") or {}
+    user_name = params.get("userName")
+    if not user_name:
+        raise ValueError("create requires params.userName")
+    system_name = params.get("systemName")
+    mgr = _logixng_manager()
+    logixng = mgr.createLogixNG(system_name, user_name) if system_name else mgr.createLogixNG(user_name)
+    logixng.activate()
+    logixng.setEnabled(True)
+    logixng.clearStartup()
+    return _logixng_info(logixng)
+
+
+def _logixng_set_enabled(payload, enabled):
+    name = payload.get("name")
+    logixng = _logixng_manager().getLogixNG(name)
+    if logixng is None:
+        raise ValueError("no LogixNG named %r" % (name,))
+    logixng.setEnabled(enabled)
+    return _logixng_info(logixng)
+
+
+def _logixng_enable(payload):
+    return _logixng_set_enabled(payload, True)
+
+
+def _logixng_disable(payload):
+    return _logixng_set_enabled(payload, False)
+
+
 # Structured (tool, operation) pairs this bridge actually implements.
-# Everything else -- jmri_introspect's get_panel_structure, jmri_authoring,
-# jmri_logixng -- returns a clear "not yet implemented" error rather than
-# a fabricated JMRI API call I'm not confident about. See jmri-mcp's
-# TOOLS.md status legend; these get filled in incrementally, each
-# validated against this live instance before being trusted.
+# Everything else -- jmri_introspect's get_panel_structure, jmri_authoring
+# -- returns a clear "not yet implemented" error rather than a fabricated
+# JMRI API call I'm not confident about. See jmri-mcp's TOOLS.md status
+# legend; these get filled in incrementally, each validated against this
+# live instance before being trusted.
 _STRUCTURED_OPS = {
     ("jmri_introspect", "describe_class"): lambda payload: _describe_class(payload["class_name"]),
     ("jmri_introspect", "list_signal_masts"): _list_signal_masts,
     ("jmri_introspect", "list_signal_mast_logic"): _list_signal_mast_logic,
     ("jmri_introspect", "list_sections"): _list_sections,
     ("jmri_introspect", "list_transits"): _list_transits,
+    ("jmri_logixng", "list"): _logixng_list,
+    ("jmri_logixng", "get"): _logixng_get,
+    ("jmri_logixng", "create"): _logixng_create,
+    ("jmri_logixng", "enable"): _logixng_enable,
+    ("jmri_logixng", "disable"): _logixng_disable,
     ("jmri_logs", "tail"): _jmri_logs_tail,
     ("jmri_logs", "grep"): _jmri_logs_grep,
     ("jmri_logs", "get_last_error"): _jmri_logs_get_last_error,
