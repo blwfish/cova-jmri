@@ -123,6 +123,7 @@
             <property name="systemPrefix" value=""/>
         </perform>
         <perform xmlns="" class="jmri.util.startup.configurexml.PerformFileModelXml" enabled="no" name="preference:Gville-arsenal.xml" type="XmlFile"/>
+        <perform xmlns="" class="jmri.util.startup.configurexml.PerformFileModelXml" enabled="no" name="preference:TestDoubleOval.xml" type="XmlFile"/>
         <perform xmlns="" class="jmri.util.startup.configurexml.PerformScriptModelXml" enabled="no" name="home:speed-cal/jmri/jmri_throttle_bridge.py" type="ScriptFile"/>
         <perform xmlns="" class="jmri.util.startup.configurexml.PerformScriptModelXml" enabled="no" name="home:speed-cal/jmri/jmri_start_viewer.py" type="ScriptFile"/>
         <perform xmlns="" class="jmri.util.startup.configurexml.PerformScriptModelXml" enabled="yes" name="preference:jython/JmriMcpBridge.py" type="ScriptFile"/>
