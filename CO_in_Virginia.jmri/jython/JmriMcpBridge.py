@@ -902,12 +902,24 @@ def _authoring_create_test_oval(payload):
     contention -- the wrapper costs nothing measurable, so there's no
     reason to skip it.
 
-    Each of the four crossovers gets its own real Turnout bean on JMRI's
+    Each of the four crossovers gets TWO real Turnout beans on JMRI's
     Internal connection (system name prefix "IT", via
     TurnoutManager.provideTurnout) -- a synthetic test fixture must never
     be able to command real hardware, even by accident, so this
     deliberately avoids whatever connection(s) this profile's real layout
-    uses (LCC/MQTT/SPROG DCC, none of them "I").
+    uses (LCC/MQTT/SPROG DCC, none of them "I"). Two beans per crossover,
+    not one, because that's what an RH/LH single crossover actually is
+    prototypically: two switch points (one where the diagonal departs the
+    first track, one where it rejoins the second -- see the two `**`
+    marks in LayoutXOver.java's own ASCII-art javadoc), which is exactly
+    what LayoutTurnout's optional secondTurnoutName field
+    (setSecondTurnout()) exists to represent. A caller building this for
+    real would need two physical turnouts and two servos/Tortoises, not
+    one -- confirmed against the user's own FastTracks-built-turnout
+    workflow 2026-09-23. setTurnout() binds the first (A/B side),
+    setSecondTurnout() the second (C/D side); secondTurnoutInverted is
+    left at its default (False), matching the common case where both
+    switch points move in lockstep as one commanded crossover throw.
 
     Only the A-B "through" route of each RH crossover is wired into the
     loop (per LayoutXOver.java's own javadoc: A-B and C-D are the straight
@@ -982,12 +994,15 @@ def _authoring_create_test_oval(payload):
         for side_name, corner_a, corner_b, center_point, rotation in sides:
             turnout_name = "ITTestOval%s%s" % (suffix, side_name)
             turnout = turnout_mgr.provideTurnout(turnout_name)
+            second_turnout_name = "ITTestOval%s%s2" % (suffix, side_name)
+            second_turnout = turnout_mgr.provideTurnout(second_turnout_name)
 
             xover_id = "X%s%s" % (suffix, side_name)
             xover = LayoutRHXOver(xover_id, editor)
             xover_view = LayoutRHXOverView(xover, center_point, rotation, 1.0, 1.0, editor)
             editor.addLayoutTrack(xover, xover_view)
             xover.setTurnout(turnout.getSystemName())
+            xover.setSecondTurnout(second_turnout.getSystemName())
 
             seg_a = add_segment("T%s" % side_name, corner_a, HitPointType.POS_POINT, xover, HitPointType.TURNOUT_A)
             corner_a.setTrackConnection(seg_a)
@@ -997,7 +1012,11 @@ def _authoring_create_test_oval(payload):
             corner_b.setTrackConnection(seg_b)
             xover.setConnectB(seg_b, HitPointType.TRACK)
 
-            xovers[side_name] = {"id": xover.getId(), "turnout": turnout.getSystemName()}
+            xovers[side_name] = {
+                "id": xover.getId(),
+                "turnout": turnout.getSystemName(),
+                "secondTurnout": second_turnout.getSystemName(),
+            }
 
         editor.setDirty()
 
@@ -1058,10 +1077,17 @@ def _authoring_create_test_double_oval(payload):
     (one long-side leg, one short-side leg) -- the same two-slot
     connect1/connect2 pattern testOval's corners already use.
 
-    Each crossover gets its own real Turnout bean on JMRI's Internal
+    Each crossover gets TWO real Turnout beans on JMRI's Internal
     connection (system name prefix "IT", via TurnoutManager.
     provideTurnout) -- same as testOval, a synthetic test fixture must
-    never be able to command real hardware.
+    never be able to command real hardware. Two beans per crossover, not
+    one, because that's what an RH/LH single crossover actually is
+    prototypically: two switch points (one on each of the two parallel
+    tracks it joins), which is exactly what LayoutTurnout's optional
+    secondTurnoutName field (setSecondTurnout()) exists to represent --
+    setTurnout() binds the A/B-row switch point, setSecondTurnout() the
+    D/C-row one. A caller building this for real would need two physical
+    turnouts and two servos/Tortoises per crossover, not one.
 
     params (all optional): editorName (default "Test Double Oval"),
     centerX/centerY (default 300/300), outerWidth/outerHeight (default
@@ -1139,12 +1165,15 @@ def _authoring_create_test_double_oval(payload):
             # docstring above for which loop that is on which side.
             turnout_name = "ITTestDblOval%s%s" % (suffix, name_suffix)
             turnout = turnout_mgr.provideTurnout(turnout_name)
+            second_turnout_name = "ITTestDblOval%s%s2" % (suffix, name_suffix)
+            second_turnout = turnout_mgr.provideTurnout(second_turnout_name)
 
             xover_id = "X%s%s" % (suffix, name_suffix)
             xover = LayoutRHXOver(xover_id, editor)
             xover_view = LayoutRHXOverView(xover, center_point, 0.0, 1.0, 1.0, editor)
             editor.addLayoutTrack(xover, xover_view)
             xover.setTurnout(turnout.getSystemName())
+            xover.setSecondTurnout(second_turnout.getSystemName())
 
             ab_w, ab_e = ab_pair
             dc_w, dc_e = dc_pair
@@ -1165,7 +1194,11 @@ def _authoring_create_test_double_oval(payload):
             dc_e.setTrackConnection(seg_c)
             xover.setConnectC(seg_c, HitPointType.TRACK)
 
-            return {"id": xover.getId(), "turnout": turnout.getSystemName()}
+            return {
+                "id": xover.getId(),
+                "turnout": turnout.getSystemName(),
+                "secondTurnout": second_turnout.getSystemName(),
+            }
 
         # North side: outer's edge has the smaller y here -> outer is A/B.
         north_center = Point2D.Double(

@@ -22,14 +22,20 @@
     <defaultclosedspeed>Normal</defaultclosedspeed>
     <defaultthrownspeed>Restricted</defaultthrownspeed>
     <turnout feedback="DIRECT" inverted="false" automate="Off">
-      <systemName>ITTestDblOvalaffd7bN</systemName>
+      <systemName>ITTestDblOval1c1849N</systemName>
     </turnout>
     <turnout feedback="DIRECT" inverted="false" automate="Off">
-      <systemName>ITTestDblOvalaffd7bS</systemName>
+      <systemName>ITTestDblOval1c1849N2</systemName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>ITTestDblOval1c1849S</systemName>
+    </turnout>
+    <turnout feedback="DIRECT" inverted="false" automate="Off">
+      <systemName>ITTestDblOval1c1849S2</systemName>
     </turnout>
   </turnouts>
   <memories class="jmri.managers.configurexml.DefaultMemoryManagerXml">
-    <memory value="6:03 AM">
+    <memory value="6:11 AM">
       <systemName>IMCURRENTTIME</systemName>
     </memory>
     <memory value="1.0">
@@ -77,16 +83,16 @@
       <sideTieLength>0</sideTieLength>
       <sideTieWidth>0</sideTieWidth>
     </layoutTrackDrawingOptions>
-    <layoutturnout ident="Xaffd7bN" type="RH_XOVER" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="300.0" ycen="150.0" xa="270.0" ya="140.0" xb="310.0" yb="140.0" xc="330.0" yc="160.0" xd="290.0" yd="160.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHXOverXml" turnoutname="ITTestDblOvalaffd7bN" connectaname="TNA1" connectbname="TNB2" connectcname="TNC4" connectdname="TND3" />
-    <layoutturnout ident="Xaffd7bS" type="RH_XOVER" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="300.0" ycen="450.0" xa="270.0" ya="440.0" xb="310.0" yb="440.0" xc="330.0" yc="460.0" xd="290.0" yd="460.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHXOverXml" turnoutname="ITTestDblOvalaffd7bS" connectaname="TSA5" connectbname="TSB6" connectcname="TSC8" connectdname="TSD7" />
-    <tracksegment ident="TNA1" connect1name="A1" type1="POS_POINT" connect2name="Xaffd7bN" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
-    <tracksegment ident="TNB2" connect1name="Xaffd7bN" type1="TURNOUT_B" connect2name="A2" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
-    <tracksegment ident="TND3" connect1name="A5" type1="POS_POINT" connect2name="Xaffd7bN" type2="TURNOUT_D" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
-    <tracksegment ident="TNC4" connect1name="Xaffd7bN" type1="TURNOUT_C" connect2name="A6" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
-    <tracksegment ident="TSA5" connect1name="A8" type1="POS_POINT" connect2name="Xaffd7bS" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
-    <tracksegment ident="TSB6" connect1name="Xaffd7bS" type1="TURNOUT_B" connect2name="A7" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
-    <tracksegment ident="TSD7" connect1name="A4" type1="POS_POINT" connect2name="Xaffd7bS" type2="TURNOUT_D" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
-    <tracksegment ident="TSC8" connect1name="Xaffd7bS" type1="TURNOUT_C" connect2name="A3" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <layoutturnout ident="X1c1849N" type="RH_XOVER" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="300.0" ycen="150.0" xa="270.0" ya="140.0" xb="310.0" yb="140.0" xc="330.0" yc="160.0" xd="290.0" yd="160.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHXOverXml" turnoutname="ITTestDblOval1c1849N" secondturnoutname="ITTestDblOval1c1849N2" connectaname="TNA1" connectbname="TNB2" connectcname="TNC4" connectdname="TND3" />
+    <layoutturnout ident="X1c1849S" type="RH_XOVER" hidden="no" disabled="no" disableWhenOccupied="no" showtooltip="yes" continuing="2" xcen="300.0" ycen="450.0" xa="270.0" ya="440.0" xb="310.0" yb="440.0" xc="330.0" yc="460.0" xd="290.0" yd="460.0" ver="1" class="jmri.jmrit.display.layoutEditor.configurexml.LayoutRHXOverXml" turnoutname="ITTestDblOval1c1849S" secondturnoutname="ITTestDblOval1c1849S2" connectaname="TSA5" connectbname="TSB6" connectcname="TSC8" connectdname="TSD7" />
+    <tracksegment ident="TNA1" connect1name="A1" type1="POS_POINT" connect2name="X1c1849N" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="TNB2" connect1name="X1c1849N" type1="TURNOUT_B" connect2name="A2" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="TND3" connect1name="A5" type1="POS_POINT" connect2name="X1c1849N" type2="TURNOUT_D" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="TNC4" connect1name="X1c1849N" type1="TURNOUT_C" connect2name="A6" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="TSA5" connect1name="A8" type1="POS_POINT" connect2name="X1c1849S" type2="TURNOUT_A" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="TSB6" connect1name="X1c1849S" type1="TURNOUT_B" connect2name="A7" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="TSD7" connect1name="A4" type1="POS_POINT" connect2name="X1c1849S" type2="TURNOUT_D" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
+    <tracksegment ident="TSC8" connect1name="X1c1849S" type1="TURNOUT_C" connect2name="A3" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
     <tracksegment ident="OuterW9" connect1name="A1" type1="POS_POINT" connect2name="A4" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
     <tracksegment ident="OuterE10" connect1name="A2" type1="POS_POINT" connect2name="A3" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
     <tracksegment ident="InnerW11" connect1name="A5" type1="POS_POINT" connect2name="A8" type2="POS_POINT" dashed="no" mainline="yes" hidden="no" class="jmri.jmrit.display.layoutEditor.configurexml.TrackSegmentXml" />
@@ -107,10 +113,27 @@
       <filename>PanelPro (v5.17.3)</filename>
     </operation>
     <operation>
+      <type>Load OK</type>
+      <date>Wed Sep 23 06:03:46 EDT 2026</date>
+      <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/TestDoubleOval.xml</filename>
+      <filehistory>
+        <operation>
+          <type>app</type>
+          <date>Wed Sep 23 05:20:09 EDT 2026</date>
+          <filename>PanelPro (v5.17.3)</filename>
+        </operation>
+        <operation>
+          <type>Store</type>
+          <date>Wed Sep 23 06:03:09 EDT 2026</date>
+          <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/TestDoubleOval.xml</filename>
+        </operation>
+      </filehistory>
+    </operation>
+    <operation>
       <type>Store</type>
-      <date>Wed Sep 23 06:03:09 EDT 2026</date>
+      <date>Wed Sep 23 06:11:41 EDT 2026</date>
       <filename>/Users/blw/Library/Preferences/JMRI/CO_in_Virginia.jmri/TestDoubleOval.xml</filename>
     </operation>
   </filehistory>
-  <!--Written by JMRI version 5.17.3+Rd7f572827a on Wed Sep 23 06:03:09 EDT 2026-->
+  <!--Written by JMRI version 5.17.3+Rd7f572827a on Wed Sep 23 06:11:41 EDT 2026-->
 </layout-config>
