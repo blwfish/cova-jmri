@@ -654,6 +654,197 @@ def _logixng_get(payload):
     return _logixng_info(logixng)
 
 
+# jmri-mcp issue #7. The generic tree-walk uses ONLY jmri.jmrit.logixng.
+# Base's own interface (getChild/getChildCount/getShortDescription) --
+# confirmed against Base.java that every action/expression/ConditionalNG
+# implements this, so no per-class special-casing is needed for the tree
+# structure itself, unlike printTree()'s human-formatted text output this
+# replaces.
+#
+# Bean-reference detection is reflection-based: for every zero-arg method
+# on a node's concrete class that returns
+# jmri.jmrit.logixng.util.LogixNG_SelectNamedBean, call it and inspect
+# the wrapper. Confirmed by actually surveying this project's own JMRI
+# 5.17.3 source checkout (java/src/jmri/jmrit/logixng/{actions,
+# expressions}/**/*.java, non-Swing files): 160 of 416 action/expression
+# classes hold at least one bean reference via this wrapper; only one
+# non-Swing class (ActionListenOnBeans) uses something else (a raw
+# NamedBeanHandle list) and isn't covered by this -- a known, source-
+# confirmed gap, not a surprise found later.
+#
+# LogixNG_SelectNamedBean.getBean() can NEVER usefully answer "does this
+# still exist" on its own -- confirmed against its own source
+# (jmri.jmrit.logixng.util.LogixNG_SelectNamedBean): the NamedBeanHandle
+# it wraps holds a direct, @Nonnull Java object reference, not a live
+# name-based lookup, and JMRI's own delete path (the "DoDelete"
+# vetoable-change LogixNG_SelectNamedBean.vetoableChange() handles) nulls
+# the handle out the moment the referenced bean is actually deleted
+# through a manager's normal deleteBean() call -- so under normal
+# operation the handle is either valid or null, never a stale reference
+# to a since-deleted object. Live-confirmed by constructing exactly that
+# scenario: create a bean, reference it from an ActionTurnout, delete the
+# bean via deleteBean(bean, "DoDelete"), re-check the action -- the
+# handle came back null, not a dangling non-null handle. Rather than
+# trust that reasoning alone for "exists", this still does a FRESH lookup
+# by name against the bean's own manager (select.getManager().
+# getNamedBean(name)) for the actually-configured case -- authoritative
+# regardless of any handle-caching subtlety this reasoning might have
+# missed, and it's what genuinely answers "does this exist right now".
+#
+# isDirectAddressing() gates all of the above -- confirmed live for both
+# sides of that gate, not just Direct: setReference(...) alone does NOT
+# switch a LogixNG_SelectNamedBean into Reference addressing (its own
+# addressing field is separate from the reference string and needs an
+# explicit setAddressing(NamedBeanAddressing.Reference) call first,
+# confirmed live the hard way -- getAddressing() still read "Direct"
+# after setReference() alone). Once genuinely Reference-addressed, this
+# reports {"configured": null, "addressing": "Reference"} with no name/
+# exists, confirmed live -- correct, since there's no fixed name to
+# check until the LogixNG actually runs and evaluates the reference.
+def _logixng_bean_references(base):
+    from java.lang import Class
+    select_named_bean_class = Class.forName("jmri.jmrit.logixng.util.LogixNG_SelectNamedBean")
+
+    refs = []
+    for method in base.getClass().getMethods():
+        if len(method.getParameterTypes()) != 0:
+            continue
+        if not select_named_bean_class.isAssignableFrom(method.getReturnType()):
+            continue
+        try:
+            select = method.invoke(base, [])
+        except (Exception, Throwable):
+            continue
+        if select is None:
+            continue
+
+        entry = {"accessor": method.getName(), "addressing": str(select.getAddressing())}
+        if select.isDirectAddressing():
+            handle = select.getNamedBean()
+            if handle is None:
+                entry["configured"] = False
+            else:
+                name = handle.getName()
+                entry["configured"] = True
+                entry["name"] = name
+                try:
+                    entry["beanType"] = select.getManager().getBeanTypeHandled()
+                except (Exception, Throwable):
+                    entry["beanType"] = None
+                entry["exists"] = select.getManager().getNamedBean(name) is not None
+        else:
+            # Reference/LocalVariable/Formula/Table addressing -- no
+            # fixed name exists to check; it's resolved at runtime.
+            entry["configured"] = None
+        refs.append(entry)
+    return refs
+
+
+def _logixng_walk_tree(base, depth=0):
+    from jmri.jmrit.logixng import MaleSocket
+    if depth > 50:
+        # A genuine LogixNG tree is never anywhere near this deep --
+        # a cap here turns a hypothetical cycle (a socket connected back
+        # to one of its own ancestors, which JMRI's own editor is
+        # supposed to prevent but this bridge shouldn't simply trust)
+        # into a clean error instead of a JVM stack overflow.
+        raise ValueError("LogixNG tree exceeds max depth 50 while walking -- possible cycle")
+
+    node = {
+        "class": base.getClass().getName(),
+        "shortDescription": base.getShortDescription(),
+        "beanReferences": _logixng_bean_references(base),
+        "children": [],
+    }
+    for i in range(base.getChildCount()):
+        female = base.getChild(i)
+        child = {"socketName": female.getName(), "connected": female.isConnected()}
+        if female.isConnected():
+            male = female.getConnectedSocket()
+            child["enabled"] = male.isEnabled()
+            # A connected socket is not necessarily the leaf action/
+            # expression directly -- confirmed live that it's commonly
+            # wrapped a second time (jmri.jmrit.logixng.tools.debugger.
+            # DebuggerMaleDigital{Action,Expression}Socket, present on
+            # every socket in this rig's test ConditionalNG, not an
+            # opt-in rarity) on top of the "normal" Default...Socket
+            # wrapper, which is itself on top of the real object. Loop
+            # until genuinely past every MaleSocket layer -- the same
+            # pattern JMRI's own jmri.jmrit.logixng.util.WhereUsed (a
+            # built-in "what uses this bean" tool doing a structurally
+            # identical tree walk) uses for exactly this, not invented
+            # here: `while (b instanceof MaleSocket) b = ((MaleSocket)
+            # b).getObject();`. Getting this wrong silently produced
+            # beanReferences: [] for every real node (the reflection
+            # found no LogixNG_SelectNamedBean getters because it was
+            # inspecting a socket wrapper class, not the action/
+            # expression class that actually has them) -- caught by
+            # actually building a real reference and checking the
+            # result, not assumed from Base.java's interface alone.
+            obj = male.getObject()
+            while isinstance(obj, MaleSocket):
+                obj = obj.getObject()
+            child["node"] = _logixng_walk_tree(obj, depth + 1)
+        node["children"].append(child)
+    return node
+
+
+def _logixng_audit(payload):
+    """`name` may be either a system name or a user name, same lookup as
+    `get`. Audits EVERY ConditionalNG the named LogixNG has (via
+    getNumConditionalNGs()/getConditionalNG(i)) -- not just the first,
+    unlike the ad-hoc script this replaces (jmri-mcp issue #7's own
+    example only checked index 0).
+
+    Live-confirmed against a real, deliberately non-trivial tree built on
+    this test rig (a Timeout action -- two sockets, one connected to an
+    ExpressionSensor referencing a real Sensor, the other deliberately
+    left unconnected -- inside a ConditionalNG, inside a LogixNG), plus a
+    genuinely dangling-reference scenario (an ActionTurnout referencing a
+    Turnout that was then deleted via deleteBean(t, "DoDelete")) and a
+    Reference-addressed expression (setAddressing(Reference) +
+    setReference("{IS1}")). All three real gaps this caught before
+    shipping, none obvious from Base.java's interface alone:
+      1. A connected socket's object is wrapped, commonly twice (a
+         jmri.jmrit.logixng.tools.debugger.DebuggerMaleDigital*Socket on
+         top of the normal Default...Socket wrapper) -- getObject() must
+         be called in a loop until the result is no longer a MaleSocket,
+         same as JMRI's own jmri.jmrit.logixng.util.WhereUsed does; a
+         single getObject() call left every real node's beanReferences
+         empty, since the reflection was inspecting a socket wrapper
+         class instead of the real action/expression class.
+      2. A bean reference's NamedBeanHandle never usefully answers
+         "does this still exist" via getBean() alone -- confirmed by the
+         actual delete-then-recheck test, not reasoned from source alone
+         (the handle came back null after "DoDelete", not a dangling
+         non-null reference to a deleted object) -- see
+         _logixng_bean_references's own comment for the mechanism.
+      3. setReference(...) alone does not switch addressing to
+         Reference -- setAddressing(NamedBeanAddressing.Reference) is a
+         separate, required call; getAddressing() still read "Direct"
+         after setReference() alone until that was added."""
+    name = payload.get("name")
+    logixng = _logixng_manager().getLogixNG(name)
+    if logixng is None:
+        raise ValueError("no LogixNG named %r" % (name,))
+
+    conditional_ngs = []
+    for i in range(logixng.getNumConditionalNGs()):
+        cng = logixng.getConditionalNG(i)
+        conditional_ngs.append({
+            "name": cng.getSystemName(),
+            "userName": cng.getUserName(),
+            "enabled": cng.isEnabled(),
+            "tree": _logixng_walk_tree(cng),
+        })
+
+    return {
+        "name": logixng.getSystemName(),
+        "userName": logixng.getUserName(),
+        "conditionalNGs": conditional_ngs,
+    }
+
+
 def _logixng_create(payload):
     params = payload.get("params") or {}
     user_name = params.get("userName")
@@ -1560,6 +1751,7 @@ _STRUCTURED_OPS = {
     ("jmri_introspect", "list_transits", None): _list_transits,
     ("jmri_logixng", "list", None): _logixng_list,
     ("jmri_logixng", "get", None): _logixng_get,
+    ("jmri_logixng", "audit", None): _logixng_audit,
     ("jmri_logixng", "create", None): _logixng_create,
     ("jmri_logixng", "enable", None): _logixng_enable,
     ("jmri_logixng", "disable", None): _logixng_disable,
