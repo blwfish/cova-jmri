@@ -788,6 +788,125 @@ def _authoring_create_signal_mast(payload):
     }
 
 
+_SIGNAL_HEAD_TURNOUT_PARAMS = {
+    "virtual": (),
+    "doubleTurnout": ("redTurnout", "greenTurnout"),
+    "tripleTurnout": ("redTurnout", "yellowTurnout", "greenTurnout"),
+}
+
+
+def _authoring_create_signal_head(payload):
+    """jmri-mcp issue #11. Unlike every other jmri_authoring create
+    target_type, SignalHeadManager (confirmed against its interface --
+    unlike BlockManager's createNewBlock(userName)) exposes no manager-
+    level auto-naming helper -- the caller supplies a complete system
+    name directly (params.name, e.g. "IH47" on JMRI's always-present
+    Internal connection), matching the convention jmri_state's own
+    `create` operation (issue #10) already uses for turnout/sensor/light.
+    Checks the name doesn't already exist first and refuses rather than
+    risk silently replacing a real head -- same reasoning as that
+    operation's own existence guard, just enforced bridge-side here since
+    there's no JMRI-side creates-or-updates PUT to worry about instead.
+
+    params.headType selects the concrete SignalHead subclass. The fixed
+    appearance-to-turnout-state mappings below are read directly from
+    JMRI's own source (jmri.implementation.DoubleTurnoutSignalHead /
+    TripleTurnoutSignalHead's updateOutput()), not guessed or inferred
+    from behavior -- neither class exposes any way to reconfigure them:
+
+      "virtual": jmri.implementation.VirtualSignalHead. No turnouts
+          needed -- pure software. For testing signal logic
+          (SignalMastLogic, LogixNG conditions, etc.) without real
+          hardware. Does NOT support LUNAR/FLASHLUNAR -- confirmed
+          against source: it doesn't override getValidStates(), so it
+          inherits DefaultSignalHead's own default set (DARK/RED/YELLOW/
+          GREEN + their FLASH variants only; that base class's own source
+          comment reads "// Lunar not included"). An initial version of
+          this docstring claimed the opposite before this was checked
+          live -- POSTing {"state": 64} to a freshly-created virtual head
+          gets a clean JMRI-side 400 "unknown state 64", not a crash, but
+          also not the LUNAR support this originally (wrongly) promised.
+      "doubleTurnout": jmri.implementation.DoubleTurnoutSignalHead.
+          params.redTurnout, params.greenTurnout (existing Turnout
+          names). RED = red THROWN + green CLOSED; GREEN = red CLOSED +
+          green THROWN; YELLOW = both THROWN; DARK = both CLOSED. No
+          LUNAR here either -- falls through to a JMRI-side log warning +
+          DARK.
+      "tripleTurnout": jmri.implementation.TripleTurnoutSignalHead.
+          params.redTurnout, params.yellowTurnout, params.greenTurnout
+          (existing Turnout names). Each color drives its own dedicated
+          turnout THROWN, the other two CLOSED. Same no-LUNAR fallthrough
+          as doubleTurnout.
+
+    Turnout references are resolved to NamedBeanHandles via
+    NamedBeanHandleManager.getNamedBeanHandle() -- matching how JMRI's
+    own signal-head-creation code does it (confirmed against
+    DoubleTurnoutSignalHead's constructor signature, which takes
+    NamedBeanHandle<Turnout> not a bare Turnout) -- rather than the raw
+    NamedBeanHandle constructor, so a later turnout rename stays tracked
+    correctly instead of leaving a stale handle."""
+    params = payload.get("params") or {}
+    name = params.get("name")
+    user_name = params.get("userName")
+    head_type = params.get("headType")
+    if not name:
+        raise ValueError('signalHead create requires params.name (a complete JMRI system name, e.g. "IH47")')
+    if head_type not in _SIGNAL_HEAD_TURNOUT_PARAMS:
+        raise ValueError(
+            "signalHead create requires params.headType to be one of %s"
+            % (sorted(_SIGNAL_HEAD_TURNOUT_PARAMS.keys()),)
+        )
+
+    from jmri import InstanceManager, NamedBeanHandleManager, SignalHeadManager
+    from jmri.implementation import DoubleTurnoutSignalHead, TripleTurnoutSignalHead, VirtualSignalHead
+
+    mgr = InstanceManager.getDefault(SignalHeadManager)
+    if mgr.getBySystemName(name) is not None:
+        raise ValueError("signalHead %r already exists -- create refuses to replace an existing bean" % (name,))
+
+    turnout_mgr = InstanceManager.turnoutManagerInstance()
+    handle_mgr = InstanceManager.getDefault(NamedBeanHandleManager)
+
+    def turnout_handle(param_name):
+        turnout_name = params.get(param_name)
+        if not turnout_name:
+            raise ValueError(
+                "signalHead create with headType=%r requires params.%s (an existing Turnout name)"
+                % (head_type, param_name)
+            )
+        turnout = _lookup_named_bean(turnout_mgr, turnout_name)
+        if turnout is None:
+            raise ValueError("no such Turnout %r (referenced by params.%s)" % (turnout_name, param_name))
+        return handle_mgr.getNamedBeanHandle(turnout.getSystemName(), turnout)
+
+    handles = [turnout_handle(p) for p in _SIGNAL_HEAD_TURNOUT_PARAMS[head_type]]
+
+    if head_type == "virtual":
+        head = VirtualSignalHead(name, user_name) if user_name else VirtualSignalHead(name)
+    elif head_type == "doubleTurnout":
+        red, green = handles
+        head = (
+            DoubleTurnoutSignalHead(name, user_name, green, red)
+            if user_name
+            else DoubleTurnoutSignalHead(name, green, red)
+        )
+    else:  # tripleTurnout
+        red, yellow, green = handles
+        head = (
+            TripleTurnoutSignalHead(name, user_name, green, yellow, red)
+            if user_name
+            else TripleTurnoutSignalHead(name, green, yellow, red)
+        )
+
+    mgr.register(head)
+    return {
+        "name": head.getSystemName(),
+        "userName": head.getUserName(),
+        "class": head.getClass().getName(),
+        "headType": head_type,
+    }
+
+
 def _authoring_create_block(payload):
     """Two things live-testing caught here, neither obvious from the method
     names alone:
@@ -1445,6 +1564,7 @@ _STRUCTURED_OPS = {
     ("jmri_logixng", "enable", None): _logixng_enable,
     ("jmri_logixng", "disable", None): _logixng_disable,
     ("jmri_authoring", "create", "signalMast"): _authoring_create_signal_mast,
+    ("jmri_authoring", "create", "signalHead"): _authoring_create_signal_head,
     ("jmri_authoring", "create", "block"): _authoring_create_block,
     ("jmri_authoring", "create", "section"): _authoring_create_section,
     ("jmri_authoring", "create", "transit"): _authoring_create_transit,
