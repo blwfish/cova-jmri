@@ -1243,6 +1243,187 @@ def _authoring_create_transit(payload):
     }
 
 
+# --- Section/Transit get/set/delete -----------------------------------
+# jmri-mcp issue tracker follow-up (Section/Transit CRUD): JMRI's JSON
+# Servlet has no HTTP API for section/transit at all (confirmed live --
+# GET /json/section, /json/transit both answer a clean 404 "Unknown
+# object type", not just an unlisted-but-forwardable type the way block
+# was) -- unlike block/signalHead, this can never move to jmri_state; it
+# has to live here.
+#
+# Section.state (FREE/FORWARD/REVERSE) is genuinely mutable, Dispatcher-
+# relevant config -- confirmed against DefaultSection.java's own
+# setState(), which also flips the Section's forward/reverse blocking
+# sensors as a side effect. Values confirmed live against the real JVM
+# (not assumed from the constant names): UNKNOWN=1, FREE=2, FORWARD=4,
+# REVERSE=8, OCCUPIED=2, UNOCCUPIED=4 -- note OCCUPIED and FREE share the
+# same int value (2) despite being unrelated properties (Block.state's
+# OCCUPIED vs Section.state's FREE), so these two little maps must never
+# be confused for one general "state int" lookup.
+_SECTION_STATE_NAMES = {1: "UNKNOWN", 2: "FREE", 4: "FORWARD", 8: "REVERSE"}
+_SECTION_STATE_VALUES = {"FREE": 2, "FORWARD": 4, "REVERSE": 8}
+_SECTION_OCCUPANCY_NAMES = {2: "OCCUPIED", 4: "UNOCCUPIED"}
+
+# Transit.state (IDLE/ASSIGNED) is Dispatcher-internal bookkeeping --
+# confirmed against DefaultTransit.java, it just tracks whether an
+# ActiveTrain currently has this Transit assigned, with no side effects
+# of its own. Deliberately NOT exposed as a `set` here: jmri-mcp has no
+# ActiveTrain/Dispatcher wrapping yet, so setting this by hand would
+# produce a Transit marked ASSIGNED with no real train behind it --
+# confusing, inconsistent-with-reality state for no benefit until that
+# layer exists. `get` still reports it (read-only) since it's genuinely
+# informative once Dispatcher usage exists on a layout.
+_TRANSIT_STATE_NAMES = {2: "IDLE", 4: "ASSIGNED"}
+
+
+def _section_manager():
+    from jmri import InstanceManager, SectionManager
+    return InstanceManager.getDefault(SectionManager)
+
+
+def _transit_manager():
+    from jmri import InstanceManager, TransitManager
+    return InstanceManager.getDefault(TransitManager)
+
+
+def _section_info(section):
+    state = section.getState()
+    occupancy = section.getOccupancy()
+    return {
+        "name": section.getSystemName(),
+        "userName": section.getUserName(),
+        "sectionType": str(section.getSectionType()),
+        "blocks": [b.getSystemName() for b in section.getBlockList()],
+        "state": state,
+        "stateName": _SECTION_STATE_NAMES.get(state, "UNKNOWN"),
+        "occupancy": occupancy,
+        "occupancyName": _SECTION_OCCUPANCY_NAMES.get(occupancy, "UNKNOWN"),
+    }
+
+
+def _transit_info(transit):
+    state = transit.getState()
+    return {
+        "name": transit.getSystemName(),
+        "userName": transit.getUserName(),
+        "sections": [
+            {"name": ts.getSectionName(), "sequenceNumber": ts.getSequenceNumber(), "direction": ts.getDirection()}
+            for ts in transit.getTransitSectionList()
+        ],
+        "state": state,
+        "stateName": _TRANSIT_STATE_NAMES.get(state, "UNKNOWN"),
+    }
+
+
+def _introspect_get_section(payload):
+    name = payload.get("name")
+    if not name:
+        raise ValueError("get_section requires `name`")
+    section = _lookup_named_bean(_section_manager(), name)
+    if section is None:
+        raise ValueError("no Section named %r" % (name,))
+    return _section_info(section)
+
+
+def _introspect_get_transit(payload):
+    name = payload.get("name")
+    if not name:
+        raise ValueError("get_transit requires `name`")
+    transit = _lookup_named_bean(_transit_manager(), name)
+    if transit is None:
+        raise ValueError("no Transit named %r" % (name,))
+    return _transit_info(transit)
+
+
+def _authoring_set_section_state(payload):
+    params = payload.get("params") or {}
+    name = params.get("name")
+    state_name = params.get("state")
+    if not name:
+        raise ValueError("setState requires params.name")
+    if state_name not in _SECTION_STATE_VALUES:
+        raise ValueError(
+            "section setState requires params.state to be one of %s (UNKNOWN is not "
+            "settable -- confirmed against Section.setState()'s own source, which "
+            "rejects it)" % (sorted(_SECTION_STATE_VALUES.keys()),)
+        )
+    section = _lookup_named_bean(_section_manager(), name)
+    if section is None:
+        raise ValueError("no Section named %r" % (name,))
+    section.setState(_SECTION_STATE_VALUES[state_name])
+    return _section_info(section)
+
+
+def _delete_named_bean(manager, name, label):
+    """Shared safe-delete: fires JMRI's own "CanDelete" veto check first
+    and refuses (raises rather than forcing the delete through) if
+    ANYTHING objects. This bridge's own test-cleanup scripts use the
+    "DoDelete"-only shortcut throughout jmri-mcp's development (bypassing
+    vetoes, appropriate for known-safe scratch objects created and torn
+    down in the same script) -- a `jmri_authoring` `delete` operation
+    exposed to a real caller must not do that.
+
+    A real nuance here, confirmed against AbstractManager.
+    fireVetoableChange() and DefaultTransit.vetoableChange()'s actual
+    source, not assumed: "CanDelete" has TWO distinct severities baked
+    into the same exception type. A listener that re-throws with
+    property name "DoNotDelete" is a genuine hard block (JMRI itself
+    won't proceed past it even if forced). Anything else -- e.g.
+    DefaultTransit's own veto when asked to delete a Section it
+    contains, confirmed live to carry property name "CanDelete", not
+    "DoNotDelete" -- is informational: a real GUI shows it as a "this is
+    used elsewhere, delete anyway?" confirmation, and proceeding to
+    "DoDelete" is allowed. Deliberately NOT distinguishing between the
+    two here anyway: confirmed against DefaultTransit's own source that
+    NOTHING handles cleaning up a Transit's reference on the "DoDelete"
+    side (no vetoableChange branch for it at all) despite the veto
+    message's own claim ("It will be removed from the Transits") --  so
+    proceeding past an informational veto would leave a Transit holding
+    a genuinely dangling Section reference, exactly the failure mode
+    jmri_logixng's `audit` operation (a separate feature) exists to
+    detect elsewhere. With no human to show a confirmation dialog to and
+    no verified automatic cleanup to rely on, refusing on ANY veto --
+    hard or informational -- is the safe default until there's a real
+    reason to add an explicit force-through option."""
+    from java.beans import PropertyVetoException
+
+    bean = _lookup_named_bean(manager, name)
+    if bean is None:
+        raise ValueError("no %s named %r" % (label, name))
+    try:
+        manager.deleteBean(bean, "CanDelete")
+    except PropertyVetoException as veto:
+        message = veto.getMessage()
+        if message and message.strip():
+            raise ValueError("cannot delete %s %r: %s" % (label, name, message))
+        # Empty message -- confirmed against AbstractManager.
+        # fireVetoableChange()'s own source that "CanDelete" throws a
+        # PropertyVetoException UNCONDITIONALLY at the end of its
+        # listener loop, even when not one listener actually objected
+        # (message.toString() on the never-appended-to StringBuilder is
+        # just ""). Caught live: deleting a genuinely unreferenced
+        # Transit still raised this exact empty-message exception --
+        # treating that as a real refusal would make delete permanently
+        # unusable for anything with no real objections. An empty
+        # message here means nothing, proceed.
+    manager.deleteBean(bean, "DoDelete")
+    return {"name": bean.getSystemName(), "deleted": True}
+
+
+def _authoring_delete_section(payload):
+    name = (payload.get("params") or {}).get("name")
+    if not name:
+        raise ValueError("delete requires params.name")
+    return _delete_named_bean(_section_manager(), name, "Section")
+
+
+def _authoring_delete_transit(payload):
+    name = (payload.get("params") or {}).get("name")
+    if not name:
+        raise ValueError("delete requires params.name")
+    return _delete_named_bean(_transit_manager(), name, "Transit")
+
+
 def _authoring_create_test_oval(payload):
     """Builds a synthetic rectangular test loop -- four corner anchors and
     one RH crossover per side, wired into the through route -- entirely
@@ -1749,6 +1930,8 @@ _STRUCTURED_OPS = {
     ("jmri_introspect", "list_signal_mast_logic", None): _list_signal_mast_logic,
     ("jmri_introspect", "list_sections", None): _list_sections,
     ("jmri_introspect", "list_transits", None): _list_transits,
+    ("jmri_introspect", "get_section", None): _introspect_get_section,
+    ("jmri_introspect", "get_transit", None): _introspect_get_transit,
     ("jmri_logixng", "list", None): _logixng_list,
     ("jmri_logixng", "get", None): _logixng_get,
     ("jmri_logixng", "audit", None): _logixng_audit,
@@ -1760,6 +1943,9 @@ _STRUCTURED_OPS = {
     ("jmri_authoring", "create", "block"): _authoring_create_block,
     ("jmri_authoring", "create", "section"): _authoring_create_section,
     ("jmri_authoring", "create", "transit"): _authoring_create_transit,
+    ("jmri_authoring", "setState", "section"): _authoring_set_section_state,
+    ("jmri_authoring", "delete", "section"): _authoring_delete_section,
+    ("jmri_authoring", "delete", "transit"): _authoring_delete_transit,
     ("jmri_authoring", "create", "testOval"): _authoring_create_test_oval,
     ("jmri_authoring", "create", "testDoubleOval"): _authoring_create_test_double_oval,
     ("jmri_authoring", "discover", "connection"): _authoring_connection_discover,
