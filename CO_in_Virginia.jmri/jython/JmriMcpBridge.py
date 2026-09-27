@@ -17,6 +17,7 @@
 # rather than crash on a malformed request, explicit validation before
 # acting -- not its MQTT transport.
 
+import ast
 import json
 import os
 import re
@@ -128,6 +129,62 @@ def _check_auth(exchange):
     return auth[len("Bearer "):] == _TOKEN
 
 
+def _split_last_expression(script):
+    """jmri-mcp issue #6: ScriptEngine.eval() only ever returns a value
+    for a script that's a SINGLE bare expression -- a multi-statement
+    script (even one ending in a legitimate bare expression) otherwise
+    always gets `result: None`, with no way to tell that apart from "the
+    script genuinely produced nothing." Real REPL behavior -- exec every
+    statement but the last, then, if the last one is a bare expression,
+    eval() just that -- recovers the value without changing what the
+    script actually does.
+
+    Uses `ast.parse`, not a text/line split, to find the boundary: a
+    naive split on the last newline would misfire on a multi-line final
+    statement, a statement containing a multi-line string, or any
+    statement before it that happens to look like a boundary in raw text
+    (Syntactic-Semantic Seam Rule -- a semantic distinction like
+    "statement boundary" needs a real parse, not a syntactic stand-in).
+    Only the ast.parse() call and the AST shape decide whether/where to
+    split; the actual text sent to manager.eval() for both halves is
+    always a verbatim slice of the original script, so what actually
+    *runs* is never affected by anything this function gets wrong -- at
+    worst it fails to split and behavior falls back to today's
+    single-eval-call semantics (see the three `return None, script`
+    fallbacks below, all deliberately conservative rather than guessing).
+
+    CONFIRMED live against the real test-rig JVM (2026-09-27): `x = 5\\nx+1`
+    -> 6, the real `jmri.InstanceManager.getDefault(...LogixNG_Manager)\\n
+    ...getNamedBeanSet().size()` two-liner from the issue -> a real int,
+    `a=1\\nb=2\\na+b` -> 3, a `print()` line ahead of the split point still
+    lands in `stdout`, a bare single expression is still a single
+    manager.eval() call (unchanged), an assignment-only script still
+    correctly returns None, the semicolon-joined fallback (`x = 1; x + 1`)
+    correctly declines to split, and an exception raised in either half
+    still returns a `traceback` with whatever `stdout` was captured before
+    the raise -- see tests/test_split_last_expression.py for the
+    unit-level split-boundary coverage this doesn't re-run against a JVM."""
+    try:
+        tree = ast.parse(script)
+    except SyntaxError:
+        return None, script
+    body = tree.body
+    if not body or not isinstance(body[-1], ast.Expr):
+        return None, script
+    if len(body) == 1:
+        return None, script
+    prev, last = body[-2], body[-1]
+    if getattr(prev, "lineno", None) == last.lineno:
+        # Semicolon-joined statements sharing the final line (`x = 1;
+        # x + 1`) -- a line-based split can't separate these safely.
+        return None, script
+    lines = script.splitlines(True)
+    split_at = last.lineno - 1
+    exec_part = "".join(lines[:split_at])
+    eval_part = "".join(lines[split_at:])
+    return (exec_part if exec_part.strip() else None), eval_part
+
+
 def _run_jython(script):
     """CONFIRMED live against the real JVM: getEngineByName("python") is
     the correct registered name -- a plain successful script round-trips
@@ -144,7 +201,17 @@ def _run_jython(script):
     concrete Java type, java.lang.Throwable, or a bare `except:` catches
     it. A native Python error (e.g. ZeroDivisionError raised directly,
     not through a nested eval) is the opposite case -- Throwable alone
-    does NOT catch that. The combined tuple is required for both."""
+    does NOT catch that. The combined tuple is required for both.
+
+    _split_last_expression's exec/eval split (jmri-mcp issue #6) reuses
+    this SAME `engine` instance for both manager.eval() calls -- a
+    ScriptEngine's default Bindings persist across separate eval() calls
+    on one engine instance (javax.script spec), so a variable the exec
+    half assigns is visible to the eval half, the same way two REPL
+    lines share state. If splitting the script itself raises anything,
+    fall back to the original single-eval-call behavior rather than
+    letting a bug in the split machinery break a script that would have
+    worked fine unsplit."""
     manager = JmriScriptEngineManager.getDefault()
     engine = manager.getEngineByName("python")
     sw = StringWriter()
@@ -152,7 +219,13 @@ def _run_jython(script):
     engine.getContext().setWriter(writer)
     engine.getContext().setErrorWriter(writer)
     try:
-        result = manager.eval(script, engine)
+        try:
+            exec_part, eval_part = _split_last_expression(script)
+        except (Exception, Throwable):
+            exec_part, eval_part = None, script
+        if exec_part:
+            manager.eval(exec_part, engine)
+        result = manager.eval(eval_part, engine)
         writer.flush()
         return {"stdout": sw.toString(), "result": _jsonable(result)}
     except (Exception, Throwable) as exc:

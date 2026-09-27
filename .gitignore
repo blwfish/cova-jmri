@@ -19,3 +19,4 @@ monitorLog.txt
 # Legacy config files (superseded by profile/)
 ProfileConfig.xml
 UserPrefsProfileConfig.xml
+__pycache__/
