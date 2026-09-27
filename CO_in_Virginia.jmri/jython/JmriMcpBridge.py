@@ -934,7 +934,29 @@ def _authoring_create_test_oval(payload):
     duplicate panel names across separate LayoutEditor instances, only
     warns, so pass a distinct name to keep multiple test ovals apart
     rather than relying on this to reject a collision), centerX/centerY
-    (default 300/300), width/height (default 400/300, pixels)."""
+    (default 300/300), width/height (default 400/300, pixels).
+
+    A freshly-constructed LayoutEditor defaults to Editor.SCROLL_NONE
+    (Editor.java's own field default, not something set here) -- in that
+    mode the target canvas is forced to always exactly match the WINDOW's
+    current size (a deliberate JMRI behavior, confirmed by reading
+    LayoutEditor's adjustScrollBars()/resetTargetSize()), not the
+    panelWidth/panelHeight the content actually needs. A headless
+    construction like this one never gets the window resized by a human
+    before anything might persist it, so whatever AWT/Swing defaults the
+    window to (confirmed live 2026-09-23: nearly the full primary-screen
+    resolution) gets baked in as the "correct" size. If that huge window
+    size is later restored from a saved file, JMRI dutifully regrows the
+    canvas to match it again on load -- and depending on how the viewport
+    ends up scrolled at that huge size, the actual track content (drawn
+    at small, sane coordinates near the origin) can end up scrolled
+    completely out of view, a real, live-confirmed failure mode, not a
+    hypothetical one. setScroll("both") plus an explicit, sane setSize()
+    sidesteps this entirely -- the canvas keeps a fixed logical size
+    regardless of window size, with real scrollbars for the rest, which
+    is how virtually every genuine layout (bigger than one screen) is
+    already used anyway."""
+    from java.awt import Dimension
     from java.awt.geom import Point2D
     from jmri import InstanceManager
     from jmri.jmrit.display.layoutEditor import (
@@ -960,6 +982,8 @@ def _authoring_create_test_oval(payload):
     def build():
         editor = LayoutEditor(editor_name)
         editor.setVisible(True)
+        editor.setScroll("both")
+        editor.setSize(Dimension(750, 700))
 
         turnout_mgr = InstanceManager.turnoutManagerInstance()
 
@@ -1094,7 +1118,18 @@ def _authoring_create_test_double_oval(payload):
     500/400, pixels), gap (default 100, pixels -- the outer-to-inner
     spacing on every side). innerWidth/innerHeight are derived as
     outerWidth/outerHeight minus 2*gap and must come out positive --
-    e.g. the defaults above give a 300x200 inner loop."""
+    e.g. the defaults above give a 300x200 inner loop.
+
+    Calls setScroll("both") and a sane setSize() on the freshly-built
+    editor -- see testOval's docstring above for the full story: a
+    freshly-constructed LayoutEditor defaults to Editor.SCROLL_NONE, which
+    forces the canvas to always match the window's current size; built
+    headlessly, that window defaults to whatever AWT/Swing size the
+    toolkit picks (confirmed live 2026-09-23: nearly full-screen), which
+    then gets saved as "correct" and reproduces a canvas that scrolls the
+    actual track content out of view on every future load. This isn't
+    hypothetical -- it's exactly what happened building this fixture."""
+    from java.awt import Dimension
     from java.awt.geom import Point2D
     from jmri import InstanceManager
     from jmri.jmrit.display.layoutEditor import (
@@ -1131,6 +1166,8 @@ def _authoring_create_test_double_oval(payload):
     def build():
         editor = LayoutEditor(editor_name)
         editor.setVisible(True)
+        editor.setScroll("both")
+        editor.setSize(Dimension(750, 700))
 
         turnout_mgr = InstanceManager.turnoutManagerInstance()
 
