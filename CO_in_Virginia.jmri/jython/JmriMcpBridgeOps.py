@@ -802,42 +802,571 @@ def _lookup_named_bean(manager, name):
 
 
 def _authoring_create_signal_mast(payload):
-    """A MatrixSignalMast's system name ENCODES its signal-system and
-    mast-type (parsed by configureFromName() from "IF$xsm:<system>:
-    <mastType>($NNNN)" -- confirmed against MatrixSignalMast.java's source,
-    not guessed), so this builds that string from structured params rather
-    than asking the caller to construct JMRI's own internal name format.
-    getLastRef()/the "($NNNN)" ordinal is MatrixSignalMast's own class-wide
-    auto-numbering counter (confirmed live 2026-09-22: creating one bumps
-    it, so a second create with the same signalSystem/mastType doesn't
-    collide). Passing a plain Python string ("0100") for the char[]
-    setBitsForAspect expects works without any manual conversion --
-    confirmed live, Jython does this automatically."""
+    """A MatrixSignalMast's or VirtualSignalMast's system name ENCODES its
+    signal-system and mast-type -- confirmed against both classes' own
+    configureFromName() (MatrixSignalMast.java: "IF$xsm:<system>:
+    <mastType>($NNNN)"; VirtualSignalMast.java: "IF$vsm:<system>:
+    <mastType>($NNNN)", same three-colon-part shape, just a different
+    THE_MAST_TYPE prefix constant) -- so this builds that string from
+    structured params rather than asking the caller to construct JMRI's
+    own internal name format. getLastRef()/the "($NNNN)" ordinal is each
+    class's OWN class-wide auto-numbering counter -- confirmed against
+    source that VirtualSignalMast has the identical public static
+    getLastRef()/protected setLastRef() pattern as MatrixSignalMast
+    (MatrixSignalMast behavior live-confirmed 2026-09-22: creating one
+    bumps it, so a second create with the same signalSystem/mastType
+    doesn't collide; VirtualSignalMast not yet live-confirmed, same
+    mechanism per source).
+
+    params.mastClass selects which: "matrix" (default, unchanged from
+    before this param existed -- existing callers that omit it keep
+    getting a MatrixSignalMast) or "virtual". The two classes' `mastType`
+    param means something DIFFERENT despite the shared name -- not a bug,
+    just how JMRI itself defines each system name's third part:
+      - "matrix": mastType is an arbitrary label for this bridge's own
+        bit-pattern definitions -- params.aspects (a non-empty
+        {aspect: bitPattern} mapping) is REQUIRED; passing a plain Python
+        string ("0100") for the char[] setBitsForAspect expects works
+        without manual conversion (confirmed live, Jython does this
+        automatically).
+      - "virtual": mastType must name an aspect-map table that ACTUALLY
+        EXISTS for that signalSystem in JMRI's own signal-system XML data
+        (e.g. "one-searchlight" for "basic" -- see
+        jmri.implementation.VirtualSignalMast's own class javadoc example,
+        confirmed against source) -- VirtualSignalMast.configureFromName()
+        loads it by name via configureAspectTable(system, mast); an
+        unknown system/mastType pair is a JMRI-side failure surfaced as
+        whatever exception that load raises, not pre-validated here (no
+        reason to duplicate JMRI's own lookup). params.aspects is NOT
+        used for this mastClass -- the aspect table's own XML defines the
+        valid aspects, not the caller.
+    Both classes share jmri.implementation.AbstractSignalMast's
+    getValidAspects() (confirmed against source) -- used here for BOTH
+    mastClass values so the returned `aspects` field always reflects what
+    JMRI itself now considers valid for the created mast, not (for
+    "matrix") just an echo of the caller's own input keys."""
     params = payload.get("params") or {}
+    mast_class = params.get("mastClass", "matrix")
     signal_system = params.get("signalSystem")
     mast_type = params.get("mastType")
-    aspects = params.get("aspects")
     user_name = params.get("userName")
     if not signal_system or not mast_type:
         raise ValueError("signalMast create requires params.signalSystem and params.mastType")
-    if not aspects:
-        raise ValueError("signalMast create requires params.aspects (a non-empty {aspect: bitPattern} mapping)")
+    if mast_class not in ("matrix", "virtual"):
+        raise ValueError("signalMast create requires params.mastClass to be 'matrix' or 'virtual' (got %r)" % (mast_class,))
 
-    from jmri.implementation import MatrixSignalMast
     from jmri import InstanceManager, SignalMastManager
 
-    ordinal = MatrixSignalMast.getLastRef() + 1
-    system_name = "IF$xsm:%s:%s($%04d)" % (signal_system, mast_type, ordinal)
-    mast = MatrixSignalMast(system_name, user_name) if user_name else MatrixSignalMast(system_name)
-    for aspect, bits in aspects.items():
-        mast.setBitsForAspect(aspect, bits)
+    if mast_class == "matrix":
+        aspects = params.get("aspects")
+        if not aspects:
+            raise ValueError(
+                "signalMast create with params.mastClass='matrix' requires "
+                "params.aspects (a non-empty {aspect: bitPattern} mapping)"
+            )
+        from jmri.implementation import MatrixSignalMast
+        ordinal = MatrixSignalMast.getLastRef() + 1
+        system_name = "IF$xsm:%s:%s($%04d)" % (signal_system, mast_type, ordinal)
+        mast = MatrixSignalMast(system_name, user_name) if user_name else MatrixSignalMast(system_name)
+        for aspect, bits in aspects.items():
+            mast.setBitsForAspect(aspect, bits)
+    else:  # virtual
+        from jmri.implementation import VirtualSignalMast
+        ordinal = VirtualSignalMast.getLastRef() + 1
+        system_name = "IF$vsm:%s:%s($%04d)" % (signal_system, mast_type, ordinal)
+        mast = VirtualSignalMast(system_name, user_name) if user_name else VirtualSignalMast(system_name)
+
     InstanceManager.getDefault(SignalMastManager).register(mast)
     return {
         "name": mast.getSystemName(),
         "userName": mast.getUserName(),
         "class": mast.getClass().getName(),
-        "aspects": sorted(aspects.keys()),
+        "mastClass": mast_class,
+        "aspects": sorted(mast.getValidAspects()),
     }
+
+
+# --- jmri_authoring: signalMastPlacement -----------------------------------
+# LOGICAL (not physical/icon) signal-mast placement at Layout Editor
+# connectivity boundaries -- the actual prerequisite for DispatcherPro's
+# Signal Mast Logic (SML), confirmed against JMRI source
+# (LayoutTurnout.java, PositionablePoint.java,
+# jmri.implementation.DefaultSignalMastLogic, LayoutBlockManager.java):
+# SML/Dispatcher's train-authority lookups (LayoutBlockManager.
+# getFacingSignalMast(), DefaultSignalMastLogic.getFacingBlock()) read
+# ONLY the signalAMast/B/C/D (LayoutTurnout) and eastBoundSignalMast/
+# westBoundSignalMast (PositionablePoint) fields on these connectivity
+# objects -- NEVER a SignalMastIcon placed on a panel (confirmed against
+# every call site of LayoutEditor's own signalMastList: purely cosmetic,
+# the one exception being a minor max-line-speed fallback in
+# DispatcherFrame.java, unrelated to authority logic). This is exactly
+# what cova-jmri's AutoPlaceSignalMasts-spec.md was designed around, as a
+# standalone Jython script contribution to JMRI's own script library --
+# these three operations bring that same capability into jmri-mcp
+# instead, split into a granular `assign` (works for ANY existing mast,
+# any class -- virtual, matrix, DCC, physical -- so a boundary can be
+# migrated from a virtual placeholder to a real hardware-backed mast
+# later just by calling `assign` again with the new mast's name) plus a
+# bulk `apply` convenience that creates-then-assigns for every boundary
+# lacking one, and a `discover` read-only report of every boundary and
+# its current assignment state.
+#
+# CRITICAL, confirmed against JMRI source (NOT documented in JMRI's own
+# javadoc for these methods): LayoutTurnout.setSignalAMast()/
+# setSignalBMast()/setSignalCMast()/setSignalDMast() and
+# PositionablePoint.setEastBoundSignalMast()/setWestBoundSignalMast() are
+# ALL silent-failure void methods -- passing a mast name that doesn't
+# resolve via SignalMastManager.getSignalMast() logs a JMRI-internal
+# ERROR (that class's own logger, never raised to this caller) and
+# leaves the field null/unchanged, with NOTHING thrown and NOTHING
+# returned to check. Every assignment here reads the field back
+# immediately after calling the setter and raises if it doesn't match
+# what was requested -- never trusts the call silently (this project's
+# own Unchecked-Result Rule scenario, found by reading source before
+# writing this, not discovered by a live failure).
+#
+# Scope, deliberately (2026-09-28 design discussion): LayoutTurnout
+# (ends A/B/C, plus D for DOUBLE_XOVER/RH_XOVER/LH_XOVER only -- via
+# LayoutTurnout.isTurnoutTypeXover(), confirmed against source) and
+# PositionablePoint (ANCHOR, END_BUMPER) only, matching
+# AutoPlaceSignalMasts-spec.md's own coverage and Gville-arsenal.xml's
+# current inventory (18 turnouts, 177 points, zero LevelXings). LevelXing
+# and LayoutSlip signal-mast fields exist in JMRI (LevelXing.java has
+# signalAMastNamed/signalBMastNamed; LayoutSlip extends LayoutTurnout so
+# it's already covered incidentally via the LayoutTurnout branch below,
+# not specially handled) but LevelXing support was explicitly deferred,
+# not silently dropped -- add it if/when a real LevelXing shows up on
+# this layout. EDGE_CONNECTOR points are also skipped (deliberately,
+# same scope decision) even though PositionablePoint DOES support
+# east/west masts for them (confirmed against source: getEastBoundSignal
+# MastNamed()/getWestBoundSignalMastNamed() special-case EDGE_CONNECTOR,
+# resolving direction via a PROTECTED getConnect1Dir() this bridge has no
+# clean way to call) -- discover reports every skipped EDGE_CONNECTOR by
+# name under `skippedEdgeConnectors` rather than omitting them silently
+# (Data-Capture Backward-Chaining Rule: dropped-with-reason, not
+# "didn't notice").
+#
+# Ambiguity resolved explicitly, not guessed silently (Threshold-Boundary
+# Testing Rule): an END_BUMPER is a dead end with only ONE real direction
+# of approach, but JMRI exposes no PUBLIC api on PositionablePoint to
+# determine WHICH of east/west that is for a plain ANCHOR/END_BUMPER (only
+# EDGE_CONNECTOR resolves it internally, via the same protected
+# getConnect1Dir() noted above) -- so an END_BUMPER candidate's `end` is
+# reported as the literal string "both", and `assign`/`apply` set BOTH
+# eastBoundSignalMast and westBoundSignalMast to the SAME terminus mast for
+# it. This is safe (not a guess dressed up as certainty): there is no track
+# beyond a bumper in either direction, so whichever field SML/Dispatcher
+# actually ends up reading, it reads the correct (only) mast; the other
+# field's assignment is simply never queried, never wrong.
+
+_TURNOUT_END_FIELDS = {
+    "A": ("getSignalAMastName", "setSignalAMast"),
+    "B": ("getSignalBMastName", "setSignalBMast"),
+    "C": ("getSignalCMastName", "setSignalCMast"),
+    "D": ("getSignalDMastName", "setSignalDMast"),
+}
+_TURNOUT_END_BLOCK_GETTERS = {
+    "A": "getLayoutBlock",
+    "B": "getLayoutBlockB",
+    "C": "getLayoutBlockC",
+    "D": "getLayoutBlockD",
+}
+_POINT_END_FIELDS = {
+    "east": ("getEastBoundSignalMastName", "setEastBoundSignalMast"),
+    "west": ("getWestBoundSignalMastName", "setWestBoundSignalMast"),
+}
+_TURNOUT_END_CONNECT_GETTERS = {
+    "A": "getConnectA", "B": "getConnectB", "C": "getConnectC", "D": "getConnectD",
+}
+
+
+def _signal_mast_placement_block_name(layout_block):
+    if layout_block is None:
+        return None
+    real_block = layout_block.getBlock()
+    return real_block.getSystemName() if real_block is not None else None
+
+
+def _turnout_leg_pointing_at(neighbor_turnout, target):
+    """Which of `neighbor_turnout`'s own ends (A/B/C/D) connects back to
+    `target` -- needed only for the rare case of two LayoutTurnouts wired
+    directly together with no TrackSegment between them (most real
+    connections go through a TrackSegment, handled separately below)."""
+    for end, getter_name in _TURNOUT_END_CONNECT_GETTERS.items():
+        if getattr(neighbor_turnout, getter_name)() is target:
+            return end
+    return None
+
+
+def _neighbor_block_for_turnout_leg(track, end):
+    """The LayoutBlock on the OTHER SIDE of this leg's real connection --
+    NOT this leg's own assigned block. This is the check that actually
+    matters for the common real-world case (confirmed empirically
+    2026-09-28 against this bridge's own testDoubleOval fixture, cross-
+    checked against `_get_block_boundaries`' already-proven
+    LayoutEditorAuxTools-based mechanism, which caught this gap): a plain
+    turnout is very often entirely inside ONE LayoutBlock (all of its own
+    legs share the same block -- so a same-object leg-vs-leg comparison
+    alone finds nothing), with the real boundary sitting between the
+    turnout and whatever's connected beyond one specific leg. Returns
+    None if unresolvable (no connection, or the connected object isn't a
+    TrackSegment or another LayoutTurnout -- e.g. a LevelXing directly
+    wired in, which is out of scope per this module's own scope note) --
+    None here means "can't tell," not "confirmed no boundary," so it
+    never manufactures a false boundary, only possibly misses one in
+    this rare unresolvable case."""
+    from jmri.jmrit.display.layoutEditor import LayoutTurnout, TrackSegment
+
+    connect_getter = _TURNOUT_END_CONNECT_GETTERS.get(end)
+    if connect_getter is None:
+        return None
+    neighbor = getattr(track, connect_getter)()
+    if neighbor is None:
+        return None
+    if isinstance(neighbor, TrackSegment):
+        return _signal_mast_placement_block_name(neighbor.getLayoutBlock())
+    if isinstance(neighbor, LayoutTurnout):
+        neighbor_end = _turnout_leg_pointing_at(neighbor, track)
+        if neighbor_end is None:
+            return None
+        neighbor_block_getter = _TURNOUT_END_BLOCK_GETTERS[neighbor_end]
+        return _signal_mast_placement_block_name(getattr(neighbor, neighbor_block_getter)())
+    return None
+
+
+def _find_layout_turnout(name):
+    """Searches every open Layout Editor panel's LayoutTracks for a
+    LayoutTurnout (which LayoutSlip/LayoutXOver both extend, same as
+    elsewhere in this file) with this exact icon name -- NOT the
+    underlying Turnout bean's own system name, a different, separately-
+    named object (see the module comment above)."""
+    from jmri import InstanceManager
+    from jmri.jmrit.display import EditorManager
+    from jmri.jmrit.display.layoutEditor import LayoutEditor, LayoutTurnout
+
+    for editor in InstanceManager.getDefault(EditorManager).getAll():
+        if not isinstance(editor, LayoutEditor):
+            continue
+        for track in editor.getLayoutTracks():
+            if isinstance(track, LayoutTurnout) and track.getName() == name:
+                return track
+    return None
+
+
+def _find_positionable_point(name):
+    from jmri import InstanceManager
+    from jmri.jmrit.display import EditorManager
+    from jmri.jmrit.display.layoutEditor import LayoutEditor
+
+    for editor in InstanceManager.getDefault(EditorManager).getAll():
+        if not isinstance(editor, LayoutEditor):
+            continue
+        for pp in editor.getPositionablePoints():
+            if pp.getName() == name:
+                return pp
+    return None
+
+
+def _signal_mast_placement_set_and_verify(element, end, field_map, mast_name):
+    if end not in field_map:
+        raise ValueError("unrecognized end %r (known: %s)" % (end, sorted(field_map.keys())))
+    getter_name, setter_name = field_map[end]
+    getattr(element, setter_name)(mast_name)
+    actual = getattr(element, getter_name)()
+    if actual != mast_name:
+        raise ValueError(
+            "%s(%r) did not take effect -- %s() now reports %r. JMRI silently "
+            "refuses this assignment when the mast name doesn't resolve to an "
+            "existing SignalMast (logged server-side as a JMRI-internal ERROR, "
+            "not raised here) -- confirm %r is an existing SignalMast's system "
+            "or user name." % (setter_name, mast_name, getter_name, actual, mast_name)
+        )
+    return actual
+
+
+def _authoring_signal_mast_placement_discover(payload):
+    """Read-only: every real signal-mast boundary on each open Layout
+    Editor panel -- LayoutTurnout ends that need a mast, and
+    PositionablePoint (ANCHOR) connections whose two sides differ --
+    each annotated with its CURRENT mast assignment (empty string if
+    none), so a caller can tell an already-wired boundary from one that
+    still needs one without a separate round trip. See the module
+    comment above for the exact scope (LayoutTurnout + PositionablePoint
+    only) and the END_BUMPER "both" / EDGE_CONNECTOR-skip decisions.
+
+    A turnout end qualifies as a boundary via EITHER of two independent
+    checks (candidate if either is true) -- both matter, confirmed
+    empirically 2026-09-28 against this bridge's own testDoubleOval
+    fixture, cross-checked against `_get_block_boundaries`'s already-
+    proven LayoutEditorAuxTools mechanism:
+      1. ITS OWN block differs from AT LEAST ONE other end's block on
+         the SAME turnout object (a plain, non-crossover turnout can
+         legitimately have different blocks on different legs -- e.g. a
+         siding entrance -- confirmed against LayoutTurnout.java's own
+         internal block-comparison logic, e.g. `lbA != lbC`, which is
+         not gated on crossover type).
+      2. ITS OWN block differs from the block of whatever's actually
+         CONNECTED beyond that leg (`_neighbor_block_for_turnout_leg()`)
+         -- this is the common real-world case check #1 alone MISSES: a
+         plain turnout is very often entirely inside ONE block (all legs
+         share the same block), with the real boundary sitting between
+         the turnout and the next block beyond one specific leg. An
+         earlier version of this operation checked #1 only and found
+         ZERO candidates on a turnout deliberately set up this way in
+         testing, while `_get_block_boundaries` correctly found one --
+         that comparison is what caught this gap before it shipped.
+    An end with no LayoutBlock assigned at all is not a candidate
+    (nothing to protect).
+
+    Returns {"candidates": [...], "count", "skippedEdgeConnectors"}. Each
+    candidate: {"panel", "elementType": "turnout"|"point", "elementName",
+    "end", "block", "currentMastName", plus "turnoutType" (turnout) or
+    "pointType"/"neighborBlock" (point, ANCHOR only)}."""
+    from jmri import InstanceManager
+    from jmri.jmrit.display import EditorManager
+    from jmri.jmrit.display.layoutEditor import LayoutEditor, LayoutTurnout
+
+    candidates = []
+    skipped_edge_connectors = []
+
+    for editor in InstanceManager.getDefault(EditorManager).getAll():
+        if not isinstance(editor, LayoutEditor):
+            continue
+        panel_name = editor.getTitle()
+
+        for track in editor.getLayoutTracks():
+            if not isinstance(track, LayoutTurnout):
+                continue
+            ends = ["A", "B", "C"]
+            if LayoutTurnout.isTurnoutTypeXover(track.getTurnoutType()):
+                ends.append("D")
+            end_blocks = {
+                end: _signal_mast_placement_block_name(getattr(track, _TURNOUT_END_BLOCK_GETTERS[end])())
+                for end in ends
+            }
+            for end in ends:
+                this_block = end_blocks[end]
+                if this_block is None:
+                    continue
+                differs_internally = any(
+                    end_blocks[other] is not None and end_blocks[other] != this_block
+                    for other in ends if other != end
+                )
+                neighbor_block = _neighbor_block_for_turnout_leg(track, end)
+                differs_from_neighbor = neighbor_block is not None and neighbor_block != this_block
+                if not (differs_internally or differs_from_neighbor):
+                    continue
+                mast_getter = _TURNOUT_END_FIELDS[end][0]
+                candidates.append({
+                    "panel": panel_name,
+                    "elementType": "turnout",
+                    "elementName": track.getName(),
+                    "turnoutType": track.getTurnoutType().toString(),
+                    "end": end,
+                    "block": this_block,
+                    "neighborBlock": neighbor_block,
+                    "currentMastName": getattr(track, mast_getter)(),
+                })
+
+        for pp in editor.getPositionablePoints():
+            point_type = pp.getType().toString()
+            if point_type == "EDGE_CONNECTOR":
+                skipped_edge_connectors.append(pp.getName())
+                continue
+            if point_type == "ANCHOR":
+                c1, c2 = pp.getConnect1(), pp.getConnect2()
+                block1 = _signal_mast_placement_block_name(c1.getLayoutBlock()) if c1 is not None else None
+                block2 = _signal_mast_placement_block_name(c2.getLayoutBlock()) if c2 is not None else None
+                if block1 is None or block2 is None or block1 == block2:
+                    continue
+                for end in ("east", "west"):
+                    candidates.append({
+                        "panel": panel_name,
+                        "elementType": "point",
+                        "elementName": pp.getName(),
+                        "pointType": point_type,
+                        "end": end,
+                        "block": block1,
+                        "neighborBlock": block2,
+                        "currentMastName": getattr(pp, _POINT_END_FIELDS[end][0])(),
+                    })
+            elif point_type == "END_BUMPER":
+                c1 = pp.getConnect1()
+                block1 = _signal_mast_placement_block_name(c1.getLayoutBlock()) if c1 is not None else None
+                # Single "both" candidate, not separate east/west entries --
+                # see the module comment's Ambiguity-resolved-explicitly note.
+                east_mast = pp.getEastBoundSignalMastName()
+                west_mast = pp.getWestBoundSignalMastName()
+                candidates.append({
+                    "panel": panel_name,
+                    "elementType": "point",
+                    "elementName": pp.getName(),
+                    "pointType": point_type,
+                    "end": "both",
+                    "block": block1,
+                    "currentMastName": east_mast or west_mast,
+                })
+
+    return {
+        "candidates": candidates,
+        "count": len(candidates),
+        "skippedEdgeConnectors": skipped_edge_connectors,
+    }
+
+
+def _authoring_signal_mast_placement_assign(payload):
+    """Granular, mastClass-agnostic assignment: writes an EXISTING
+    SignalMast's name onto one boundary end (a LayoutTurnout leg or a
+    PositionablePoint direction). Deliberately separate from `apply`'s
+    create-then-assign convenience so a boundary can be migrated from a
+    virtual placeholder mast to a real hardware-backed one later just by
+    calling this again with the new mast's name -- no different code
+    path needed for that migration.
+
+    params.elementType: "turnout" | "point".
+    params.elementName: the LayoutTurnout's or PositionablePoint's own
+        icon name (as `discover`'s `elementName` reports it) -- NOT the
+        underlying Turnout bean's system name.
+    params.end: "A"/"B"/"C"/"D" for a turnout; "east"/"west"/"both" for a
+        point ("both" sets both fields to the same mast -- see the
+        module comment's END_BUMPER note; valid for any point, not just
+        END_BUMPER, if a caller wants symmetric assignment).
+    params.mastName: an EXISTING SignalMast's system or user name --
+        resolved either way (SignalMastManager.getSignalMast() checks
+        user name then system name, confirmed against source) and
+        checked to exist BEFORE touching the turnout/point, so a typo
+        can't silently null out an existing assignment (setSignalAMast(
+        None-resolving-name) sets the field to null, not a no-op --
+        confirmed against source)."""
+    params = payload.get("params") or {}
+    element_type = params.get("elementType")
+    element_name = params.get("elementName")
+    end = params.get("end")
+    mast_name = params.get("mastName")
+    if element_type not in ("turnout", "point"):
+        raise ValueError("signalMastPlacement assign requires params.elementType to be 'turnout' or 'point'")
+    if not element_name:
+        raise ValueError("signalMastPlacement assign requires params.elementName")
+    if not mast_name:
+        raise ValueError("signalMastPlacement assign requires params.mastName (an existing SignalMast's name)")
+
+    from jmri import InstanceManager, SignalMastManager
+    if InstanceManager.getDefault(SignalMastManager).getSignalMast(mast_name) is None:
+        raise ValueError("no such SignalMast %r" % (mast_name,))
+
+    if element_type == "turnout":
+        element = _find_layout_turnout(element_name)
+        if element is None:
+            raise ValueError("no LayoutTurnout named %r on any open panel" % (element_name,))
+        if end == "both":
+            raise ValueError("end='both' is only meaningful for a point, not a turnout")
+        _signal_mast_placement_set_and_verify(element, end, _TURNOUT_END_FIELDS, mast_name)
+        return {"elementType": element_type, "elementName": element_name, "end": end, "mastName": mast_name}
+
+    element = _find_positionable_point(element_name)
+    if element is None:
+        raise ValueError("no PositionablePoint named %r on any open panel" % (element_name,))
+    if end == "both":
+        _signal_mast_placement_set_and_verify(element, "east", _POINT_END_FIELDS, mast_name)
+        _signal_mast_placement_set_and_verify(element, "west", _POINT_END_FIELDS, mast_name)
+    else:
+        _signal_mast_placement_set_and_verify(element, end, _POINT_END_FIELDS, mast_name)
+    return {"elementType": element_type, "elementName": element_name, "end": end, "mastName": mast_name}
+
+
+def _authoring_signal_mast_placement_apply(payload):
+    """Bulk convenience: for every boundary `discover` finds WITHOUT an
+    existing mast assignment, creates a new SignalMast (via the same
+    logic as `create`, target_type=signalMast) and assigns it (via the
+    same logic as `assign` above) -- not a separate reimplementation of
+    either.
+
+    params.signalSystem, params.mastType, params.mastClass ("matrix" |
+    "virtual") are all REQUIRED, deliberately with no default -- which
+    mast class/system to use for boundary masts is a per-layout, per-run
+    decision (e.g. virtual placeholders now to get DispatcherPro running,
+    a real hardware-backed mast type later for specific boundaries once
+    they're physically wired), not something this bulk operation should
+    silently assume on the caller's behalf (2026-09-28 design decision).
+    params.aspects is required when mastClass="matrix" (see `create`);
+    unused when mastClass="virtual".
+    params.dryRun (optional, default False): report what WOULD be
+    created/assigned, without calling create or assign at all.
+    params.userNamePrefix (optional, default "SM"): naming convention,
+    following AutoPlaceSignalMasts-spec.md's own scheme where the
+    direction is unambiguous -- "<prefix>-<turnoutName>-<end>" for a
+    turnout end, "<prefix>-terminus-<pointName>" for an end-bumper.
+    For an anchor point (where east vs west isn't derivable from any
+    JMRI API this bridge can call -- see the module comment), the spec's
+    own "reverse for west" naming can't be followed correctly, so this
+    uses "<prefix>-<block>-to-<neighborBlock>-<end>" instead, appending
+    the end label rather than guessing which block name belongs first --
+    still unique and idempotent, just not the spec's exact string.
+
+    Never fails the whole batch on one boundary's error (Data-Capture
+    Backward-Chaining Rule: no silent drops) -- each candidate's outcome
+    ("skipped_already_assigned" | "dry_run" | "created_and_assigned" |
+    "error") is reported individually in `results`; `errorCount` is
+    nonzero if anything failed, so a caller can't miss a partial failure
+    by only checking the top-level response shape."""
+    params = payload.get("params") or {}
+    signal_system = params.get("signalSystem")
+    mast_type = params.get("mastType")
+    mast_class = params.get("mastClass")
+    dry_run = bool(params.get("dryRun", False))
+    user_name_prefix = params.get("userNamePrefix") or "SM"
+    if not signal_system or not mast_type:
+        raise ValueError("signalMastPlacement apply requires params.signalSystem and params.mastType")
+    if mast_class not in ("matrix", "virtual"):
+        raise ValueError(
+            "signalMastPlacement apply requires params.mastClass to be 'matrix' or "
+            "'virtual' -- no default, this is a deliberate per-run choice (see docstring)"
+        )
+    if mast_class == "matrix" and not params.get("aspects"):
+        raise ValueError("signalMastPlacement apply requires params.aspects when params.mastClass='matrix'")
+
+    discovered = _authoring_signal_mast_placement_discover(payload)
+    results = []
+    error_count = 0
+    for candidate in discovered["candidates"]:
+        if candidate["currentMastName"]:
+            results.append(dict(candidate, outcome="skipped_already_assigned"))
+            continue
+
+        if candidate["elementType"] == "turnout":
+            user_name = "%s-%s-%s" % (user_name_prefix, candidate["elementName"], candidate["end"])
+        elif candidate["pointType"] == "END_BUMPER":
+            user_name = "%s-terminus-%s" % (user_name_prefix, candidate["elementName"])
+        else:  # ANCHOR
+            user_name = "%s-%s-to-%s-%s" % (
+                user_name_prefix, candidate["block"], candidate.get("neighborBlock") or "?", candidate["end"],
+            )
+
+        if dry_run:
+            results.append(dict(candidate, outcome="dry_run", plannedUserName=user_name))
+            continue
+
+        try:
+            create_params = {
+                "signalSystem": signal_system, "mastType": mast_type,
+                "mastClass": mast_class, "userName": user_name,
+            }
+            if mast_class == "matrix":
+                create_params["aspects"] = params["aspects"]
+            created = _authoring_create_signal_mast({"params": create_params})
+
+            assigned = _authoring_signal_mast_placement_assign({"params": {
+                "elementType": candidate["elementType"],
+                "elementName": candidate["elementName"],
+                "end": candidate["end"],
+                "mastName": created["name"],
+            }})
+            results.append(dict(candidate, outcome="created_and_assigned", mastName=assigned["mastName"]))
+        except (Exception, Throwable) as exc:
+            error_count += 1
+            results.append(dict(candidate, outcome="error", error="%s: %s" % (type(exc).__name__, exc)))
+
+    return {"results": results, "count": len(results), "errorCount": error_count, "dryRun": dry_run}
 
 
 _SIGNAL_HEAD_TURNOUT_PARAMS = {
