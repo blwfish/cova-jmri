@@ -338,6 +338,31 @@ def _get_block_boundaries(payload):
     `PositionablePoint.reCheckBlockBoundary()`, which can delete signal
     masts as a side effect and is deliberately NOT called here).
 
+    **Confirmed, fixed staleness bug (2026-09-28, found live-testing
+    signalMastPlacement)**: `getConnectivityList()` only does a full
+    rebuild (`initializeBlockConnectivity()`) on its very first-ever call
+    for a given panel; every call after that only recomputes
+    (`updateBlockConnectivity()`) if `setBlockConnectivityChanged()` was
+    called first. Confirmed against source that `LayoutTurnout`'s block
+    setters call it (`LayoutTurnout.java` line ~1483) but `TrackSegment`'s
+    do NOT -- and a plain `ANCHOR` boundary's blocks live entirely on its
+    two connected `TrackSegment`s, never on the `PositionablePoint`
+    itself. Net effect: any block assigned to a `TrackSegment` AFTER this
+    operation has already been called once for that panel was silently
+    invisible to every later call -- live-reproduced with a minimal
+    two-Block anchor boundary that a direct read of `PositionablePoint.
+    getConnect1()/getConnect2()`'s current blocks confirmed was real.
+    Fixed by unconditionally calling `editor.getLEAuxTools().
+    setBlockConnectivityChanged()` before reading each panel's
+    connectivity below -- confirmed live this forces the same full,
+    correct recompute every call, at the cost of that recompute's work
+    (a full walk of the panel's points/segments/turnouts/slips) on every
+    invocation rather than only when something changed; acceptable here
+    since this operation is already documented as a full-panel scan, not
+    a hot-path call. This does NOT touch `PositionablePoint.
+    reCheckBlockBoundary()` or any mast state -- purely an internal cache
+    invalidation, safe to call unconditionally.
+
     **Confirmed gap in JMRI's OWN mechanism, not this bridge's** (jmri-mcp
     issue #13): `LevelXing` is never fed into `LayoutEditorAuxTools` at
     all -- confirmed against source, both `initializeBlockConnectivity()`
@@ -387,6 +412,10 @@ def _get_block_boundaries(payload):
             continue
 
         aux = editor.getLEAuxTools()
+        # Force a fresh recompute every call -- see the staleness-bug
+        # comment on this function's own docstring above. Pure cache
+        # invalidation, no mutation of any layout object or bean.
+        aux.setBlockConnectivityChanged()
 
         # Same per-track-type block resolution as _get_panel_structure,
         # but keeping the LayoutBlock objects themselves (not just their
